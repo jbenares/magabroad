@@ -3,7 +3,7 @@
       <!-- Navbar -->
       <header class="bg-white text-gray-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 class="text-2xl font-bold">Skillhunt</h1>
+          <h1 class="text-2xl font-bold">MagAbroad</h1>
           <nav class="flex items-center space-x-6">
             <a href="#" class="text-gray-600 hover:text-blue-500">Dashboard</a>
             <a href="#" class="text-gray-600 hover:text-blue-500">Browse Jobs</a>

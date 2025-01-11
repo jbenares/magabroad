@@ -1,10 +1,8 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white">
-      <div
-        class="w-full max-w-lg bg-white text-gray-800 rounded-lg shadow-lg p-8 lg:bg-opacity-100 sm:bg-opacity-90"
-      >
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white py-3">
+      <div  class="w-full max-w-lg bg-white text-gray-800 rounded-lg shadow-lg p-8 lg:bg-opacity-100 sm:bg-opacity-90" >
         <!-- Logo -->
-        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Skillhunt</h1>
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">MagAbroad</h1>
   
         <!-- Title -->
         <h2 class="text-xl font-semibold text-center mb-6">Create Your Account</h2>
@@ -38,7 +36,7 @@
             <input
               type="text"
               v-model="form.fullName"
-              class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your full name"
               required
             />
@@ -48,7 +46,7 @@
             <input
               type="email"
               v-model="form.email"
-              class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your email"
               required
             />
@@ -58,7 +56,7 @@
             <input
               type="password"
               v-model="form.password"
-              class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Create a password"
               required
             />
@@ -70,7 +68,7 @@
             <input
               type="text"
               v-model="form.employerId"
-              class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter your Employer ID"
             />
           </div>
@@ -81,7 +79,7 @@
             <input
               type="text"
               v-model="form.jobTitle"
-              class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="e.g., Graphic Designer"
               required
             />

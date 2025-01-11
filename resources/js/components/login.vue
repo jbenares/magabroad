@@ -2,7 +2,7 @@
     <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 text-white">
       <div class="w-full max-w-md bg-white text-gray-800 rounded-lg shadow-lg p-8">
         <!-- Logo -->
-        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Skillhunt</h1>
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">MagAbroad</h1>
   
         <!-- Title -->
         <h2 class="text-xl font-semibold text-center mb-6">Login to Your Account</h2>
