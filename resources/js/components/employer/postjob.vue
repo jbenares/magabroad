@@ -19,71 +19,98 @@
 					<form action="#" class="p-5 bg-white">
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-price-1">
-									<input type="checkbox" id="option-price-1"> <span class="text-success">$500</span> For 30 days
-								</label>
+								<label class="font-weight-bold" for="jobtitle">Job Title</label>
+								<input type="text" id="jobtitle" class="form-control" placeholder="">
 							</div>
+						</div>
+						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-price-2">
-									<input type="checkbox" id="option-price-2"> <span class="text-success">$300</span> / Monthly Recurring
+								<label class="font-weight-bold" for="location">Location</label>
+								<input type="text" id="location" class="form-control" placeholder="">
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0">
+								<label class="font-weight-bold" for="workplace">Workplace Option</label>
+								<select id="workplace" class="form-control" >
+									<option value="">On-site</option>
+									<option value="">Remote</option>
+									<option value="">Hybrid</option>
+								</select>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0">
+								<label class="font-weight-bold" for="workplace">Work Type</label>
+								<label for="fulltime" class="block !mb-0">
+									<input type="radio" id="fulltime" class="mr-2" name="worktype">Full-time
+								</label>
+								<label for="parttime" class="block !mb-0">
+									<input type="radio" id="parttime" class="mr-2" name="worktype">Part-time
+								</label>
+								<label for="contract" class="block !mb-0">
+									<input type="radio" id="contract" class="mr-2" name="worktype">Contract
+								</label>
+								<label for="casual" class="block !mb-0">
+									<input type="radio" id="casual" class="mr-2" name="worktype">Casual
 								</label>
 							</div>
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0">
-								<label class="font-weight-bold" for="fullname">Job Title</label>
-								<input type="text" id="fullname" class="form-control" placeholder="eg. Professional UI/UX Designer">
+								<label class="font-weight-bold" for="workplace">Pay Type</label>
+								<label for="hourly" class="block !mb-0">
+									<input type="radio" id="hourly" class="mr-2" name="paytype">Hourly Rate
+								</label>
+								<label for="monthly" class="block !mb-0">
+									<input type="radio" id="monthly" class="mr-2" name="paytype">Monthly Salary
+								</label>
+								<label for="annual" class="block !mb-0">
+									<input type="radio" id="annual" class="mr-2" name="paytype">Annual Salary
+								</label>
 							</div>
 						</div>
-						<div class="row form-group mb-5">
-							<div class="col-md-12 mb-3 mb-md-0">
-								<label class="font-weight-bold" for="fullname">Company</label>
-								<input type="text" id="fullname" class="form-control" placeholder="eg. Facebook, Inc.">
+						<label class="font-weight-bold" for="workplace">Pay Range</label>
+						<div class="row form-group">
+							<div class="col-md-3 mb-3 mb-md-0 !pr-0">
+								<label class="mb-0" for="workplace">Currency</label>
+								<select id="workplace" class="form-control" >
+									<option value="">Php</option>
+								</select>
+							</div>
+							<div class="col-md-4 mb-4 mb-md-0 !pr-0">
+								<label class="mb-0" for="workplace">From</label>
+								<input type="text" class="form-control" placeholder="Enter minimum pay">
+							</div>
+							<div class="col-md-4 mb-4 mb-md-0 !pr-0">
+								<label class="mb-0" for="workplace">To</label>
+								<input type="text" class="form-control" placeholder="Enter maximum pay">
 							</div>
 						</div>
 						<div class="row form-group">
-							<div class="col-md-12"><h3>Job Type</h3></div>
 							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-job-type-1">
-								<input type="radio" id="option-job-type-1" name="job-type"> Full Time
-								</label>
-							</div>
-							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-job-type-2">
-								<input type="radio" id="option-job-type-2" name="job-type"> Part Time
-								</label>
-							</div>
-							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-job-type-3">
-								<input type="radio" id="option-job-type-3" name="job-type"> Freelance
-								</label>
-							</div>
-							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-job-type-4">
-								<input type="radio" id="option-job-type-4" name="job-type"> Internship
-								</label>
-							</div>
-							<div class="col-md-12 mb-3 mb-md-0">
-								<label for="option-job-type-4">
-								<input type="radio" id="option-job-type-4" name="job-type"> Termporary
-								</label>
-							</div>
-						</div>
-						<div class="row form-group mb-4">
-							<div class="col-md-12"><h3>Location</h3></div>
-							<div class="col-md-12 mb-3 mb-md-0">
-								<input type="text" class="form-control" placeholder="Western City, UK">
+								<label class="font-weight-bold" for="jobdesc">Job Description</label>
+								<textarea id="jobdesc" class="form-control" placeholder=""></textarea>
 							</div>
 						</div>
 						<div class="row form-group">
-							<div class="col-md-12"><h3>Job Description</h3></div>
 							<div class="col-md-12 mb-3 mb-md-0">
-								<textarea name="" class="form-control" id="" cols="30" rows="5"></textarea>
+								<label class="font-weight-bold" for="jobdesc">Job Summary</label>
+								<textarea id="jobdesc" class="form-control" placeholder=""></textarea>
 							</div>
 						</div>
+						<br>
+						<hr>
 						<div class="row form-group">
 							<div class="col-md-12">
-								<input type="submit" value="Post" class="btn btn-primary  py-2 px-5">
+								<div class="flex justify-between">
+									<button class="btn btn-outline-primary py-2 px-5">Preview</button>
+									<div class="flex justify-end space-x-1">
+										<button class="btn btn-primary  py-2 px-5">Save Draft</button>
+										<input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5">
+									</div>
+								</div>
+								
 							</div>
 						</div>
 					</form>
@@ -209,5 +236,5 @@
 </template>
 
 <script setup>
-	import navigation from '@/layouts/navigation.vue';
+	import navigation from '@/layouts/navigation_employer.vue';
 </script>

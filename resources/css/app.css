@@ -14494,3 +14494,57 @@ input:checked + .slider:before {
 .phone-input-group:focus-within {
     border-color: #4a90e2;
 }
+
+.dropdown-menu-wrapper {
+    position: relative;
+}
+
+.dropdown-menu-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -20px; 
+    left: 70%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent; /* Adjust color to match navbar */
+    z-index: 2;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px; /* Size of the ring */
+    height: 20px;
+    border: 2px solid #ccc; /* Default border color */
+    border-radius: 50%; /* Make it circular */
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    vertical-align: middle;
+}
+
+/* Add hover effect */
+input[type="radio"]:hover {
+    border-color: #006aff; /* Border color on hover */
+}
+
+input[type="radio"]:checked{
+    border: 2px solid #006aff;
+}
+
+/* Inner circle (ring effect when selected) */
+input[type="radio"]:checked::before {
+    content: '';
+    width: 12px; /* Size of the inner circle */
+    height: 12px;
+    background-color:  #006aff; /* Color of the selected state */
+    border-radius: 50%; /* Make it circular */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
