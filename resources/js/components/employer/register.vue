@@ -1,53 +1,110 @@
 <template>
 	<navigation>
-		<div class="hero-wrap hero-wrap-3">
-			<div class="overlay"></div>
-			<div class="container">
-				<!-- <div class="row no-gutters slider-text align-items-end justify-content-start">
-					<div class="col-md-12 text-center mb-5">
-						<p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login</span></p>
-						<h1 class="mb-3 bread">Login</h1>
-					</div>
-				</div> -->
-			</div>
+		<div class="hero-wrap hero-wrap-2" >
+		  <div class="overlay"></div>
+			  <div class="container">
+				  <div class="row no-gutters slider-text align-items-end justify-content-start">
+					  <div class="col-md-12 text-center mb-5" >
+					  <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Register</span></p>
+					  <h1 class="mb-3 bread">Create Employer Account</h1>
+					 
+				  </div>
+			  </div>
+		  </div>
 		</div>
-
+  
 		<section class="ftco-section bg-light">
 			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-6 col-lg-6 mb-5">
+				<div class="row">
+					<div class="col-md-12 col-lg-8 mb-5">
 						<form action="#" class="p-5 bg-white">
-							<h2 class="text-center mb-4">Login</h2>
+							<h4 class="mb-0">Your Employer Account</h4>
+							<p class="m-0">We wont share your details with anyone.</p>
 							<hr>
-
-							<div class="btn-group d-flex mb-4" role="group" aria-label="Role Selection">
-								<button type="button" class="btn btn-secondary w-50" :class="{ active: role === 'jobseeker' }" @click="role = 'jobseeker'">Jobseeker</button>
-								<button type="button" class="btn !bg-gray-100 w-50" :class="{ active: role === 'employer' }" @click="role = 'employer'">Employer</button>
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="fullname">First Name</label>
+									<input type="text" id="fullname" class="form-control" placeholder="">
+								</div>
+								<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="fullname">Last Name</label>
+									<input type="text" id="fullname" class="form-control" placeholder="">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="email">Email Address</label>
+									<input type="email" id="email" class="form-control" placeholder="">
+								</div>
+							</div>
+							
+							<hr>
+							<div class="row">
+								<div class="col-lg-12 col-md-12"><h3>Business Details</h3></div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="businessname">Business name</label>
+									<input type="text" id="businessname" class="form-control" placeholder="">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="country">Country</label>
+									<select id="country" class="form-control">
+										<option value="">
+											Select Country
+										</option>
+									</select>
+								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="email" class="font-weight-bold">Email Address</label>
-								<input type="email" id="email" class="form-control" placeholder="Enter your email">
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="phone">Phone Number</label>
+									<div class="phone-input-group">
+										<select id="country-code">
+											<option value="+63">Philippines (+63)</option>
+											<option value="+1">USA (+1)</option>
+											<option value="+44">UK (+44)</option>
+											<option value="+91">India (+91)</option>
+										</select>
+										<input type="text" id="phone" placeholder="9051234567" />
+									</div>
+								</div>
 							</div>
-
-							<div class="form-group">
-								<label for="password" class="font-weight-bold">Password</label>
-								<input type="password" id="password" class="form-control" placeholder="Enter your password">
-							</div>
-
-							<div class="form-group">
-								<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
-							</div>
-
-							<div class="text-center">
-								<p class="mb-0">Don't have an account? <a href="/job_seeker/register">Register here</a></p>
+							<hr>
+							<div class="row form-group">
+								<div class="col-md-12">
+									<input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5">
+								</div>
 							</div>
 						</form>
+					</div>
+	
+					<div class="col-lg-4">
+					<div class="p-4 mb-3 bg-white">
+						<h3 class="h5 text-black mb-3">Contact Info</h3>
+						<p class="mb-0 font-weight-bold">Address</p>
+						<p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+	
+						<p class="mb-0 font-weight-bold">Phone</p>
+						<p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+	
+						<p class="mb-0 font-weight-bold">Email Address</p>
+						<p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
+					</div>
+					
+					<div class="p-4 mb-3 bg-white">
+						<h3 class="h5 text-black mb-3">More Info</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
+						<p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
+					</div>
 					</div>
 				</div>
 			</div>
 		</section>
-
+		
 		<section class="ftco-section-parallax">
 		  <div class="parallax-img d-flex align-items-center">
 				<div class="container">

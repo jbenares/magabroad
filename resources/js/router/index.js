@@ -3,18 +3,21 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import notFound from '../components/notFound.vue'
 import loginForm from  '../components/login.vue'
-import registerForm from  '../components/register.vue'
+import home from '../components/home.vue'
+
+import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
 import find_job from  '../components/job_seeker/findjob.vue'
+
+import employer_register from  '../components/employer/register.vue'
 import employer_dash from  '../components/employer/dashboard.vue'
 import post_job from  '../components/employer/postjob.vue'
-import dashboard from '../components/dashboard.vue'
 
 
 const routes = [
     {
         path:'/',
-        component: dashboard,
+        component: home,
     },
     {
         path:'/login',
@@ -22,9 +25,9 @@ const routes = [
         component: loginForm,
     },
     {
-        path:'/register',
-        name:'register',
-        component: registerForm,
+        path:'/job_seeker/register',
+        name:'jobseeker_register',
+        component: jobseeker_register,
     },
     {
         path:'/job_seeker/dashboard',
@@ -36,7 +39,11 @@ const routes = [
         name:'find_job',
         component: find_job,
     },
-
+    {
+        path:'/employer/register',
+        name:'employer_register',
+        component: employer_register,
+    },
     {
         path:'/employer/dashboard',
         name:'employer_dash',

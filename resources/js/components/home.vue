@@ -7,8 +7,8 @@
 				<div class="col-md-10 d-flex align-items-center " data-aos="fade-up" data-aos-duration="800">
 					<div class="text text-center pt-5 mt-md-5">
 						<p class="mb-4">Find Job, Employment, and Career Opportunities</p>
-					<h1 class="mb-5">The Eassiest Way to Get Your New Job</h1>
-								<div class="ftco-counter ftco-no-pt ftco-no-pb">
+						<h1 class="mb-5">The Eassiest Way to Get Your New Job</h1>
+						<div class="ftco-counter ftco-no-pt ftco-no-pb">
 							<div class="row">
 							<div class="col-md-4 d-flex justify-content-center counter-wrap" data-aos="fade-up">
 								<div class="block-18">
@@ -44,27 +44,23 @@
 									</div>
 									<div class="desc text-left">
 										<strong class="number" data-number="80000">0</strong>
-										<span>Active Employees</span>
+										<span>Active Job Seekers</span>
 									</div>
 								</div>
 								</div>
 							</div>
 							</div>
 						</div>
-								<div class="ftco-search my-md-5">
-									<div class="row">
+						<div class="ftco-search my-md-5">
+							<div class="row">
 							<div class="col-md-12 nav-link-wrap">
 								<div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								<a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Find a Job</a>
-
 								<a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Find a Candidate</a>
-
 								</div>
 							</div>
 							<div class="col-md-12 tab-wrap">
-								
 								<div class="tab-content p-4" id="v-pills-tabContent">
-
 								<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
 									<form action="#" class="search-job">
 										<div class="row no-gutters">
