@@ -16,7 +16,7 @@
 							<hr>
 							<h6>Active Jobs</h6>
 							<h2 class="text-primary">12</h2>
-							<a href="/employer/postjob" class="btn btn-primary btn-block">Post a New Job</a>
+							<a href="/employer/profile" class="btn btn-primary btn-block">Profile</a>
 						</div>
 					</div>
 
@@ -26,7 +26,7 @@
 								<div class="p-4 bg-white">
 									<h6 class="text-muted">Active Job Postings</h6>
 									<h3>12 jobs currently posted</h3>
-									<a href="#" class="text-primary">Manage Postings</a>
+									<a href="/employer/job_list" class="text-primary">Manage Postings</a>
 								</div>
 							</div>
 							<div class="col-md-6 mb-4">
