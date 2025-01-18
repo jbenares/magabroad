@@ -118,7 +118,7 @@
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="jobdesc">Requirements</label>
+									<label class="font-weight-bold" for="jobdesc">Skills</label>
 									<div class="flex justify-start">
 										<input type="text" class="form-control">
 										<button class="btn !text-blue-500"> <PlusCircleIcon class="size-6"/></button>

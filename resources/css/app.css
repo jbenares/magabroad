@@ -7553,7 +7553,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-    background-color: #f8f9fa !important;
+    background-color: #fbfbfb !important;
 }
 
 a.bg-light:hover,
@@ -12633,9 +12633,9 @@ h5,
 
 .job-post-item:hover,
 .job-post-item:focus {
-    -webkit-box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
-    box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:  rgb(54 55 193 / 10%) 0px 0px 8px 0px;
+    -moz-box-shadow:  rgb(54 55 193 / 10%) 0px 0px 8px 0px;
+    box-shadow:  rgb(54 55 193 / 10%) 0px 0px 8px 0px;
     border: none;
 }
 
@@ -13247,7 +13247,7 @@ textarea.form-control {
 
 .ftco-footer {
     font-size: 16px;
-    background: #fff;
+    background: #206dfb;
     padding: 6em 0;
     color: rgba(0, 0, 0, 0.5);
 }
@@ -13259,18 +13259,18 @@ textarea.form-control {
 
 .ftco-footer .ftco-footer-widget h2 {
     font-weight: normal;
-    color: rgba(0, 0, 0, 0.7);
+    color: #fff;
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 400;
 }
 
 .ftco-footer .ftco-footer-widget ul li a {
-    color: rgba(0, 0, 0, 0.4);
+    color: #fff;
 }
 
 .ftco-footer .ftco-footer-widget ul li a span {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .ftco-footer .ftco-footer-widget .btn-primary {
@@ -13284,11 +13284,11 @@ textarea.form-control {
 }
 
 .ftco-footer p {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .ftco-footer a {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .ftco-footer a:hover {
@@ -13308,7 +13308,7 @@ textarea.form-control {
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
     position: relative;
-    color: #206dfb;
+    color: #fff;
 }
 
 .ftco-footer-social li a span {
@@ -13378,7 +13378,7 @@ textarea.form-control {
 .ftco-media .icon {
     font-size: 50px;
     display: block;
-    color: #206dfb;
+    color: #fff;
 }
 
 .ftco-media.text-center .ftco-icon {
@@ -13782,7 +13782,7 @@ textarea.form-control {
 }
 
 .block-23 ul li span {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .block-23 ul li .icon,
@@ -13795,15 +13795,15 @@ textarea.form-control {
     width: 40px;
     font-size: 18px;
     padding-top: 2px;
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .block-23 ul li a {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .block-23 ul li a .icon {
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: #fff !important;
 }
 
 .block-6 .media-body p {
@@ -14567,4 +14567,172 @@ input[type="radio"]:checked::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.job-application-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  
+}
+
+.job-header {
+  display: flex;
+  align-items: center;
+}
+
+.job-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  margin-right: 16px;
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.job-link {
+  font-size: 14px;
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.job-link:hover {
+  text-decoration: underline;
+}
+
+.image-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1; /* Optional for background */
+    border: 1px solid #e5e5e5
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar-admin {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0b2165;
+    color: #fff;
+    width: 280px;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.sidebar-admin h2 {
+    font-size: 1.5rem;
+    padding: 20px;
+    margin: 0;
+    background: #0b2165;
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #3b4f63;
+}
+.sidebar-admin ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-admin ul li {
+    border-bottom: 1px solid #3b4f63;
+}
+.sidebar-admin ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #dcdde1;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.sidebar-admin ul li a:hover, .sidebar-admin ul li a.active {
+    background: #0b2165;
+    color: #fff;
+}
+.dropdown-menu {
+    background-color: #34495e;
+    border: none;
+}
+.dropdown-menu a {
+    color: #dcdde1;
+}
+.dropdown-menu a:hover {
+    color: #fff;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 280px;
+    padding: 30px;
+}
+.main-content h1 {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Card Styling */
+/* .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card h5, .card h3 {
+    margin: 0;
+}
+.card .card-body {
+    text-align: center;
+} */
+
+/* Recent Activity Styling */
+.list-group-item {
+    border: none;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .sidebar-admin {
+        width: 0;
+        position: absolute;
+        z-index: 999;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+    .sidebar-admin.active {
+        width: 250px;
+    }
+    .sidebar-admin ul li a {
+        padding: 10px 15px;
+    }
+}
+
+/* Navbar on Small Screens */
+.navbar-admin {
+    background-color: #34495e;
+    padding: 15px;
+}
+.navbar-admin-toggler {
+    background-color: #fff;
+}
+.navbar-admin-nav {
+    width: 100%;
+    justify-content: flex-end;
 }

@@ -13,7 +13,7 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Candidates</a></li>
                         <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
@@ -40,7 +40,7 @@
                         </li> -->
                         <li class="nav-item cta mr-md-1 cta-link"><a href="/login" class="nav-link">Sign In</a></li>
                         <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link">Post a Job</a></li>
-                        <li class="nav-item cta cta-colored"><a href="/job_seeker/findjob" class="nav-link">Want a Job</a></li>
+                        <li class="nav-item cta cta-colored"><a href="/job_seeker/search_job" class="nav-link">Want a Job</a></li>
                     </ul>
                 </div>
             </div>

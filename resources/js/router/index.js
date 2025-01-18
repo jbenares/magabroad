@@ -9,7 +9,9 @@ import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
 import search_job from  '../components/job_seeker/search_job.vue'
 import view_job from  '../components/job_seeker/view_job.vue'
+import apply_job from  '../components/job_seeker/apply_job.vue'
 import jobseeker_profile from  '../components/job_seeker/profile.vue'
+import notif_jobseeker from  '../components/job_seeker/notifications.vue'
 
 import employer_register from  '../components/employer/register.vue'
 import employer_dash from  '../components/employer/dashboard.vue'
@@ -19,7 +21,9 @@ import job_list from  '../components/employer/job_list.vue'
 import job_view from  '../components/employer/job_view.vue'
 import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
+import notif_employer from  '../components/employer/notifications.vue'
 
+import admin_dash from '../components/admin/dashboard.vue'
 
 const routes = [
     {
@@ -31,6 +35,7 @@ const routes = [
         name:'login',
         component: loginForm,
     },
+    // ----------------------------------------------------------------------------Job Seeker
     {
         path:'/job_seeker/register',
         name:'jobseeker_register',
@@ -56,6 +61,18 @@ const routes = [
         name:'view_job',
         component: view_job,
     },
+    {
+        path:'/job_seeker/apply_job',
+        name:'apply_job',
+        component: apply_job,
+    },
+    {
+        path:'/job_seeker/notifications',
+        name:'notif_jobseeker',
+        component: notif_jobseeker,
+    },
+
+    // ----------------------------------------------------------------------------Employer
     {
         path:'/employer/register',
         name:'employer_register',
@@ -96,6 +113,20 @@ const routes = [
         name:'view_candidate',
         component: view_candidate,
     },
+    {
+        path:'/employer/notifications',
+        name:'notif_employer',
+        component: notif_employer,
+    },
+
+    // ----------------------------------------------------------------------------Admin
+
+    {
+        path:'/admin/dashboard',
+        name:'admin_dash',
+        component: admin_dash,
+    },
+
     {
         path:'/:pathMatch(.*)*',
         name:'notFound',

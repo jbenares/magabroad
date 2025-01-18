@@ -15,7 +15,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="tab-content p-4 bg-white">
+						<div class="tab-content p-4 bg-white rounded-lg">
 							<div class="" id="v-pills-1">
 								<form action="#" class="search-job">
 									<div class="row no-gutters">
@@ -74,14 +74,14 @@
 					<div class="col-lg-9 pr-lg-2">
 						<div class="row">
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -109,14 +109,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -144,14 +144,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -179,14 +179,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -214,14 +214,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -249,14 +249,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -284,14 +284,14 @@
 							</div><!-- end -->
 
 							<div class="col-md-12"  data-aos="fade-up">
-								<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
+								<div class="job-post-item p-4 d-block d-lg-flex align-items-center rounded-lg">
 									<div class="relative mb-4 mb-md-0">
 										<div class="absolute top-0 right-0 ">
 											<div class="flex justify-between space-x-3" >
 												<button class="text-gray-300 hover:text-yellow-400">
 													<BookmarkIcon class="size-5"/>
 												</button>
-												<button class="btn btn-primary btn-sm !rounded-3xl">Apply</button>
+												<a href="/job_seeker/apply_job" class="btn btn-primary btn-sm !rounded-3xl">Apply</a>
 											</div>
 										</div>
 										<a href="/job_seeker/view_job" class="">
@@ -335,7 +335,7 @@
 							</div>
 						</div>
 						<div class="col-lg-3 sidebar">
-							<div class="sidebar-box bg-white p-4"  data-aos="fade-up">
+							<div class="sidebar-box bg-white rounded-lg p-4"  data-aos="fade-up">
 								<h3 class="heading-sidebar">Browse Category</h3>
 								<form action="#" class="search-form mb-3">
 									<div class="form-group">
@@ -353,7 +353,7 @@
 								</form>
 							</div>
 
-							<div class="sidebar-box bg-white p-4"  data-aos="fade-up">
+							<div class="sidebar-box bg-white rounded-lg p-4"  data-aos="fade-up">
 									<h3 class="heading-sidebar">Select Location</h3>
 										<form action="#" class="search-form mb-3">
 									<div class="form-group">
@@ -371,7 +371,7 @@
 										</form>
 							</div>
 
-							<div class="sidebar-box bg-white p-4"  data-aos="fade-up">
+							<div class="sidebar-box bg-white rounded-lg p-4"  data-aos="fade-up">
 								<h3 class="heading-sidebar">Job Type</h3>
 								<form action="#" class="browse-form">
 										<label for="option-job-type-1"><input type="checkbox" id="option-job-type-1" name="vehicle" value="" checked> Partime</label><br>

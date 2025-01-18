@@ -1,13 +1,12 @@
 <template>
 	<navigation>
-		<div class="hero-wrap hero-wrap-3">
-			<div class="overlay"></div>
-			<div class="container"></div>
+		<div class="hero-wrap hero-wrap-3" >
+            <div class="overlay"></div>
+             <div class="container"></div>
 		</div>
-
+  
 		<section class="ftco-section bg-light">
 			<div class="container">
-				<!-- Dashboard Section -->
 				<div class="row">
 					<div class="col-lg-3 mb-4">
 						<div class="p-3 bg-white text-center rounded-lg">
@@ -16,10 +15,10 @@
 								<div class="progress-bar bg-primary w-[75%]" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<hr>
-							<img src="../../../images/company-1.jpg" alt="Profile Picture" class="img-fluid rounded-circle mb-2" >
-							<h4 class="mb-2">Sample Company</h4>
+							<img src="../../../images/person_2.jpg" alt="Profile Picture" class="img-fluid rounded-circle mb-2" >
+							<h4 class="mb-2">John Doe</h4>
 							<hr>
-							<!-- <div class="">
+							<div class="">
 								<a href="" class=" text-gray-500 hover:text-gray-500">
 									<div class="flex justify-between hover:bg-gray-100 px-2">
 										<div class="flex justify-start space-x-2">
@@ -38,78 +37,92 @@
 										<span>9</span>
 									</div>
 								</a>
-							</div> -->
+							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-9">
-						<div class="row">
-							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white rounded-lg">
-									<h6 class="text-muted">Active Job Postings</h6>
-									<h3>12 jobs currently posted</h3>
-									<a href="/employer/job_list" class="text-primary">Manage Postings</a>
-								</div>
-							</div>
-							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white rounded-lg">
-									<h6 class="text-muted">New Applications</h6>
-									<h3>45 new applications</h3>
-									<a href="#" class="text-primary">View Applications</a>
-								</div>
-							</div>
-							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white rounded-lg">
-									<h6 class="text-muted">Team Members</h6>
-									<h3>5 team members added</h3>
-									<a href="#" class="text-primary">Manage Team</a>
-								</div>
-							</div>
-							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white rounded-lg">
-									<h6 class="text-muted">Performance Analytics</h6>
-									<h3>120 job views this week</h3>
-									<a href="#" class="text-primary">View Analytics</a>
-								</div>
-							</div>
+						<h4 class="mb-2 text-left text-gray-500">Notifications</h4>
+
+						<!-- Notifications for Today -->
+						<div class="mb-4">
+							<h4 class="mb-1 text-base text-gray-600">Today</h4>
+							<ul class="list-unstyled">
+								<li class="d-flex align-items-start mb-3 p-3 bg-white shadow-sm rounded">
+									<div class="image-container mr-3 !w-16 !h-16 !border-none">
+										<img src="../../../images/company-2.jpg" alt="Transportation" />
+									</div>
+									<div>
+										<p class="mb-1 leading-none"><strong>New Applications Received</strong></p>
+										<p class="mb-0">Your job listing "Frontend Developer" has received 2 new applications.</p>
+										<small class="text-muted">January 19, 2025</small>
+									</div>
+								</li>
+							</ul>
 						</div>
 
-						<div class="mt-4">
-							<h5>Recent Activities</h5>
-							<div class="p-3 bg-white rounded-lg">
-								<p>John Doe applied for Frontend Developer</p>
-								<a href="#" class="btn btn-primary btn-sm">View</a>
+						<!-- Notifications for Last Week -->
+						<div class="mb-4">
+							<h4 class="mb-1 text-base text-gray-500">Last Week</h4>
+							<ul class="list-unstyled">
+								<li class="d-flex align-items-start mb-3 p-3 bg-white shadow-sm rounded">
+									<div class="image-container mr-3 !w-16 !h-16 !border-none">
+										<img src="../../../images/company-4.jpg" alt="Transportation" />
+									</div>
+									<div>
+										<p class="mb-1 leading-none"><strong>Pending Approval</strong></p>
+										<p class="mb-0">Your job listing "UI/UX Designer" is pending approval.</p>
+										<small class="text-muted">January 17, 2025</small>
+									</div>
+								</li>
+								<li class="d-flex align-items-start mb-3 p-3 bg-white shadow-sm rounded">
+									<div class="image-container mr-3 !w-16 !h-16 !border-none">
+										<img src="../../../images/company-3.jpg" alt="Transportation" />
+									</div>
+									<div>
+										<p class="mb-1 leading-none"><strong>Job Listing Updated</strong></p>
+										<p class="mb-0">The job listing "Backend Engineer" has been edited successfully.</p>
+										<small class="text-muted">January 16, 2025</small>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<!-- Notifications for Last Month -->
+						<div class="mb-4">
+					<h4 class="mb-1 text-base text-gray-500">Last Month</h4>
+					<ul class="list-unstyled">
+						<li class="d-flex align-items-start mb-3 p-3 bg-white shadow-sm rounded">
+							<div class="image-container mr-3 !w-16 !h-16 !border-none">
+								<img src="../../../images/company-1.jpg" alt="Transportation" />
 							</div>
+							<div>
+								<p class="mb-1 leading-none"><strong>Job Closed</strong></p>
+								<p class="mb-0">Your job listing "Project Manager" has been closed.</p>
+								<small class="text-muted">December 25, 2024</small>
+							</div>
+						</li>
+						<li class="d-flex align-items-start mb-3 p-3 bg-white shadow-sm rounded">
+							<div class="image-container mr-3 !w-16 !h-16 !border-none">
+								<img src="../../../images/company-2.jpg" alt="Transportation" />
+							</div>
+							<div>
+								<p class="mb-1 leading-none"><strong>New Job Posted</strong></p>
+								<p class="mb-0">You successfully posted the job "Data Scientist."</p>
+								<small class="text-muted">December 20, 2024</small>
+							</div>
+						</li>
+					</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="ftco-section-parallax">
-		  <div class="parallax-img d-flex align-items-center">
-				<div class="container">
-				  <div class="row d-flex justify-content-center">
-					  <div class="col-md-7 text-center heading-section heading-section-white">
-						  <h2>Subcribe to our Newsletter</h2>
-						  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-						  <div class="row d-flex justify-content-center mt-4 mb-4">
-							  <div class="col-md-12">
-								  <form action="#" class="subscribe-form">
-									  <div class="form-group d-flex">
-										  <input type="text" class="form-control" placeholder="Enter email address">
-										  <input type="submit" value="Subscribe" class="submit px-3">
-									  </div>
-								  </form>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-				</div>
-		  </div>
-		</section>
-  
-		<footer class="ftco-footer ftco-bg-dark ftco-section">
+
+
+		
+		<footer class="ftco-footer ftco-bg-blue ">
 		  <div class="container">
 			  <div class="row mb-5">
 				  <div class="col-md">
@@ -183,7 +196,8 @@
 </template>
   
 <script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
+	import navigation from '@/layouts/navigation_jobseeker.vue';
+	import { BookmarkIcon, PaperAirplaneIcon, ClockIcon } from '@heroicons/vue/24/solid'
 	// // Get the elements
 	// const ExperienceToggle = {
 	// 	data() {
