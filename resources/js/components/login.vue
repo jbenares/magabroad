@@ -1,5 +1,6 @@
 <script setup>
 	import navigation from '@/layouts/navigation.vue';
+	import	{ExclamationCircleIcon} from '@heroicons/vue/24/solid'
 	import {reactive, ref} from "vue";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
@@ -15,7 +16,7 @@
         .then(response =>{
             if(response.data.success){
                 localStorage.setItem('token', response.data.data.token)
-                router.push('/home')
+                router.push('/')
             } else {
                 error.value = response.data.message;
             }
@@ -61,12 +62,12 @@
 								<form class="pt-3" @submit.prevent="login(role)">
 									<div class="form-group">
 									<label for="email" class="font-weight-bold">Email Address</label>
-									<input type="email" id="email" class="form-control" placeholder="Enter your email">
+									<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
 									</div>
 
 									<div class="form-group">
 										<label for="password" class="font-weight-bold">Password</label>
-										<input type="password" id="password" class="form-control" placeholder="Enter your password">
+										<input type="password" id="password" class="form-control" placeholder="Enter your password" v-model="form.password">
 									</div>
 
 									<div class="form-group">
