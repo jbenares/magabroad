@@ -7,7 +7,9 @@ import home from '../components/home.vue'
 
 import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
-import find_job from  '../components/job_seeker/findjob.vue'
+import search_job from  '../components/job_seeker/search_job.vue'
+import view_job from  '../components/job_seeker/view_job.vue'
+import jobseeker_profile from  '../components/job_seeker/profile.vue'
 
 import employer_register from  '../components/employer/register.vue'
 import employer_dash from  '../components/employer/dashboard.vue'
@@ -35,14 +37,24 @@ const routes = [
         component: jobseeker_register,
     },
     {
+        path:'/job_seeker/profile',
+        name:'jobseeker_profile',
+        component: jobseeker_profile,
+    },
+    {
         path:'/job_seeker/dashboard',
         name:'jobseeker_dash',
         component: jobseeker_dash,
     },
     {
-        path:'/job_seeker/findjob',
-        name:'find_job',
-        component: find_job,
+        path:'/job_seeker/search_job',
+        name:'search_job',
+        component: search_job,
+    },
+    {
+        path:'/job_seeker/view_job',
+        name:'view_job',
+        component: view_job,
     },
     {
         path:'/employer/register',

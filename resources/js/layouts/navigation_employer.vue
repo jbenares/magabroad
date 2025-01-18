@@ -35,9 +35,9 @@
                                 Employer Name
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
-                                <a class="dropdown-item" href="">Profile</a>
+                                <a class="dropdown-item" href="/employer/profile">Profile</a>
                                 <a class="dropdown-item" href="">Settings</a>
-                                <a class="dropdown-item" href="">Logout</a>
+                                <a class="dropdown-item" href="/">Logout</a>
                             </div>
                         </li>
                         <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link">Post a Job</a></li>

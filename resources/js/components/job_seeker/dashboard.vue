@@ -16,7 +16,7 @@
 							<hr>
 							<h6>Saved Jobs</h6>
 							<h2 class="text-primary">8</h2>
-							<button class="btn btn-primary btn-block">Browse Jobs</button>
+							<a href="/job_seeker/search_job" class="btn btn-primary btn-block">Browse Jobs</a>
 						</div>
 					</div>
 

@@ -28,7 +28,7 @@
 									<a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Find a Candidate</a>
 								</div>
 							</div>
-							<div class="col-md-12 tab-wrap">
+							<div class="col-md-12 tab-wrap"a>
 								<div class="tab-content p-4" id="v-pills-tabContent">
 									<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
 										<form action="#" class="search-job">

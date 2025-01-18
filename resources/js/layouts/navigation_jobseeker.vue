@@ -13,7 +13,7 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="/" class="nav-link">Dashboard</a></li>
+                        <li class="nav-item"><a href="/job_seeker/dashboard" class="nav-link">Dashboard</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Notification <span class="badge badge-danger !rounded-xl ">3</span>
@@ -27,18 +27,19 @@
                                 <a class="dropdown-item text-center text-primary" href="#">View All Notifications</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li>
+                        <!-- <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li> -->
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown  mr-md-1">
                             <a class="nav-link dropdown-toggle " href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Job Seeker Name
                             </a>
                             <div class="dropdown-menu" aria-labelledby="signinDropdown">
+                                <a class="dropdown-item" href="/job_seeker/profile">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="/">Logout</a>
                             </div>
                         </li>
-                        <li class="nav-item cta cta-colored"><a href="/job_seeker/findjob" class="nav-link">Want a Job</a></li>
+                        <li class="nav-item cta cta-colored"><a href="/job_seeker/search_job" class="nav-link">Want a Job</a></li>
                     </ul>
                 </div>
             </div>

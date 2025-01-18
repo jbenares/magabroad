@@ -12172,6 +12172,22 @@ h5,
     }
 }
 
+@media (max-width: 768px){
+    .hero-wrap.hero-wrap-3 {
+        height: 0px !important;
+    }
+}
+
+@media (max-width: 425px){
+    .hero-wrap.hero-wrap-3 {
+        height: 0px !important;
+    }
+}
+@media (max-width: 375px){
+    .hero-wrap.hero-wrap-3 {
+        height: 0px !important;
+    }
+}
 .slider-text .breadcrumbs {
     font-size: 12px;
     letter-spacing: 1px;
@@ -12617,9 +12633,9 @@ h5,
 
 .job-post-item:hover,
 .job-post-item:focus {
-    -webkit-box-shadow: 0px 0px 24px 5px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 0px 24px 5px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 24px 5px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+    box-shadow:  0px 0px 8px 0px rgba(0, 0, 0, 0.1);
     border: none;
 }
 

@@ -54,18 +54,20 @@
                             </p>
                             <br>
                             <h5>Job Description</h5>
-                            <p class="text-gray-400 leading-normal">We’re looking for a skilled Frontend Developer with expertise in React.js and modern JavaScript frameworks. You’ll collaborate with cross-functional teams to build responsive, user-friendly interfaces.</p>
+                            <p class="text-gray-500 leading-normal">We’re looking for a skilled Frontend Developer with expertise in React.js and modern JavaScript frameworks. You’ll collaborate with cross-functional teams to build responsive, user-friendly interfaces.</p>
                             <h5>Job Summary</h5>
-                            <p class="text-gray-400 leading-normal">We’re looking for a skilled Frontend Developer with expertise in React.js and modern JavaScript frameworks. You’ll collaborate with cross-functional teams to build responsive, user-friendly interfaces.</p>
+                            <p class="text-gray-500 leading-normal">The Interaction Designer’s role is to turn the division’s User Experience vision into tangible, navigable reality. The Designer uses customer-driven insights and iterative methodologies to design and create usable, relevant and elegant user flows, interfaces, structure and interactions. 
+
+							The Interaction Design team also establishes an interface design system organizing the best practices across the division’s digital banking products. </p>
                             <h5>Responsibilities</h5>
-                            <ul class="text-gray-400 leading-normal">
+                            <ul class="text-gray-500 leading-normal">
                                 <li>Develop and maintain user-facing features.</li>
                                 <li>Ensure technical feasibility of UI/UX designs.</li>
                                 <li>Optimize application for maximum speed and scalability.</li>
                                 <li>Collaborate with other team members and stakeholders.</li>
                             </ul>
                             <h5>Requirements</h5>
-                            <ul class="text-gray-400 leading-normal">
+                            <ul class="text-gray-500 leading-normal">
                                 <li>Proficiency in React.js, JavaScript, and modern front-end libraries.</li>
                                 <li>Experience with responsive design and cross-browser compatibility.</li>
                                 <li>Strong understanding of version control systems (e.g., Git).</li>
@@ -79,11 +81,11 @@
                     <div class="col-lg-3 mb-4">
                         <div class="p-3 bg-white shadow-sm">
                             <hr>
-                            <h6>Posted By</h6>
+                            <h6 class="mb-0">Posted By</h6>
                             <p class="text-muted">Jane Smith (HR Manager)</p>
-                            <h6>Posted On</h6>
+                            <h6 class="mb-0">Posted On</h6>
                             <p class="text-muted">January 10, 2025</p>
-                            <a href="/employer/postjob" class="btn btn-primary btn-block">Post a New Job</a>
+                            <!-- <a href="/employer/postjob" class="btn btn-primary btn-block">Post a New Job</a> -->
                         </div>
                     </div>
                 </div>
