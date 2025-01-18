@@ -71,7 +71,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-BgEdTIrH.css",
+    "file": "assets/app-DjlfasSk.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -257,19 +257,22 @@
     "src": "resources/images/person_6.jpg"
   },
   "resources/js/app.js": {
-    "file": "assets/app-BDqGWOzN.js",
+    "file": "assets/app-DO9QeJIa.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-BTVNVLz5.css"
+      "assets/app-DvB2Xm2x.css"
     ],
     "assets": [
       "assets/magabroad_logo-D_i2FDpm.png",
       "assets/company-1-BQhtOlnq.jpg",
       "assets/company-2-4hGJVQYH.jpg",
       "assets/company-3-DeTIPnmA.jpg",
-      "assets/company-4-D_lXdwFd.jpg"
+      "assets/company-4-D_lXdwFd.jpg",
+      "assets/person_2-BkhrQwID.jpg",
+      "assets/person_1-BXNgDMCr.jpg",
+      "assets/person_3-CYCDGm-C.jpg"
     ]
   }
 }
