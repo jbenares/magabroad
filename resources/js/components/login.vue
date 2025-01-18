@@ -11,12 +11,16 @@
         password:'',
     })
     let error = ref('')
-    const login = async (role) =>{
+    const login = async () =>{
         await axios.post('/api/login_process', form)
         .then(response =>{
             if(response.data.success){
                 localStorage.setItem('token', response.data.data.token)
-                router.push('/')
+				if(role.value == 'Jobseeker'){
+					router.push('/job_seeker/dashboard')
+				}else{
+					router.push('/employer/dashboard')
+				}
             } else {
                 error.value = response.data.message;
             }
@@ -59,7 +63,7 @@
 										<div> {{ error }} </div>
 									</div>
 								</div>
-								<form class="pt-3" @submit.prevent="login(role)">
+								<form class="pt-3" @submit.prevent="login()">
 									<div class="form-group">
 									<label for="email" class="font-weight-bold">Email Address</label>
 									<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
