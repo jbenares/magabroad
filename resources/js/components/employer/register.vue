@@ -1,4 +1,177 @@
+<script setup>
+	import navigation from '@/layouts/navigation.vue';
+	import axios from 'axios';
+	import {onMounted, ref} from "vue";
+	import { useRouter } from "vue-router";
+	const router = useRouter();
+
+	let firstname=ref('');
+	let middlename=ref('');
+	let lastname=ref('');
+	let email=ref('');
+	let password=ref('');
+	let contact_no=ref('');
+	let otp=ref('');
+	let otpSent=ref(false);
+	let captchaVerified=ref(false);
+	let captchaResponse=ref('');
+
+	let message=ref('');
+	let fname_message=ref('');
+	let lname_message=ref('');
+	let contact_message=ref('');
+	let email_message=ref('');
+	let pass_message=ref('');
+
+	onMounted(async () => {
+		loadRecaptcha()
+	})
+
+	const loadRecaptcha = async () => {
+      if (typeof grecaptcha !== 'undefined') {
+        grecaptcha.render('recaptcha', {
+          sitekey: '6LdmoLsqAAAAAOFumDONs4lecgK5J4u7oxxq7CRE', // Replace with your site key
+          callback: onCaptchaVerified,
+        });
+      }else{
+		captchaVerified.value = false;
+	  }
+    }
+
+	const onCaptchaVerified = (response) => {
+		captchaVerified.value = true;
+		captchaResponse.value = response;
+	}
+
+	const SaveNewEmployer = () => {
+		const formData= new FormData()
+		formData.append('firstname',firstname.value)
+		formData.append('middlename',middlename.value)
+		formData.append('lastname',lastname.value)
+		formData.append('contact_no',contact_no.value)
+		formData.append('email',email.value)
+		formData.append('password',password.value)
+		// if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
+			axios.post("/api/add_employer",formData).then(function () {
+				router.push('/login')
+			});
+		// }else{
+		// 		if(firstname.value==''){
+		// 			document.getElementById('fname').style.backgroundColor = '#FAA0A0';
+		// 		}
+		// 		if(lastname.value==''){
+		// 			document.getElementById('lname').style.backgroundColor = '#FAA0A0';
+		// 		}
+		// 		if(contact.value==''){
+		// 			document.getElementById('contact').style.backgroundColor = '#FAA0A0';
+		// 		}
+		// 		if(email.value==''){
+		// 			document.getElementById('email').style.backgroundColor = '#FAA0A0';
+		// 		}
+		// 		if(password.value==''){
+		// 			document.getElementById('password').style.backgroundColor = '#FAA0A0';
+		// 		}
+		// 		// const btn_save = document.getElementById("save");
+		// 		// btn_save.disabled = true;
+		// 	}
+	}
+
+	const sendOTP = () => {
+		const formOTP= new FormData()
+		formOTP.append('email',email.value)
+		if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
+			axios.post(`/api/send-otp`,formOTP).then(function (response) {
+				message.value = response.data.message;
+				otpSent.value = true;
+			}, function (error) {
+				message.value = error.response.data.message;
+			});
+		}else{
+			if(firstname.value==''){
+				// document.getElementById('fname').style.backgroundColor = '#FAA0A0';
+				fname_message.value = 'First Name is required!'
+			}
+			if(lastname.value==''){
+				// document.getElementById('lname').style.backgroundColor = '#FAA0A0';
+				lname_message.value = 'Last Name is required!'
+			}
+			if(contact.value==''){
+				// document.getElementById('contact').style.backgroundColor = '#FAA0A0';
+				contact_message.value = 'Contact No is required!'
+			}
+			if(email.value==''){
+				// document.getElementById('email').style.backgroundColor = '#FAA0A0';
+				email_message.value = 'Email is required!'
+			}
+			if(password.value==''){
+				// document.getElementById('password').style.backgroundColor = '#FAA0A0';
+				pass_message.value = 'Password is required!'
+			}
+			// const btn_save = document.getElementById("save");
+			// btn_save.disabled = true;
+		}
+	}
+
+	const verifyOTP = () => {
+		const formOTP= new FormData()
+		formOTP.append('email',email.value)
+		formOTP.append('otp',otp.value)
+		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
+			message.value = response.data.message;
+			otpSent.value = true;
+			SaveNewEmployer()
+		}, function (error) {
+			message.value = error.response.data.message;
+		}); 
+	}
+
+	const resetError = (button) => {
+		
+		if(button==='fname'){
+			// document.getElementById('fname').style.backgroundColor = '#FEFCE8';
+			fname_message.value = '';
+		}
+		if(button==='lname'){
+			// document.getElementById('lname').style.backgroundColor = '#FEFCE8';
+			lname_message.value = '';
+		}
+		if(button==='email'){
+			// document.getElementById('email').style.backgroundColor = '#FEFCE8';
+			email_message.value = '';
+		}
+		if(button==='password'){
+			// document.getElementById('password').style.backgroundColor = '#FEFCE8';
+			pass_message.value = '';
+		}
+		if(button==='contact'){
+			// document.getElementById('contact').style.backgroundColor = '#FEFCE8';
+			contact_message.value = '';
+		}
+		// const btn_save = document.getElementById("save");
+		// btn_save.disabled = false;
+	}
+
+	
+	const isNumber = (evt)=> {
+		evt = (evt) ? evt : window.event;
+		var charCode = (evt.which) ? evt.which : evt.keyCode;
+		if (charCode == 46) {
+			//Check if the text already contains the . character
+			if (evt.target.value.indexOf('.') === -1) {
+				return true;
+			} else {
+				evt.preventDefault();
+			}
+		} else {
+			if (charCode > 31 && (charCode < 48 || charCode > 57))
+				evt.preventDefault();
+		}
+		return true;
+    }
+
+</script>
 <template>
+	
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
 		  <div class="overlay"></div>
@@ -17,29 +190,82 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mb-5">
-						<form action="#" class="p-5 bg-white">
+						<!-- <form action="#" class="p-5 bg-white"> -->
 							<h4 class="mb-0">Your Employer Account</h4>
 							<p class="m-0">We wont share your details with anyone.</p>
 							<hr>
-							<div class="row form-group">
-								<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="fullname">First Name</label>
-									<input type="text" id="fullname" class="form-control" placeholder="">
+							<form @submit.prevent="sendOTP">
+								<div class="row form-group">
+									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="fullname">First Name</label>
+										<input type="text" id="fname" class="form-control" placeholder="" v-model="firstname" @click="resetError('fname')">
+										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
+									</div>
+									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="fullname">Middle Name</label>
+										<input type="text" id="" class="form-control" placeholder="" v-model="middlename">
+									</div>
+									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="fullname">Last Name</label>
+										<input type="text" id="lname" class="form-control" placeholder="" v-model="lastname" @click="resetError('lname')">
+										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
+									</div>
 								</div>
-								<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="fullname">Last Name</label>
-									<input type="text" id="fullname" class="form-control" placeholder="">
+								<div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<input type="text" id="contact" class="form-control" placeholder="" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
+
+									</div>
 								</div>
+								<div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="email">Email Address</label>
+										<input type="email" id="email" class="form-control" placeholder="" v-model="email" @click="resetError('email')">
+										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="email">Password</label>
+										<input type="password" id="password" class="form-control" placeholder="" v-model="password" @click="resetError('password')">
+										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
+
+									</div>
+								</div>
+								<div class="row form-group">
+									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
+								</div>
+								
+								<div class="row form-group" v-if="otpSent != true">
+									<div class="col-md-12">
+										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
+										<button type="submit" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
+									</div>
+								</div>
+							</form>
+							<p v-if="message">{{ message }}</p>
+							<div>
+								<form @submit.prevent="verifyOTP" v-if="otpSent">
+									<div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<input type="text" v-model="otp" class="form-control" placeholder="Enter OTP" required />
+										</div>
+									</div>
+								<div class="row form-group">
+									<div class="col-md-12">
+										<button type="submit" class="btn btn-primary mr-2 w-44">Create Account</button>
+										<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
+									</div>
+								</div>
+								</form>
 							</div>
-							<div class="row form-group">
-								<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="email">Email Address</label>
-									<input type="email" id="email" class="form-control" placeholder="">
-								</div>
-							</div>
-							
+
 							<hr>
-							<div class="row">
+								
+							
+							<!-- <div class="row">
 								<div class="col-lg-12 col-md-12"><h3>Business Details</h3></div>
 							</div>
 							<div class="row form-group">
@@ -72,14 +298,15 @@
 										<input type="text" id="phone" placeholder="9051234567" />
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<hr>
-							<div class="row form-group">
+							<!-- <div class="row form-group">
 								<div class="col-md-12">
 									<input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5">
+									<button type="button" @click="SaveNewEmployer()" id="save" class="btn btn-primary mr-2 w-44">Submit</button>
 								</div>
-							</div>
-						</form>
+							</div> -->
+						<!-- </form> -->
 					</div>
 	
 					<div class="col-lg-4">
@@ -200,27 +427,3 @@
 		</footer>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation.vue';
-	// // Get the elements
-	// const ExperienceToggle = {
-	// 	data() {
-	// 		return {
-	// 		hasExperience: false, // Default state for the toggle
-	// 		};
-	// 	},
-	// 	computed: {
-	// 		label() {
-	// 		return this.hasExperience ? "I have experience" : "I have no experience";
-	// 		},
-	// 	},
-	// 	methods: {
-	// 		toggleExperience() {
-	// 		// Logic can be added here if needed, such as saving the state to a server
-	// 		console.log(`Experience: ${this.hasExperience}`);
-	// 		},
-	// 	},
-	// };
-
-</script>

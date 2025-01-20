@@ -7,12 +7,23 @@ import home from '../components/home.vue'
 
 import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
-import find_job from  '../components/job_seeker/findjob.vue'
+import search_job from  '../components/job_seeker/search_job.vue'
+import view_job from  '../components/job_seeker/view_job.vue'
+import apply_job from  '../components/job_seeker/apply_job.vue'
+import jobseeker_profile from  '../components/job_seeker/profile.vue'
+import notif_jobseeker from  '../components/job_seeker/notifications.vue'
 
 import employer_register from  '../components/employer/register.vue'
 import employer_dash from  '../components/employer/dashboard.vue'
+import employer_profile from  '../components/employer/profile.vue'
 import post_job from  '../components/employer/postjob.vue'
+import job_list from  '../components/employer/job_list.vue'
+import job_view from  '../components/employer/job_view.vue'
+import search_candidate from  '../components/employer/search_candidate.vue'
+import view_candidate from  '../components/employer/view_candidate.vue'
+import notif_employer from  '../components/employer/notifications.vue'
 
+import admin_dash from '../components/admin/dashboard.vue'
 
 const routes = [
     {
@@ -24,10 +35,16 @@ const routes = [
         name:'login',
         component: loginForm,
     },
+    // ----------------------------------------------------------------------------Job Seeker
     {
         path:'/job_seeker/register',
         name:'jobseeker_register',
         component: jobseeker_register,
+    },
+    {
+        path:'/job_seeker/profile',
+        name:'jobseeker_profile',
+        component: jobseeker_profile,
     },
     {
         path:'/job_seeker/dashboard',
@@ -35,10 +52,27 @@ const routes = [
         component: jobseeker_dash,
     },
     {
-        path:'/job_seeker/findjob',
-        name:'find_job',
-        component: find_job,
+        path:'/job_seeker/search_job',
+        name:'search_job',
+        component: search_job,
     },
+    {
+        path:'/job_seeker/view_job',
+        name:'view_job',
+        component: view_job,
+    },
+    {
+        path:'/job_seeker/apply_job',
+        name:'apply_job',
+        component: apply_job,
+    },
+    {
+        path:'/job_seeker/notifications',
+        name:'notif_jobseeker',
+        component: notif_jobseeker,
+    },
+
+    // ----------------------------------------------------------------------------Employer
     {
         path:'/employer/register',
         name:'employer_register',
@@ -50,10 +84,49 @@ const routes = [
         component: employer_dash,
     },
     {
+        path:'/employer/profile',
+        name:'employer_profile',
+        component: employer_profile,
+    },
+    {
         path:'/employer/postjob',
         name:'post_job',
         component: post_job,
     },
+    {
+        path:'/employer/job_list',
+        name:'job_list',
+        component: job_list,
+    },
+    {
+        path:'/employer/job_view',
+        name:'job_view',
+        component: job_view,
+    },
+    {
+        path:'/employer/search_candidate',
+        name:'search_candidate',
+        component: search_candidate,
+    },
+    {
+        path:'/employer/view_candidate',
+        name:'view_candidate',
+        component: view_candidate,
+    },
+    {
+        path:'/employer/notifications',
+        name:'notif_employer',
+        component: notif_employer,
+    },
+
+    // ----------------------------------------------------------------------------Admin
+
+    {
+        path:'/admin/dashboard',
+        name:'admin_dash',
+        component: admin_dash,
+    },
+
     {
         path:'/:pathMatch(.*)*',
         name:'notFound',

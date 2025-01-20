@@ -10,41 +10,63 @@
 				<!-- Dashboard Section -->
 				<div class="row">
 					<div class="col-lg-3 mb-4">
-						<div class="p-3 bg-white">
-							<h4 class="text-center">TechCorp Inc.</h4>
-							<p class="text-center text-muted">Innovating the Future</p>
+						<div class="p-3 bg-white text-center rounded-lg">
+							<p class="text-left text-muted text-sm mb-0">Profile Completion: 75%</p>
+							<div class="progress mb-0 h-10" >
+								<div class="progress-bar bg-primary w-[75%]" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
 							<hr>
-							<h6>Active Jobs</h6>
-							<h2 class="text-primary">12</h2>
-							<a href="/employer/postjob" class="btn btn-primary btn-block">Post a New Job</a>
+							<img src="../../../images/company-1.jpg" alt="Profile Picture" class="img-fluid rounded-circle mb-2" >
+							<h4 class="mb-2">Sample Company</h4>
+							<hr>
+							<!-- <div class="">
+								<a href="" class=" text-gray-500 hover:text-gray-500">
+									<div class="flex justify-between hover:bg-gray-100 px-2">
+										<div class="flex justify-start space-x-2">
+											<BookmarkIcon class="size-5 mt-1"/>
+											<span>Saved Jobs</span>
+										</div>
+										<span>9</span>
+									</div>
+								</a>
+								<a href="" class=" text-gray-500 hover:text-gray-500">
+									<div class="flex justify-between hover:bg-gray-100 px-2">
+										<div class="flex justify-start space-x-2">
+											<PaperAirplaneIcon class="size-5 mt-1"/>
+											<span>Companies Applied</span>
+										</div>
+										<span>9</span>
+									</div>
+								</a>
+							</div> -->
 						</div>
 					</div>
 
 					<div class="col-lg-9">
 						<div class="row">
 							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white">
+								<div class="p-4 bg-white rounded-lg">
 									<h6 class="text-muted">Active Job Postings</h6>
 									<h3>12 jobs currently posted</h3>
-									<a href="#" class="text-primary">Manage Postings</a>
+									<a href="/employer/job_list" class="text-primary">Manage Postings</a>
 								</div>
 							</div>
 							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white">
+								<div class="p-4 bg-white rounded-lg">
 									<h6 class="text-muted">New Applications</h6>
 									<h3>45 new applications</h3>
 									<a href="#" class="text-primary">View Applications</a>
 								</div>
 							</div>
 							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white">
+								<div class="p-4 bg-white rounded-lg">
 									<h6 class="text-muted">Team Members</h6>
 									<h3>5 team members added</h3>
 									<a href="#" class="text-primary">Manage Team</a>
 								</div>
 							</div>
 							<div class="col-md-6 mb-4">
-								<div class="p-4 bg-white">
+								<div class="p-4 bg-white rounded-lg">
 									<h6 class="text-muted">Performance Analytics</h6>
 									<h3>120 job views this week</h3>
 									<a href="#" class="text-primary">View Analytics</a>
@@ -54,7 +76,7 @@
 
 						<div class="mt-4">
 							<h5>Recent Activities</h5>
-							<div class="p-3 bg-white">
+							<div class="p-3 bg-white rounded-lg">
 								<p>John Doe applied for Frontend Developer</p>
 								<a href="#" class="btn btn-primary btn-sm">View</a>
 							</div>

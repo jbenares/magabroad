@@ -1,3 +1,34 @@
+<script setup>
+	import navigation from '@/layouts/navigation.vue';
+	import	{ExclamationCircleIcon} from '@heroicons/vue/24/solid'
+	import {reactive, ref} from "vue";
+	import { useRouter } from "vue-router";
+	const router = useRouter();
+
+	let role = ref('Jobseeker');
+	let form = reactive({
+        email:'',
+        password:'',
+    })
+    let error = ref('')
+    const login = async () =>{
+        await axios.post('/api/login_process', form)
+        .then(response =>{
+            if(response.data.success){
+                localStorage.setItem('token', response.data.data.token)
+				if(role.value == 'Jobseeker'){
+					router.push('/job_seeker/dashboard')
+				}else{
+					router.push('/employer/dashboard')
+				}
+            } else {
+                error.value = response.data.message;
+            }
+        })
+    }
+
+</script>
+
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3">
@@ -16,33 +47,45 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6 col-lg-6 mb-5">
-						<form action="#" class="p-5 bg-white">
+						<!-- <form action="#" class="p-5 bg-white"> -->
 							<h2 class="text-center mb-4">Login</h2>
 							<hr>
 
 							<div class="btn-group d-flex mb-4" role="group" aria-label="Role Selection">
-								<button type="button" class="btn btn-secondary w-50" :class="{ active: role === 'jobseeker' }" @click="role = 'jobseeker'">Jobseeker</button>
-								<button type="button" class="btn !bg-gray-100 w-50" :class="{ active: role === 'employer' }" @click="role = 'employer'">Employer</button>
+								<button type="button" class="btn btn-secondary w-50" :class="{ active: role === 'Jobseeker' }"  v-on:click="role = 'Jobseeker'">Jobseeker</button>
+								<button type="button" class="btn !bg-gray-100 w-50" :class="{ active: role === 'Employer' }" v-on:click="role = 'Employer'">Employer</button>
 							</div>
+								<div class="alert alert-danger" v-if="error">
+									<div class="flex justify-start space-x-2">
+										<div>
+											<ExclamationCircleIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"></ExclamationCircleIcon>
+										</div> 
+										<div> {{ error }} </div>
+									</div>
+								</div>
+								<form class="pt-3" @submit.prevent="login()">
+									<div class="form-group">
+									<label for="email" class="font-weight-bold">Email Address</label>
+									<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
+									</div>
 
-							<div class="form-group">
-								<label for="email" class="font-weight-bold">Email Address</label>
-								<input type="email" id="email" class="form-control" placeholder="Enter your email">
-							</div>
+									<div class="form-group">
+										<label for="password" class="font-weight-bold">Password</label>
+										<input type="password" id="password" class="form-control" placeholder="Enter your password" v-model="form.password">
+									</div>
 
-							<div class="form-group">
-								<label for="password" class="font-weight-bold">Password</label>
-								<input type="password" id="password" class="form-control" placeholder="Enter your password">
-							</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
+									</div>
 
-							<div class="form-group">
-								<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
-							</div>
-
-							<div class="text-center">
-								<p class="mb-0">Don't have an account? <a href="/job_seeker/register">Register here</a></p>
-							</div>
-						</form>
+									<div class="text-center" v-if="(role =='Jobseeker')">
+										<p class="mb-0">Don't have an account? <a href="/job_seeker/register">Register here</a></p>
+									</div>
+									<div class="text-center" v-if="(role =='Employer')">
+										<p class="mb-0">Don't have an account? <a href="/employer/register">Register here</a></p>
+									</div>
+								</form>
+						<!-- </form> -->
 					</div>
 				</div>
 			</div>
@@ -143,27 +186,3 @@
 		</footer>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation.vue';
-	// // Get the elements
-	// const ExperienceToggle = {
-	// 	data() {
-	// 		return {
-	// 		hasExperience: false, // Default state for the toggle
-	// 		};
-	// 	},
-	// 	computed: {
-	// 		label() {
-	// 		return this.hasExperience ? "I have experience" : "I have no experience";
-	// 		},
-	// 	},
-	// 	methods: {
-	// 		toggleExperience() {
-	// 		// Logic can be added here if needed, such as saving the state to a server
-	// 		console.log(`Experience: ${this.hasExperience}`);
-	// 		},
-	// 	},
-	// };
-
-</script>

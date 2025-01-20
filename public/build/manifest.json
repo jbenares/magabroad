@@ -1,0 +1,278 @@
+{
+  "public/js/bootstrap.min.js": {
+    "file": "assets/bootstrap.min-JNw9Ljkr.js",
+    "name": "bootstrap.min",
+    "src": "public/js/bootstrap.min.js",
+    "isEntry": true
+  },
+  "public/js/google-map.js": {
+    "file": "assets/google-map-BVSYn-nz.js",
+    "name": "google-map",
+    "src": "public/js/google-map.js",
+    "isEntry": true
+  },
+  "public/js/jquery-migrate-3.0.1.min.js": {
+    "file": "assets/jquery-migrate-3.0.1.min-BppJJ3wc.js",
+    "name": "jquery-migrate-3.0.1.min",
+    "src": "public/js/jquery-migrate-3.0.1.min.js",
+    "isEntry": true
+  },
+  "public/js/jquery.animateNumber.min.js": {
+    "file": "assets/jquery.animateNumber.min-gDRTFCZF.js",
+    "name": "jquery.animateNumber.min",
+    "src": "public/js/jquery.animateNumber.min.js",
+    "isEntry": true
+  },
+  "public/js/jquery.easing.1.3.js": {
+    "file": "assets/jquery.easing.1.3-BYF1YoEQ.js",
+    "name": "jquery.easing.1.3",
+    "src": "public/js/jquery.easing.1.3.js",
+    "isEntry": true
+  },
+  "public/js/jquery.magnific-popup.min.js": {
+    "file": "assets/jquery.magnific-popup.min-Bcz67zHe.js",
+    "name": "jquery.magnific-popup.min",
+    "src": "public/js/jquery.magnific-popup.min.js",
+    "isEntry": true
+  },
+  "public/js/jquery.min.js": {
+    "file": "assets/jquery.min-CaaCIO8V.js",
+    "name": "jquery.min",
+    "src": "public/js/jquery.min.js",
+    "isEntry": true
+  },
+  "public/js/jquery.waypoints.min.js": {
+    "file": "assets/jquery.waypoints.min-BcUFgiEe.js",
+    "name": "jquery.waypoints.min",
+    "src": "public/js/jquery.waypoints.min.js",
+    "isEntry": true
+  },
+  "public/js/main.js": {
+    "file": "assets/main-DGz6xyik.js",
+    "name": "main",
+    "src": "public/js/main.js",
+    "isEntry": true
+  },
+  "public/js/owl.carousel.min.js": {
+    "file": "assets/owl.carousel.min-FMUUf83A.js",
+    "name": "owl.carousel.min",
+    "src": "public/js/owl.carousel.min.js",
+    "isEntry": true
+  },
+  "public/js/popper.min.js": {
+    "file": "assets/popper.min-BujanNg_.js",
+    "name": "popper.min",
+    "src": "public/js/popper.min.js",
+    "isEntry": true
+  },
+  "resources/css/animate.css": {
+    "file": "assets/animate-DtOTUtl3.css",
+    "src": "resources/css/animate.css",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DjlfasSk.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/bootstrap-datepicker.css": {
+    "file": "assets/bootstrap-datepicker-Cpoy_PkZ.css",
+    "src": "resources/css/bootstrap-datepicker.css",
+    "isEntry": true
+  },
+  "resources/css/flaticon.css": {
+    "file": "assets/flaticon-C7wsbJjg.css",
+    "src": "resources/css/flaticon.css",
+    "isEntry": true
+  },
+  "resources/css/icomoon.css": {
+    "file": "assets/icomoon-BJFWGM4G.css",
+    "src": "resources/css/icomoon.css",
+    "isEntry": true
+  },
+  "resources/css/ionicons.min.css": {
+    "file": "assets/ionicons-DCgX68M2.css",
+    "src": "resources/css/ionicons.min.css",
+    "isEntry": true
+  },
+  "resources/css/jquery.timepicker.css": {
+    "file": "assets/jquery-CELvvNv_.css",
+    "src": "resources/css/jquery.timepicker.css",
+    "isEntry": true
+  },
+  "resources/css/magnific-popup.css": {
+    "file": "assets/magnific-popup-seepD-Mr.css",
+    "src": "resources/css/magnific-popup.css",
+    "isEntry": true
+  },
+  "resources/css/open-iconic-bootstrap.min.css": {
+    "file": "assets/open-iconic-bootstrap-BBnYzG7e.css",
+    "src": "resources/css/open-iconic-bootstrap.min.css",
+    "isEntry": true
+  },
+  "resources/css/owl.carousel.min.css": {
+    "file": "assets/owl.carousel-DzTZl-IF.css",
+    "src": "resources/css/owl.carousel.min.css",
+    "isEntry": true
+  },
+  "resources/css/owl.theme.default.min.css": {
+    "file": "assets/owl.theme.default-79m_hVlD.css",
+    "src": "resources/css/owl.theme.default.min.css",
+    "isEntry": true
+  },
+  "resources/fonts/flaticon/font/Flaticon.eot": {
+    "file": "assets/Flaticon-DJtv2EsS.eot",
+    "src": "resources/fonts/flaticon/font/Flaticon.eot"
+  },
+  "resources/fonts/flaticon/font/Flaticon.svg": {
+    "file": "assets/Flaticon-DrA-opml.svg",
+    "src": "resources/fonts/flaticon/font/Flaticon.svg"
+  },
+  "resources/fonts/flaticon/font/Flaticon.ttf": {
+    "file": "assets/Flaticon-C17qSu-O.ttf",
+    "src": "resources/fonts/flaticon/font/Flaticon.ttf"
+  },
+  "resources/fonts/flaticon/font/Flaticon.woff": {
+    "file": "assets/Flaticon-BiiiWwyk.woff",
+    "src": "resources/fonts/flaticon/font/Flaticon.woff"
+  },
+  "resources/fonts/icomoon/icomoon.eot": {
+    "file": "assets/icomoon-CtdjWsRq.eot",
+    "src": "resources/fonts/icomoon/icomoon.eot"
+  },
+  "resources/fonts/icomoon/icomoon.svg": {
+    "file": "assets/icomoon-CEwV7TMN.svg",
+    "src": "resources/fonts/icomoon/icomoon.svg"
+  },
+  "resources/fonts/icomoon/icomoon.ttf": {
+    "file": "assets/icomoon-CDO7zJU1.ttf",
+    "src": "resources/fonts/icomoon/icomoon.ttf"
+  },
+  "resources/fonts/icomoon/icomoon.woff": {
+    "file": "assets/icomoon-Co0gSQeT.woff",
+    "src": "resources/fonts/icomoon/icomoon.woff"
+  },
+  "resources/fonts/ionicons/fonts/ionicons.eot": {
+    "file": "assets/ionicons-Cf4e5kzW.eot",
+    "src": "resources/fonts/ionicons/fonts/ionicons.eot"
+  },
+  "resources/fonts/ionicons/fonts/ionicons.svg": {
+    "file": "assets/ionicons-CDU7xvba.svg",
+    "src": "resources/fonts/ionicons/fonts/ionicons.svg"
+  },
+  "resources/fonts/ionicons/fonts/ionicons.ttf": {
+    "file": "assets/ionicons-9aKja59l.ttf",
+    "src": "resources/fonts/ionicons/fonts/ionicons.ttf"
+  },
+  "resources/fonts/ionicons/fonts/ionicons.woff": {
+    "file": "assets/ionicons-00PzowyW.woff",
+    "src": "resources/fonts/ionicons/fonts/ionicons.woff"
+  },
+  "resources/fonts/ionicons/fonts/ionicons.woff2": {
+    "file": "assets/ionicons-DcNJYk1s.woff2",
+    "src": "resources/fonts/ionicons/fonts/ionicons.woff2"
+  },
+  "resources/fonts/open-iconic/open-iconic.eot": {
+    "file": "assets/open-iconic-B3VkREHI.eot",
+    "src": "resources/fonts/open-iconic/open-iconic.eot"
+  },
+  "resources/fonts/open-iconic/open-iconic.otf": {
+    "file": "assets/open-iconic-CWXKtUuw.otf",
+    "src": "resources/fonts/open-iconic/open-iconic.otf"
+  },
+  "resources/fonts/open-iconic/open-iconic.svg": {
+    "file": "assets/open-iconic-C_BgbKHh.svg",
+    "src": "resources/fonts/open-iconic/open-iconic.svg"
+  },
+  "resources/fonts/open-iconic/open-iconic.ttf": {
+    "file": "assets/open-iconic-QtVr7Cw7.ttf",
+    "src": "resources/fonts/open-iconic/open-iconic.ttf"
+  },
+  "resources/fonts/open-iconic/open-iconic.woff": {
+    "file": "assets/open-iconic-ChAtPn5z.woff",
+    "src": "resources/fonts/open-iconic/open-iconic.woff"
+  },
+  "resources/images/bg_1.jpg": {
+    "file": "assets/bg_1-CgiKrUkH.jpg",
+    "src": "resources/images/bg_1.jpg"
+  },
+  "resources/images/company-1.jpg": {
+    "file": "assets/company-1-BQhtOlnq.jpg",
+    "src": "resources/images/company-1.jpg"
+  },
+  "resources/images/company-2.jpg": {
+    "file": "assets/company-2-4hGJVQYH.jpg",
+    "src": "resources/images/company-2.jpg"
+  },
+  "resources/images/company-3.jpg": {
+    "file": "assets/company-3-DeTIPnmA.jpg",
+    "src": "resources/images/company-3.jpg"
+  },
+  "resources/images/company-4.jpg": {
+    "file": "assets/company-4-D_lXdwFd.jpg",
+    "src": "resources/images/company-4.jpg"
+  },
+  "resources/images/image_1.jpg": {
+    "file": "assets/image_1-Dm7uguHA.jpg",
+    "src": "resources/images/image_1.jpg"
+  },
+  "resources/images/image_2.jpg": {
+    "file": "assets/image_2-CeXdrTIS.jpg",
+    "src": "resources/images/image_2.jpg"
+  },
+  "resources/images/image_3.jpg": {
+    "file": "assets/image_3-D-emRJxe.jpg",
+    "src": "resources/images/image_3.jpg"
+  },
+  "resources/images/image_4.jpg": {
+    "file": "assets/image_4-B-Zu_fV_.jpg",
+    "src": "resources/images/image_4.jpg"
+  },
+  "resources/images/magabroad_logo.png": {
+    "file": "assets/magabroad_logo-D_i2FDpm.png",
+    "src": "resources/images/magabroad_logo.png"
+  },
+  "resources/images/person_1.jpg": {
+    "file": "assets/person_1-BXNgDMCr.jpg",
+    "src": "resources/images/person_1.jpg"
+  },
+  "resources/images/person_2.jpg": {
+    "file": "assets/person_2-BkhrQwID.jpg",
+    "src": "resources/images/person_2.jpg"
+  },
+  "resources/images/person_3.jpg": {
+    "file": "assets/person_3-CYCDGm-C.jpg",
+    "src": "resources/images/person_3.jpg"
+  },
+  "resources/images/person_4.jpg": {
+    "file": "assets/person_4-DCxxA6RD.jpg",
+    "src": "resources/images/person_4.jpg"
+  },
+  "resources/images/person_5.jpg": {
+    "file": "assets/person_5-BWbPjXGB.jpg",
+    "src": "resources/images/person_5.jpg"
+  },
+  "resources/images/person_6.jpg": {
+    "file": "assets/person_6-BgOwYFYl.jpg",
+    "src": "resources/images/person_6.jpg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DO9QeJIa.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-DvB2Xm2x.css"
+    ],
+    "assets": [
+      "assets/magabroad_logo-D_i2FDpm.png",
+      "assets/company-1-BQhtOlnq.jpg",
+      "assets/company-2-4hGJVQYH.jpg",
+      "assets/company-3-DeTIPnmA.jpg",
+      "assets/company-4-D_lXdwFd.jpg",
+      "assets/person_2-BkhrQwID.jpg",
+      "assets/person_1-BXNgDMCr.jpg",
+      "assets/person_3-CYCDGm-C.jpg"
+    ]
+  }
+}

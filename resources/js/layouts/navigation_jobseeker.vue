@@ -10,35 +10,94 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="/" class="nav-link">Dashboard</a></li>
+                        <li class="nav-item"><a href="/job_seeker/dashboard" class="nav-link">Dashboard</a></li>
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Notification <span class="badge badge-danger !rounded-xl ">3</span>
+                                Notification <span class="badge badge-danger rounded-xl">3</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-wrapper" aria-labelledby="notificationDropdown" style="min-width: 250px;">
-                                <h6 class="dropdown-header">Notifications</h6>
-                                <a class="dropdown-item" href="#">New candidate applied for the job</a>
-                                <a class="dropdown-item" href="#">Job posting has been approved</a>
-                                <a class="dropdown-item" href="#">Subscription payment received</a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-wrapper" aria-labelledby="notificationDropdown" style="min-width: 300px; max-height: 400px; overflow-y: auto;">
+                                <div class="dropdown-header d-flex justify-content-between align-items-center">
+                                    <span>Today</span>
+                                    <a href="#" class="text-primary">Mark all as read</a>
+                                </div>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img src="../../images/company-2.jpg" alt="Transportation" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Transportation</div>
+                                        <small>You expended 200 BDT on transport that exceeded your budget.</small>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img  src="../../images/company-3.jpg" alt="Party" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Party</div>
+                                        <small>Too much exceeded on party last night.</small>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img  src="../../images/company-4.jpg" alt="Loan" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Loan</div>
+                                        <small>You have an upcoming Loan to pay. Click to pay now.</small>
+                                    </div>
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-primary" href="#">View All Notifications</a>
+                                <div class="dropdown-header">Last Week</div>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img src="../../images/company-1.jpg" alt="Marriage" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Marriage</div>
+                                        <small>You need to save 20,000 BDT for marriage.</small>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img src="../../images/company-3.jpg" alt="Gym" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Gym</div>
+                                        <small>You have an upcoming payment for the Gym. Click to pay now.</small>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-start" href="#">
+                                    <div class="image-container mr-3">
+                                        <img src="../../images/company-2.jpg" alt="Investment" />
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold leading-none mb-0">Investment</div>
+                                        <small>You set a goal for investment on House and Mortgage fee.</small>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center text-primary" href="/job_seeker/notifications">View All Notifications</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li>
+
+
+                        <!-- <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li> -->
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown  mr-md-1">
                             <a class="nav-link dropdown-toggle " href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Job Seeker Name
                             </a>
                             <div class="dropdown-menu" aria-labelledby="signinDropdown">
+                                <a class="dropdown-item" href="/job_seeker/profile">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="/">Logout</a>
                             </div>
                         </li>
-                        <li class="nav-item cta cta-colored"><a href="/job_seeker/findjob" class="nav-link">Want a Job</a></li>
+                        <li class="nav-item cta cta-colored"><a href="/job_seeker/search_job" class="nav-link">Want a Job</a></li>
                     </ul>
                 </div>
             </div>
