@@ -25,7 +25,24 @@
 
 	onMounted(async () => {
 		loadRecaptcha()
+		loadRecaptchaScript()
 	})
+
+	const loadRecaptchaScript = () => {
+      return new Promise((resolve, reject) => {
+        if (typeof grecaptcha !== 'undefined') {
+          resolve();
+        } else {
+          const script = document.createElement('script');
+          script.src = 'https://www.google.com/recaptcha/api.js';
+          script.async = true;
+          script.defer = true;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        }
+      });
+    };
 
 	const loadRecaptcha = async () => {
       if (typeof grecaptcha !== 'undefined') {
