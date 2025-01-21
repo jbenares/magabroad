@@ -52,6 +52,7 @@
         });
       }else{
 		captchaVerified.value = false;
+		console.error('reCAPTCHA is not loaded');
 	  }
     }
 
