@@ -37,6 +37,6 @@
         {{-- <script src="{{ asset('js/google-map.js') }}"></script> --}}
         <script src="{{ asset('js/main.js') }}"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LdmoLsqAAAAAOFumDONs4lecgK5J4u7oxxq7CRE"></script> -->
+        <!-- <script src="https://www.google.com/recaptcha/api.js?render=6Lfjp74qAAAAAPuRUKEGtIN5-6wm_MQNbj6JoULa"></script> -->
     </body>
 </html>

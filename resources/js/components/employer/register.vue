@@ -30,7 +30,7 @@
 	const loadRecaptcha = async () => {
       if (typeof grecaptcha !== 'undefined') {
         grecaptcha.render('recaptcha', {
-          sitekey: '6LdmoLsqAAAAAOFumDONs4lecgK5J4u7oxxq7CRE', // Replace with your site key
+          sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
           callback: onCaptchaVerified,
         });
       }else{
