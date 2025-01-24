@@ -249,11 +249,13 @@ label {
 button {
     border-radius: 0;
 }
-
-button:focus {
+input:focus-visible{
+    outline: 0px!important;
+}
+/* button:focus {
     outline: 1px dotted;
     outline: 5px auto -webkit-focus-ring-color;
-}
+} */
 
 input,
 button,
@@ -349,14 +351,14 @@ progress {
     height: auto;
 }
 
-[type="search"] {
+/* [type="search"] {
     outline-offset: -2px;
     -webkit-appearance: none;
-}
+} */
 
-[type="search"]::-webkit-search-decoration {
+/* [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
-}
+} */
 
 ::-webkit-file-upload-button {
     font: inherit;
@@ -14624,3 +14626,16 @@ input[type="radio"]:checked::before {
     object-fit: cover;
 }
 
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+.modal-fade-enter-to,
+.modal-fade-leave-from {
+  opacity: 1;
+}

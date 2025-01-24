@@ -24,6 +24,14 @@ import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
 
 import admin_dash from '../components/admin/dashboard.vue'
+import emp_cat_index from '../components/admin/masterfile/emp_cat/index.vue'
+import countries_index from '../components/admin/masterfile/countries/index.vue'
+import skills_index from '../components/admin/masterfile/skills/index.vue'
+import industry_index from '../components/admin/masterfile/industry/index.vue'
+import jobclass_index from '../components/admin/masterfile/job_class/index.vue'
+import appstatus_index from '../components/admin/masterfile/app_status/index.vue'
+import employer_adm_index from '../components/admin/employer/index.vue'
+import employer_adm_view from '../components/admin/employer/index.vue'
 
 const routes = [
     {
@@ -127,6 +135,49 @@ const routes = [
         component: admin_dash,
     },
 
+    {
+        path:'/admin/employment_category',
+        name:'emp_cat_index',
+        component: emp_cat_index,
+    },
+    {
+        path:'/admin/countries',
+        name:'countries_index',
+        component: countries_index,
+    },
+    {
+        path:'/admin/skills',
+        name:'skills_index',
+        component: skills_index,
+    },
+
+    {
+        path:'/admin/industry',
+        name:'industry_index',
+        component: industry_index,
+    },
+    {
+        path:'/admin/job_classification',
+        name:'jobclass_index',
+        component: jobclass_index,
+    },
+    {
+        path:'/admin/applicant_status',
+        name:'appstatus_index',
+        component: appstatus_index,
+    },
+
+    
+    {
+        path:'/admin/employer_list',
+        name:'employer_adm_index',
+        component: employer_adm_index,
+    },
+    {
+        path:'/admin/employer_view',
+        name:'employer_adm_view',
+        component: employer_adm_view,
+    },
     {
         path:'/:pathMatch(.*)*',
         name:'notFound',
