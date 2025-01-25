@@ -31,7 +31,7 @@ import industry_index from '../components/admin/masterfile/industry/index.vue'
 import jobclass_index from '../components/admin/masterfile/job_class/index.vue'
 import appstatus_index from '../components/admin/masterfile/app_status/index.vue'
 import employer_adm_index from '../components/admin/employer/index.vue'
-import employer_adm_view from '../components/admin/employer/index.vue'
+import employer_adm_view from '../components/admin/employer/view.vue'
 
 const routes = [
     {

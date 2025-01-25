@@ -8,8 +8,42 @@
 		<section class="ftco-section bg-light"> 
             <div class="container">
                 <div class="row">
-                    <!-- Employer Profile -->
-                    <div class="col-md-12 col-lg-8 mb-5">
+                    <div class="col-lg-3 mb-4">
+						<div class="p-3 bg-white text-center rounded-lg">
+							
+							<img src="../../../images/person_2.jpg" alt="Profile Picture" class="img-fluid rounded-circle mb-2" >
+							<h4 class="mb-2">John Doe</h4>
+							<hr>
+							<div class="">
+								<a href="" class=" text-gray-500 hover:text-gray-500">
+									<div class="flex justify-between hover:bg-gray-100 px-2">
+										<div class="flex justify-start space-x-2">
+											<BookmarkIcon class="size-5 mt-1"/>
+											<span>Saved Jobs</span>
+										</div>
+										<span>9</span>
+									</div>
+								</a>
+								<a href="" class=" text-gray-500 hover:text-gray-500">
+									<div class="flex justify-between hover:bg-gray-100 px-2">
+										<div class="flex justify-start space-x-2">
+											<PaperAirplaneIcon class="size-5 mt-1"/>
+											<span>Companies Applied</span>
+										</div>
+										<span>9</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+                    <div class="col-md-12 col-lg-9 mb-5">
+						<div class="bg-white px-4  pt-3 pb-4 border-b">
+							<p class="text-left text-muted text-sm mb-0">Profile Completion: 75%</p>
+							<div class="progress mb-0 h-10" >
+								<div class="progress-bar bg-primary w-[75%]" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</div>
                         <div class="p-5 bg-white">
                             <h4 class="mb-0">Candidate Profile</h4>
                             <p class="m-0">We won't share your details with anyone.</p>
@@ -33,12 +67,53 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 mb-2">
+                                <div class="col-lg-6 col-md-6 mb-2">
                                     <p class="font-weight-bold mb-1">Email Address:</p>
                                     <p>john.doe@example.com</p>
                                 </div>
+                                <div class="col-lg-6 col-md-6 mb-2">
+                                    <p class="font-weight-bold mb-1">Job Title:</p>
+                                    <p>Sample title</p>
+                                </div>
+                            </div>
+                            <hr>
+
+							<div class="row">
+                                <div class="col-lg-5 col-md-5 mb-2">
+                                    <p class="font-weight-bold mb-1">Gender:</p>
+                                    <p>Male</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5 mb-2">
+                                    <p class="font-weight-bold mb-1">Birthdate:</p>
+                                    <p>June 19, 1991</p>
+                                </div>
+								<div class="col-lg-2 col-md-2 mb-2">
+                                    <p class="font-weight-bold mb-1">Age:</p>
+                                    <p>55</p>
+                                </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <p class="font-weight-bold mb-1">Address:</p>
+                                    <p>45 Mabini Street, Quezon City, Metro Manila, Philippines</p>
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <p class="font-weight-bold mb-1">Degree:</p>
+                                    <p>Bachelor of Science in Computer Engineering</p>
+                                </div>
+                            </div>
+
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <p class="font-weight-bold mb-1">Profile Description:</p>
+                                    <p>A passionate and results-driven Computer Engineering graduate with a strong foundation in hardware design, software development, and systems integration. Skilled in programming languages such as Python, C++, and Java, as well as circuit design and microprocessor systems. Adept at problem-solving, with experience in creating innovative solutions to optimize system performance.
+
+									Proficient in working with emerging technologies, including IoT, AI, and embedded systems, and committed to staying updated with industry advancements. Proven ability to collaborate in team environments and deliver high-quality projects under tight deadlines. Seeking opportunities to contribute technical expertise and creativity in a dynamic engineering or technology-driven organization.</p>
+                                </div>
+                            </div>
                             <hr>
                             <h3>Recent Experience</h3>
 
@@ -81,26 +156,6 @@
                                     <p>Graphic Designer</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <!-- <div class="p-4 mb-3 bg-white">
-                            <h3 class="h5 text-black mb-3">Contact Info</h3>
-                            <p class="mb-0 font-weight-bold">Address</p>
-                            <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
-
-                            <p class="mb-0 font-weight-bold">Phone</p>
-                            <p class="mb-4"><a href="tel:+12323235324">+1 232 3235 324</a></p>
-
-                            <p class="mb-0 font-weight-bold">Email Address</p>
-                            <p class="mb-0"><a href="mailto:info@example.com">info@example.com</a></p>
-                        </div> -->
-
-                        <div class="p-4 mb-3 bg-white">
-                            <h3 class="h5 text-black mb-3">More Info</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur.</p>
-                            <p><a href="#" class="btn btn-primary py-2 px-4">Learn More</a></p>
                         </div>
                     </div>
                     <!-- Sidebar -->

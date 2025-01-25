@@ -80,37 +80,40 @@
 						</div>
 						<ul class="space-y-1 overflow-hidden transition-all duration-300" :style="submenuOpen.masterfile ? 'max-height: 500px;' : 'max-height: 0;'" >
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Employment Category</span></a>
+								<a href="/admin/employment_category" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Employment Category</span></a>
 							</li>
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Countries</span></a>
+								<a href="/admin/countries" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Countries</span></a>
 							</li>
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Job Types</span></a>
+								<a href="/admin/skills" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Skills</span></a>
 							</li>
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Skills</span></a>
+								<a href="/admin/industry" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Industry</span></a>
 							</li>
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Industry</span></a>
+								<a href="/admin/job_classification" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Job Classification</span></a>
 							</li>
 							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Job Classification</span></a>
-							</li>
-							<li class="text-[15px]">
-								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Applicant Status</span></a>
+								<a href="/admin/applicant_status" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Applicant Status</span></a>
 							</li>
 						</ul>
 					</li>
 
 					<!-- More top-level items -->
 					<li class="">
+						<a href="/admin/employer_list" class="px-4 py-2 flex items-center text-gray-600 hover:text-blue-500 hover:bg-blue-100">
+						<UserIcon class="size-4" />
+						<span class="ml-3">Employer</span>
+						</a>
+					</li>
+					<li class="">
 						<a href="" class="px-4 py-2 flex items-center text-gray-600 hover:text-blue-500 hover:bg-blue-100">
 						<UsersIcon class="size-4" />
 						<span class="ml-3">Job Seekers</span>
 						</a>
 					</li>
-					<li class="">
+					<!-- <li class="">
 						<div class="px-4 py-2 flex items-center justify-between cursor-pointer text-gray-600 hover:text-blue-500 hover:bg-blue-100" @click="toggleSubmenu('employer')" >
 							<div class="flex items-center">
 								<UserIcon class="size-4" />
@@ -143,7 +146,7 @@
 								<a href="" class="pl-14 text-gray-600 hover:text-blue-500 hover:bg-blue-100 flex items-center py-1"><span>Applicant Status</span></a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="">
 						<a href="" class="px-4 py-2 flex items-center text-gray-600 hover:text-blue-500 hover:bg-blue-100">
 						<DocumentChartBarIcon class="size-4" />

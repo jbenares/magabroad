@@ -37,42 +37,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Maria Josephine Braken</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Mj Design Co.</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Qatar</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">maria.josephine@gmail.com</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">
-                                            <button class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
+                                            <a href="/admin/employer_view" class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
                                                 <EyeIcon class="size-4"/>
-                                            </button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Tadasshi Nezoka</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Ozone Cars</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Japan</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">tadasshi.ozone@gmail.com</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">
-                                            <button class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
+                                            <a href="/admin/employer_view" class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
                                                 <EyeIcon class="size-4"/>
-                                            </button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Troy David Sy</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">CENOGEN</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Canada</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">troy.cenogen@gmail.com</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">
-                                            <button class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
+                                            <a href="/admin/employer_view" class="border-transparent rounded py-1 text-gray-500 px-1 flex items-center hover:bg-orange-500 hover:text-white" @click="updateModal = true">
                                                 <EyeIcon class="size-4"/>
-                                            </button>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,54 +92,6 @@
             </div>
         </header_admin>
     </navigation>
-    <transition name="modal-fade">
-        <div v-show="addModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-            <!-- Modal content -->
-            <div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-1/3 shadow-lg relative">
-                <!-- Close button -->
-                <button @click="addModal = false" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800">✖</button>
-                <h2 class="text-xl font-bold mb-4">Add Applicant Status</h2>
-                <!-- <hr class="my-3"> -->
-                <div class="form-group">
-                    <input type="text" name="" class="form-control" id="" placeholder="Status Name">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" id="" placeholder="Description" rows="2"></textarea>
-                </div>
-                <hr class="my-3 border-gray-100">
-                <!-- Modal actions -->
-                <div class="flex justify-end">
-                <button @click="addModal = false" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
-                    Save
-                </button>
-                </div>
-            </div>
-        </div>
-    </transition>
-    <transition name="modal-fade">
-        <div v-show="updateModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-            <!-- Modal content -->
-            <div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-1/3 shadow-lg relative">
-                <!-- Close button -->
-                <button @click="updateModal = false" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800">✖</button>
-                <h2 class="text-xl font-bold mb-4">Update Classification</h2>
-                <!-- <hr class="my-3"> -->
-                <div class="form-group">
-                    <input type="text" name="" class="form-control" id="" placeholder="Classification Name">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" id="" placeholder="Description" rows="2"></textarea>
-                </div>
-                <hr class="my-3 border-gray-100">
-                <!-- Modal actions -->
-                <div class="flex justify-end">
-                <button @click="updateModal = false" class="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600">
-                    Update
-                </button>
-                </div>
-            </div>
-        </div>
-    </transition>
 </template>
 <script setup>
 	import navigation from '@/layouts/navigation_admin.vue';

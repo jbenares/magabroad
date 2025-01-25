@@ -38,7 +38,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Qatar</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">
@@ -48,7 +48,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Japan</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">
@@ -58,7 +58,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Canada</td>
                                     <td class="p-0" align="center">
                                         <div class="w-full flex justify-center">

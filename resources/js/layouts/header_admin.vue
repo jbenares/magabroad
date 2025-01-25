@@ -4,26 +4,31 @@
             <!-- <h2 class="text-2xl font-bold">Dashboard</h2> -->
             <input type="text" placeholder="Search here..." class="px-4 py-1 border rounded-md">
             <nav class="">
-                <ul class="flex space-x-4 m-0">
+                <ul class="flex space-x-4 m-0 pt-1">
                     <li class="relative" ref="dropdownRef">
                         <!-- Dropdown toggle button -->
                         <button  @click="toggleSubmenu('services')" class="text-gray-700 hover:text-blue-500 " >
-                            <span class="flex items-center">
-                                Services
-                                <ChevronDownIcon class="size-4"/>
+                            <span class="flex items-center space-x-2">
+                                <!-- Admin Thumbnail -->
+                                <img
+                                src="../../images/person_4.jpg"
+                                alt="Admin Thumbnail"
+                                class="w-6 h-6 rounded-full"
+                                />
+                                <!-- Admin's Name -->
+                                <span>Admin Name</span>
+                                <!-- Chevron Icon -->
+                                <ChevronDownIcon class="size-4" />
                             </span>
                         </button>
 
                         <!-- Dropdown menu -->
-                        <ul  v-show="submenuOpen.services" class="absolute bg-white border rounded-md shadow-lg mt-2 w-40 right-0" >
+                        <ul  v-show="submenuOpen.services" class="absolute bg-white border rounded-md shadow-lg mt-2 w-40 right-0 py-2" >
                             <li>
-                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Web Development</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Web Development</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Web Development</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
                             </li>
                         </ul>
                     </li>

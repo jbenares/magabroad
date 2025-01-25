@@ -39,7 +39,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">For Pooling</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
                                     <td class="p-0" align="center">
@@ -50,7 +50,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">For Interview</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
                                     <td class="p-0" align="center">
@@ -61,7 +61,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-gray-100 border-b hover:bg-gray-50" >
+                                <tr class="border-gray-100 border-b hover:bg-gray-50 text-gray-500" >
                                     <td class="text-sm font-medium  p-2 px-3 ">Sample Status</td>
                                     <td class="text-sm font-medium  p-2 px-3 ">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
                                     <td class="p-0" align="center">
