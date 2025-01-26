@@ -1,5 +1,6 @@
 <script setup>
 	import navigation from '@/layouts/navigation.vue';
+	import{CheckIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
 	import {onMounted, ref} from "vue";
 	import { useRouter } from "vue-router";
@@ -17,8 +18,6 @@
 	let country_code=ref(1);
 	let business_name=ref('');
 	let otp=ref('');
-	let otpSent=ref(false);
-	let captchaVerified=ref(false);
 	let captchaResponse=ref('');
 
 	let message=ref('');
@@ -30,7 +29,15 @@
 	let repass_message=ref('');
 	let business_message=ref('');
 
+	const success =  ref('');
+	const otpSent=ref(false);
+	const captchaVerified=ref(false);
+	const successAlert = ref(true)
 	const showPassword = ref(false)
+
+	const closeAlert = () => {
+		successAlert.value = !hideAlert.value
+	}
 
 	onMounted(async () => {
 		loadRecaptcha()
@@ -178,9 +185,15 @@
 		formOTP.append('email',email.value)
 		formOTP.append('otp',otp.value)
 		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
-			message.value = response.data.message;
-			otpSent.value = true;
+			// message.value = response.data.message;
+			// otpSent.value = true;
+			alert('You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.')
+			// success.value='You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.'
+			// successAlert.value=!successAlert.value
+				// setTimeout(() => {
 			SaveNewEmployer()
+				// }, 2000); // 3000 milliseconds = 3 seconds
+			
 		}, function (error) {
 			message.value = error.response.data.message;
 		}); 
@@ -249,7 +262,6 @@
 }
 </style>
 <template>
-	
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
 		  <div class="overlay"></div>
@@ -534,5 +546,37 @@
 			  </div>
 		  </div>
 		</footer>
+		<Transition
+            enter-active-class="transition ease-out !duration-1000"
+            enter-from-class="opacity-0 scale-95"
+            enter-to-class="opacity-100 scale-500"
+            leave-active-class="transition ease-in duration-75"
+            leave-from-class="opacity-100 scale-500"
+            leave-to-class="opacity-0 scale-95"
+        >
+			<div class="modal p-0 !bg-transparent" :class="{ show:successAlert }">
+				<div @click="closeAlert" class="w-full h-full fixed backdrop-blur-sm bg-white/30"></div>
+				<div class="modal__content !shadow-2xl !rounded-3xl !my-44 w-96 p-0">
+					<div class="flex justify-center">
+						<div class="!border-green-500 border-8 bg-green-500 !h-32 !w-32 -top-16 absolute rounded-full text-center shadow">
+							<div class="p-2 text-white">
+								<CheckIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 "></CheckIcon>
+							</div>
+						</div>
+					</div>
+					<div class="py-5 rounded-t-3xl"></div>
+					<div class="modal_s_items pt-0 !px-8 pb-4">
+						<div class="row">
+							<div class="col-lg-12 col-md-3">
+								<div class="text-center">
+									<h2 class="mb-2  font-bold text-green-400">Success!</h2>
+									<h5 class="leading-tight">{{ success }}</h5>
+								</div>
+							</div>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</Transition>
 	</navigation>
 </template>
