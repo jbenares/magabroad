@@ -24,6 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'contact_no',
+        'country_code_id',
+        'business_name',
         'usertype_id',
         'registration_date',
         'registration_via',

@@ -5,12 +5,17 @@
 	import { useRouter } from "vue-router";
 	const router = useRouter();
 
+	let countrycodelist=ref([]);
+
 	let firstname=ref('');
 	let middlename=ref('');
 	let lastname=ref('');
 	let email=ref('');
 	let password=ref('');
+	let re_password=ref('');
 	let contact_no=ref('');
+	let country_code=ref(1);
+	let business_name=ref('');
 	let otp=ref('');
 	let otpSent=ref(false);
 	let captchaVerified=ref(false);
@@ -22,11 +27,42 @@
 	let contact_message=ref('');
 	let email_message=ref('');
 	let pass_message=ref('');
+	let repass_message=ref('');
+	let business_message=ref('');
+
+	const showPassword = ref(false)
 
 	onMounted(async () => {
 		loadRecaptcha()
 		loadRecaptchaScript()
+		getcountrycode()
 	})
+
+	const getcountrycode = async () => {
+		let response = await axios.get("/api/country_code_list");
+		countrycodelist.value=response.data
+	}
+
+	const togglePassword = () => {
+		showPassword.value = !showPassword.value
+	}
+
+	const ConfirmPasword = () => {
+		if (password.value === re_password.value) {
+			repass_message.value = 'Passwords match!';
+			repass_message.className = 'success';
+			document.getElementById('recaptcha').style.display = 'block';
+
+			setTimeout(function() {
+				repass_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		} else {
+			repass_message.value = 'Passwords do not match.';
+			repass_message.className = 'error';
+			grecaptcha.reset();
+			document.getElementById('recaptcha').style.display = 'none';
+		}
+	}
 
 	const loadRecaptchaScript = () => {
       return new Promise((resolve, reject) => {
@@ -45,6 +81,7 @@
     };
 
 	const loadRecaptcha = async () => {
+	document.getElementById('recaptcha').style.display = 'none'
       if (typeof grecaptcha !== 'undefined') {
         grecaptcha.render('recaptcha', {
           sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
@@ -52,7 +89,7 @@
         });
       }else{
 		captchaVerified.value = false;
-		console.error('reCAPTCHA is not loaded');
+		// console.error('reCAPTCHA is not loaded');
 	  }
     }
 
@@ -67,8 +104,10 @@
 		formData.append('middlename',middlename.value)
 		formData.append('lastname',lastname.value)
 		formData.append('contact_no',contact_no.value)
+		formData.append('country_code_id',country_code.value)
 		formData.append('email',email.value)
 		formData.append('password',password.value)
+		formData.append('business_name',business_name.value)
 		// if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
 			axios.post("/api/add_employer",formData).then(function () {
 				router.push('/login')
@@ -125,6 +164,10 @@
 				// document.getElementById('password').style.backgroundColor = '#FAA0A0';
 				pass_message.value = 'Password is required!'
 			}
+			if(business_name.value==''){
+				// document.getElementById('password').style.backgroundColor = '#FAA0A0';
+				business_message.value = 'Business Name is required!'
+			}
 			// const btn_save = document.getElementById("save");
 			// btn_save.disabled = true;
 		}
@@ -165,6 +208,10 @@
 			// document.getElementById('contact').style.backgroundColor = '#FEFCE8';
 			contact_message.value = '';
 		}
+		if(button==='business'){
+			// document.getElementById('contact').style.backgroundColor = '#FEFCE8';
+			business_message.value = '';
+		}
 		// const btn_save = document.getElementById("save");
 		// btn_save.disabled = false;
 	}
@@ -188,6 +235,19 @@
     }
 
 </script>
+<style>
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+</style>
 <template>
 	
 	<navigation>
@@ -216,42 +276,73 @@
 								<div class="row form-group">
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="" v-model="firstname" @click="resetError('fname')">
+										<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
 										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Middle Name</label>
-										<input type="text" id="" class="form-control" placeholder="" v-model="middlename">
+										<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="" v-model="lastname" @click="resetError('lname')">
+										<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
 										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
+									<div class="col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="businessname">Business name</label>
+										<input type="text" id="businessname" class="form-control" placeholder="Business Name" v-model="business_name" @click="resetError('business')">
+									</div>
+								</div>
+								<!-- <div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="phone">Phone Number</label>
-										<input type="text" id="contact" class="form-control" placeholder="" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+										<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
+									</div>
+								</div> -->
+								<div class="row form-group">
+									<div class="col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<div class="phone-input-group">
+											<select id="country-code" v-model="country_code">
+												<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
+											</select>
+											
+											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+											<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
+										</div>
+										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="" v-model="email" @click="resetError('email')">
+										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')">
 										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Password</label>
-										<input type="password" id="password" class="form-control" placeholder="" v-model="password" @click="resetError('password')">
+										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
-
 									</div>
 								</div>
+								<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
+									<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+								</span>
+
+								<div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="email">Confirm Password</label>
+										<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
+										<p v-if="repass_message">{{ repass_message }}</p>
+									</div>
+								</div>
+
 								<div class="row form-group">
 									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
 								</div>
