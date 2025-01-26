@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('contact_no');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('google_id')->nullable();
             $table->integer('usertype_id')->default(0);
             $table->string('registration_via');
             $table->string('registration_date');
