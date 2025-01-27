@@ -26,7 +26,6 @@ class IndustrySeeder extends Seeder
             'Professional, Scientific and Technical Activities',
             'Administrative and Support Service Activities',
             'Public Administration and Defense; Compulsory Social Security',
-            'Education',
             'Human Health and Social Work Activities',
             'Arts, Entertainment and Recreation',
             'Other Service Activities',
