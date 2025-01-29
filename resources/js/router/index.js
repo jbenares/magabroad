@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import notFound from '../components/notFound.vue'
 import loginForm from  '../components/login.vue'
 import home from '../components/home.vue'
+import event_list from '../components/event_list.vue'
+import event_view from '../components/event_view.vue'
 
 import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
@@ -38,6 +40,14 @@ const routes = [
     {
         path:'/',
         component: home,
+    },
+    {
+        path:'/events',
+        component: event_list,
+    },
+    {
+        path:'/event_view',
+        component: event_view,
     },
     {
         path:'/login',

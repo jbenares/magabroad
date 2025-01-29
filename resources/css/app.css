@@ -13705,9 +13705,9 @@ textarea.form-control {
 
 .block-20 {
     overflow: hidden;
-    background-size: cover;
+    /* background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center center; */
     height: 250px;
     position: relative;
     display: block;
