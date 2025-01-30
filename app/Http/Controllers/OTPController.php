@@ -23,7 +23,7 @@ class OTPController extends Controller
         }
 
         // Store OTP in cache for a limited time (e.g., 5 minutes)
-        Cache::put('otp_' . $email, $otp, now()->addMinutes(1));
+        Cache::put('otp_' . $email, $otp, now()->addMinutes(5));
 
         // Send OTP via email (you can use SMS gateways for phone numbers)
         Mail::raw("Your MagAbroad OTP is: $otp", function ($message) use ($email) {
