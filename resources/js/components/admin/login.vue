@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-blue-600 fixed w-full h-[50%] top-0"></div>
     <div class="flex items-center justify-center min-h-screen relative">
-		<div class="container">
+		<div class="container"> 
 			<div class="flex justify-center space-x-2 mb-4">
 				<span class="shadow rounded-[100%]  border-2 border-white"><img src="../../../images/magabroad_logo.png" alt="" class="size-14 "></span>
 				<h2 class="pt-1 font-bold text-white mb-0">MagAbroad</h2>
