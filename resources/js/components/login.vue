@@ -88,7 +88,8 @@
 											<div class="form-group">
 												<!-- <button type="button" class="btn btn-primary btn-block py-2" @click="googleLogin">Login with GMAIL</button> -->
 												<!-- <a href="/auth/google" class="btn btn-primary mr-2 w-44">Login with Gmail</a> -->
-												<a  href="'/auth/google'" class="btn btn-primary mr-2 w-44">Login with Gmail</a>
+												<a :href="'/auth/facebook/'" class="btn btn-primary mr-2 w-44">Login with Facebook</a>
+												<a  :href="'/auth/google/'" class="btn btn-primary mr-2 w-44">Login with Gmail</a>
 											</div>
 									</template>
 									

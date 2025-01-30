@@ -1,43 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class GoogleController extends Controller
 {
-    public function redirectToGoogle($google)
+    public function redirectToGoogle()
     {
-        return Socialite::driver($google)->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback()
     {
-        try{
+        try {
             $google_user = Socialite::driver('google')->stateless()->user();
 
             $user = User::where('google_id', $google_user->getId())->first();
 
-            if(!$user){
+            if (!$user) {
                 $new_user = User::create([
-                    // 'firstname' => $google_user->getName(),
-                    // 'middlename' => $google_user->getmiddlename(),
-                    // 'lastname' => $google_user->getlastname(),
-                    'email' => $google_user->Email(),
+                    'email' => $google_user->getEmail(),  // Correct method
                     'google_id' => $google_user->getId(),
+                    'registration_date'=>date("Y-m-d"),
+                    'registration_via'=>'google'
                 ]);
 
                 Auth::login($new_user);
                 return redirect()->intended('job_seeker/dashboard');
-            }else{
+            } else {
                 Auth::login($user);
                 return redirect()->intended('job_seeker/dashboard');
             }
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             dd('Something went wrong! '. $th->getMessage());
         }
     }
