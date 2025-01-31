@@ -8,6 +8,7 @@ use Database\Seeders\IndustrySeeder;
 use Database\Seeders\SkillSeeder;
 use Database\Seeders\JobTypesSeeder;
 use Database\Seeders\WorkCategoriesSeeder;
+use Database\Seeders\ApplicantStatusSeeder;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //  \App\Models\User::factory(10)->create();
+          \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SkillSeeder::class);
         $this->call(JobTypesSeeder::class);
         $this->call(WorkCategoriesSeeder::class);
+        $this->call(ApplicantStatusSeeder::class);
       
     }
 }
