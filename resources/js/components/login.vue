@@ -3,6 +3,7 @@
 	import	{ExclamationCircleIcon} from '@heroicons/vue/24/solid'
 	import {reactive, ref} from "vue";
 	import { useRouter } from "vue-router";
+	import axios from 'axios';
 	const router = useRouter();
 
 	let role = ref('Jobseeker');
@@ -12,19 +13,25 @@
     })
     let error = ref('')
     const login = async () =>{
-        await axios.post('/api/login_process', form)
-        .then(response =>{
-            if(response.data.success){
-                localStorage.setItem('token', response.data.data.token)
-				if(role.value == 'Jobseeker'){
-					router.push('/job_seeker/dashboard')
-				}else{
-					router.push('/employer/dashboard')
+		if(role.value == 'Jobseeker'){
+			await axios.post('/api/jobseeker_login_process', form).then(response =>{
+				if(response.data.success){
+					localStorage.setItem('token', response.data.data.token)
+						router.push('/job_seeker/dashboard')
+				} else {
+					error.value = response.data.message;
 				}
-            } else {
-                error.value = response.data.message;
-            }
-        })
+			})
+		}else{
+			await axios.post('/api/employeer_login_process', form).then(response =>{
+				if(response.data.success){
+					localStorage.setItem('token', response.data.data.token)
+						router.push('/employer/dashboard')
+				} else {
+					error.value = response.data.message;
+				}
+			})
+		}
     }
 
 </script>

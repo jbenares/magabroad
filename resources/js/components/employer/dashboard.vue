@@ -9,6 +9,21 @@
 			<div class="container">
 				<!-- Dashboard Section -->
 				<div class="row">
+					<div class="col-lg-12">
+						<div class="p-3 px-4 mb-4 rounded-lg bg-white border border-yellow-600">
+							<div class="flex justify-start space-x-3">
+								<div class="text-yellow-500">
+									<ExclamationTriangleIcon class="size-14"/>
+								</div>
+								<div>
+									<h4 class="text-yellow-500 font-bold mb-0 leading-tight">Opps!</h4>
+									<p class="leading-snug m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-lg-3 mb-4">
 						<div class="p-3 bg-white text-center rounded-lg">
 							<p class="text-left text-muted text-sm mb-0">Profile Completion: 75%</p>
@@ -184,6 +199,7 @@
   
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
+	import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid'
 	// // Get the elements
 	// const ExperienceToggle = {
 	// 	data() {

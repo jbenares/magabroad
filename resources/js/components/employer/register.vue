@@ -2,7 +2,7 @@
 	import navigation from '@/layouts/navigation.vue';
 	import{CheckIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
-	import {onMounted, ref} from "vue";
+	import {onBeforeUnmount,onMounted, ref} from "vue";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
 
@@ -38,6 +38,28 @@
 	const closeAlert = () => {
 		successAlert.value = !hideAlert.value
 	}
+
+	const rejectModal = ref(false);
+
+    // Reference to the modal content
+    const modalContent = ref(null);
+
+    // Close the modal when clicking outside the content
+    const handleClickOutside = (event) => {
+    if (modalContent.value && !modalContent.value.contains(event.target)) {
+        rejectModal.value = false;
+    }
+    };
+
+    // Add event listener for clicks outside
+    onMounted(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    });
+
+    // Remove event listener to prevent memory leaks
+    onBeforeUnmount(() => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    });
 
 	onMounted(async () => {
 		loadRecaptcha()
@@ -280,7 +302,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mb-5">
+						<div class="p-5 bg-white">
 						<!-- <form action="#" class="p-5 bg-white"> -->
+							<button @click="rejectModal = true">Show Success Message </button>
 							<h4 class="mb-0">Your Employer Account</h4>
 							<p class="m-0">We wont share your details with anyone.</p>
 							<hr>
@@ -382,10 +406,7 @@
 								</div>
 								</form>
 							</div>
-
 							<hr>
-								
-							
 							<!-- <div class="row">
 								<div class="col-lg-12 col-md-12"><h3>Business Details</h3></div>
 							</div>
@@ -428,6 +449,7 @@
 								</div>
 							</div> -->
 						<!-- </form> -->
+						</div>
 					</div>
 	
 					<div class="col-lg-4">
@@ -546,14 +568,8 @@
 			  </div>
 		  </div>
 		</footer>
-		<Transition
-            enter-active-class="transition ease-out !duration-1000"
-            enter-from-class="opacity-0 scale-95"
-            enter-to-class="opacity-100 scale-500"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="opacity-100 scale-500"
-            leave-to-class="opacity-0 scale-95"
-        >
+		<!-- :class="{ show:successAlert } -->
+		<Transition>
 			<div class="modal p-0 !bg-transparent" :class="{ show:successAlert }">
 				<div @click="closeAlert" class="w-full h-full fixed backdrop-blur-sm bg-white/30"></div>
 				<div class="modal__content !shadow-2xl !rounded-3xl !my-44 w-96 p-0">
@@ -578,5 +594,26 @@
 				</div>
 			</div>
 		</Transition>
+		<transition name="modal-fade">
+			<div v-show="rejectModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+				<!-- Modal content -->
+				<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-3/6 shadow-lg relative">
+					<!-- Close button -->
+					<!-- <button @click="rejectModal = false" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800">✖</button> -->
+					<!-- <hr class="my-3"> -->
+					<div class="flex justify-start space-x-4 px-4 pb-2">
+						<div class="flex justify-center">
+							<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+						</div>
+						<div class="text-left mb-4">
+							<h2 class="font-bold text-[#4bb71b] mt-2 mb-0">Success!</h2>
+							<hr class="my-1">
+							<p class="text-gray-600 font-bold m-0">You have successfully registered as an Employer!</p>
+							<p class="text-gray-500 m-0 leading-snug"> Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 	</navigation>
 </template>

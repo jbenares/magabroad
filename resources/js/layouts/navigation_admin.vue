@@ -49,12 +49,12 @@
 			<div class="px-2 py-3 sticky top-0 h-20">
 					<a class="navbar-brand !flex justify-center !space-x-2 mr-1" href="/">
 					<img
-						src="../../images/company-1.jpg"
+						src="../../images/magabroad_logo.png"
 						alt="MagAbroad Logo"
 						class="img-fluid"
 						style="max-height: 50px;"
 					/>
-					<h4 class="pt-2 font-bold text-blue-900 mb-0">sample</h4>
+					<h4 class="pt-2 font-bold text-blue-950 mb-0">MagAbroad</h4>
 				</a>
 			</div>
 			<nav class="pt-2 flex-grow bottom-1 overflow-y-hidden hover:overflow-y-auto lg:touch-auto md:touch-auto sm:touch-auto">

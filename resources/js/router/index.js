@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import notFound from '../components/notFound.vue'
 import loginForm from  '../components/login.vue'
 import home from '../components/home.vue'
+import event_list from '../components/event_list.vue'
+import event_view from '../components/event_view.vue'
 
 import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
@@ -23,6 +25,7 @@ import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
 
+import admin_login from '../components/admin/login.vue'
 import admin_dash from '../components/admin/dashboard.vue'
 import emp_cat_index from '../components/admin/masterfile/emp_cat/index.vue'
 import countries_index from '../components/admin/masterfile/countries/index.vue'
@@ -37,6 +40,14 @@ const routes = [
     {
         path:'/',
         component: home,
+    },
+    {
+        path:'/events',
+        component: event_list,
+    },
+    {
+        path:'/event_view',
+        component: event_view,
     },
     {
         path:'/login',
@@ -129,12 +140,17 @@ const routes = [
 
     // ----------------------------------------------------------------------------Admin
 
+
+    {
+        path:'/admin/',
+        name:'admin_login',
+        component: admin_login,
+    },
     {
         path:'/admin/dashboard',
         name:'admin_dash',
         component: admin_dash,
     },
-
     {
         path:'/admin/employment_category',
         name:'emp_cat_index',
