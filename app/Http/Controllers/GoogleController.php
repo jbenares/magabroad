@@ -21,13 +21,21 @@ class GoogleController extends Controller
             $google_user = Socialite::driver('google')->stateless()->user();
 
             $user = User::where('google_id', $google_user->getId())->first();
+            $fullName = $google_user->getName();
+            $nameParts = explode(' ', $fullName, 2); // Split into two parts (first name and last name)
+
+            $firstName = $nameParts[0]; 
+            $lastName = isset($nameParts[1]) ? $nameParts[1] : ''; // Handle cases where there's no last name
 
             if (!$user) {
                 $new_user = User::create([
-                    'email' => $google_user->getEmail(),  // Correct method
+                    'firstname' => $firstName,
+                    'lastname' => $lastName,
+                    'email' => $google_user->getEmail(),
                     'google_id' => $google_user->getId(),
                     'registration_date'=>date("Y-m-d"),
-                    'registration_via'=>'google'
+                    'registration_via'=>'google',
+                    'usertype_id'=>'2'
                 ]);
 
                 Auth::login($new_user);
