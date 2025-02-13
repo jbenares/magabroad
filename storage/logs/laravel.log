@@ -2300,6 +2300,7 @@
 "} 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [2025-01-22 15:36:23] local.ERROR: Class "App\Http\Controllers\GoogleAuthController" does not exist {"exception":"[object] (ReflectionException(code: -1): Class \"App\\Http\\Controllers\\GoogleAuthController\" does not exist at C:\\Projects\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php:225)
 [stacktrace]
 #0 C:\\Projects\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\RouteListCommand.php(225): ReflectionClass->__construct('App\\\\Http\\\\Contro...')
@@ -2634,6 +2635,8 @@
 #44 C:\\Projects\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Projects\\\\mag...')
 #45 {main}
 =======
+=======
+>>>>>>> 56e6846c8afbd4b6984ce05e8c2b6af13d83e16f
 =======
 >>>>>>> 56e6846c8afbd4b6984ce05e8c2b6af13d83e16f
 [2025-01-23 13:12:25] local.ERROR: Class "Database\Seeders\Industry" not found {"exception":"[object] (Error(code: 0): Class \"Database\\Seeders\\Industry\" not found at C:\\Systems\\magabroad\\database\\seeders\\IndustrySeeder.php:48)
@@ -3104,6 +3107,9 @@
 #51 C:\\Projects\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Projects\\\\mag...')
 #52 {main}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 56e6846c8afbd4b6984ce05e8c2b6af13d83e16f
+=======
 >>>>>>> 56e6846c8afbd4b6984ce05e8c2b6af13d83e16f
 =======
 >>>>>>> 56e6846c8afbd4b6984ce05e8c2b6af13d83e16f
