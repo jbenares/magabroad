@@ -26,7 +26,6 @@ class User extends Authenticatable
         'google_id',
         'facebook_id',
         'contact_no',
-        'contact_no',
         'country_code_id',
         'business_name',
         'usertype_id',
