@@ -27,6 +27,8 @@ class User extends Authenticatable
         'facebook_id',
         'contact_no',
         'contact_no',
+        'country_code_id',
+        'business_name',
         'usertype_id',
         'registration_date',
         'registration_via',

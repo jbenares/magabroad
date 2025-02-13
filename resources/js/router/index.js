@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import notFound from '../components/notFound.vue'
 import loginForm from  '../components/login.vue'
 import home from '../components/home.vue'
+import event_list from '../components/event_list.vue'
+import event_view from '../components/event_view.vue'
 
 import jobseeker_register from  '../components/job_seeker/register.vue'
 import jobseeker_dash from  '../components/job_seeker/dashboard.vue'
@@ -23,12 +25,29 @@ import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
 
+import admin_login from '../components/admin/login.vue'
 import admin_dash from '../components/admin/dashboard.vue'
+import emp_cat_index from '../components/admin/masterfile/emp_cat/index.vue'
+import countries_index from '../components/admin/masterfile/countries/index.vue'
+import skills_index from '../components/admin/masterfile/skills/index.vue'
+import industry_index from '../components/admin/masterfile/industry/index.vue'
+import jobclass_index from '../components/admin/masterfile/job_class/index.vue'
+import appstatus_index from '../components/admin/masterfile/app_status/index.vue'
+import employer_adm_index from '../components/admin/employer/index.vue'
+import employer_adm_view from '../components/admin/employer/view.vue'
 
 const routes = [
     {
         path:'/',
         component: home,
+    },
+    {
+        path:'/events',
+        component: event_list,
+    },
+    {
+        path:'/event_view',
+        component: event_view,
     },
     {
         path:'/login',
@@ -121,12 +140,60 @@ const routes = [
 
     // ----------------------------------------------------------------------------Admin
 
+
+    {
+        path:'/admin/',
+        name:'admin_login',
+        component: admin_login,
+    },
     {
         path:'/admin/dashboard',
         name:'admin_dash',
         component: admin_dash,
     },
+    {
+        path:'/admin/employment_category',
+        name:'emp_cat_index',
+        component: emp_cat_index,
+    },
+    {
+        path:'/admin/countries',
+        name:'countries_index',
+        component: countries_index,
+    },
+    {
+        path:'/admin/skills',
+        name:'skills_index',
+        component: skills_index,
+    },
 
+    {
+        path:'/admin/industry',
+        name:'industry_index',
+        component: industry_index,
+    },
+    {
+        path:'/admin/job_classification',
+        name:'jobclass_index',
+        component: jobclass_index,
+    },
+    {
+        path:'/admin/applicant_status',
+        name:'appstatus_index',
+        component: appstatus_index,
+    },
+
+    
+    {
+        path:'/admin/employer_list',
+        name:'employer_adm_index',
+        component: employer_adm_index,
+    },
+    {
+        path:'/admin/employer_view',
+        name:'employer_adm_view',
+        component: employer_adm_view,
+    },
     {
         path:'/:pathMatch(.*)*',
         name:'notFound',

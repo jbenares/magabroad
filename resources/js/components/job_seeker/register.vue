@@ -183,6 +183,7 @@
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mb-5">
 						<form action="#" class="p-5 bg-white">
+							<h4 class="mb-0">Your Job Seeker Account</h4>
 							<p class="">Be found by employers. Start a MagAbroad Profile.</p>
 							<hr>
 							<div class="row form-group">
@@ -201,7 +202,64 @@
 									<input type="email" id="email" class="form-control" placeholder="">
 								</div>
 							</div>
-							
+							<div class="row form-group">
+								<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="jobtitle">Job Title</label>
+									<input type="text" id="jobtitle" class="form-control" placeholder="">
+								</div>
+							</div>
+							<hr>
+							<div class="row form-group">
+								<div class="col-lg-5 col-md-5 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold" for="Gender">Gender</label>
+									<select class="form-control">
+										<option value="">Select</option>
+									</select>
+								</div>
+								<div class="col-lg-5 col-md-5 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold" for="birth">Birthdate</label>
+									<input type="date" id="birth" class="form-control" placeholder="">
+								</div>
+								<div class="col-lg-2 col-md-2 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="age">Age</label>
+									<input type="number" id="age" class="form-control" disabled="">
+								</div>
+							</div>
+							<label class="font-weight-bold mb-0">Address</label>
+							<div class="row form-group">
+								<div class="col-md-6 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold mb-0 text-xs" for="Street">Street</label>
+									<input type="text" id="Street" class="form-control" placeholder="Street">
+								</div>
+								<div class="col-md-6 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold mb-0 text-xs" for="City">City</label>
+									<input type="text" id="City" class="form-control" placeholder="City">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-6 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold mb-0 text-xs" for="Province">Province</label>
+									<input type="text" id="Province" class="form-control" placeholder="Province">
+								</div>
+								<div class="col-md-6 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold mb-0 text-xs" for="Country">Country</label>
+									<input type="text" id="Country" class="form-control" placeholder="Country">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-lg-6 col-md-6 mb-3 mb-md-0 !pr-0">
+									<label class="font-weight-bold" for="degree">Degree</label>
+									<select class="form-control">
+										<option value="">Select</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="jobtitle">Profile Description</label>
+									<textarea id="jobtitle" class="form-control" placeholder="" rows="3"></textarea>
+								</div>
+							</div>
 							<hr>
 							<div class="row">
 								<div class="col-lg-12 col-md-12"><h3>Recent Experience</h3></div>

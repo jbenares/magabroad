@@ -1,19 +1,23 @@
 <script setup>
 	import navigation from '@/layouts/navigation.vue';
+	import{CheckIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
-	import {onMounted, ref} from "vue";
+	import {onBeforeUnmount,onMounted, ref} from "vue";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
+
+	let countrycodelist=ref([]);
 
 	let firstname=ref('');
 	let middlename=ref('');
 	let lastname=ref('');
 	let email=ref('');
 	let password=ref('');
+	let re_password=ref('');
 	let contact_no=ref('');
+	let country_code=ref(1);
+	let business_name=ref('');
 	let otp=ref('');
-	let otpSent=ref(false);
-	let captchaVerified=ref(false);
 	let captchaResponse=ref('');
 
 	let message=ref('');
@@ -22,11 +26,72 @@
 	let contact_message=ref('');
 	let email_message=ref('');
 	let pass_message=ref('');
+	let repass_message=ref('');
+	let business_message=ref('');
+
+	const success =  ref('');
+	const otpSent=ref(false);
+	const captchaVerified=ref(false);
+	const successAlert = ref(true)
+	const showPassword = ref(false)
+
+	const closeAlert = () => {
+		successAlert.value = !hideAlert.value
+	}
+
+	const rejectModal = ref(false);
+
+    // Reference to the modal content
+    const modalContent = ref(null);
+
+    // Close the modal when clicking outside the content
+    const handleClickOutside = (event) => {
+    if (modalContent.value && !modalContent.value.contains(event.target)) {
+        rejectModal.value = false;
+    }
+    };
+
+    // Add event listener for clicks outside
+    onMounted(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    });
+
+    // Remove event listener to prevent memory leaks
+    onBeforeUnmount(() => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    });
 
 	onMounted(async () => {
 		loadRecaptcha()
 		loadRecaptchaScript()
+		getcountrycode()
 	})
+
+	const getcountrycode = async () => {
+		let response = await axios.get("/api/country_code_list");
+		countrycodelist.value=response.data
+	}
+
+	const togglePassword = () => {
+		showPassword.value = !showPassword.value
+	}
+
+	const ConfirmPasword = () => {
+		if (password.value === re_password.value) {
+			repass_message.value = 'Passwords match!';
+			repass_message.className = 'success';
+			document.getElementById('recaptcha').style.display = 'block';
+
+			setTimeout(function() {
+				repass_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		} else {
+			repass_message.value = 'Passwords do not match.';
+			repass_message.className = 'error';
+			grecaptcha.reset();
+			document.getElementById('recaptcha').style.display = 'none';
+		}
+	}
 
 	const loadRecaptchaScript = () => {
       return new Promise((resolve, reject) => {
@@ -45,6 +110,7 @@
     };
 
 	const loadRecaptcha = async () => {
+	document.getElementById('recaptcha').style.display = 'none'
       if (typeof grecaptcha !== 'undefined') {
         grecaptcha.render('recaptcha', {
           sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
@@ -52,7 +118,7 @@
         });
       }else{
 		captchaVerified.value = false;
-		console.error('reCAPTCHA is not loaded');
+		// console.error('reCAPTCHA is not loaded');
 	  }
     }
 
@@ -67,8 +133,10 @@
 		formData.append('middlename',middlename.value)
 		formData.append('lastname',lastname.value)
 		formData.append('contact_no',contact_no.value)
+		formData.append('country_code_id',country_code.value)
 		formData.append('email',email.value)
 		formData.append('password',password.value)
+		formData.append('business_name',business_name.value)
 		// if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
 			axios.post("/api/add_employer",formData).then(function () {
 				router.push('/login')
@@ -125,6 +193,10 @@
 				// document.getElementById('password').style.backgroundColor = '#FAA0A0';
 				pass_message.value = 'Password is required!'
 			}
+			if(business_name.value==''){
+				// document.getElementById('password').style.backgroundColor = '#FAA0A0';
+				business_message.value = 'Business Name is required!'
+			}
 			// const btn_save = document.getElementById("save");
 			// btn_save.disabled = true;
 		}
@@ -135,9 +207,15 @@
 		formOTP.append('email',email.value)
 		formOTP.append('otp',otp.value)
 		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
-			message.value = response.data.message;
-			otpSent.value = true;
+			// message.value = response.data.message;
+			// otpSent.value = true;
+			alert('You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.')
+			// success.value='You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.'
+			// successAlert.value=!successAlert.value
+				// setTimeout(() => {
 			SaveNewEmployer()
+				// }, 2000); // 3000 milliseconds = 3 seconds
+			
 		}, function (error) {
 			message.value = error.response.data.message;
 		}); 
@@ -165,6 +243,10 @@
 			// document.getElementById('contact').style.backgroundColor = '#FEFCE8';
 			contact_message.value = '';
 		}
+		if(button==='business'){
+			// document.getElementById('contact').style.backgroundColor = '#FEFCE8';
+			business_message.value = '';
+		}
 		// const btn_save = document.getElementById("save");
 		// btn_save.disabled = false;
 	}
@@ -188,8 +270,20 @@
     }
 
 </script>
+<style>
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+</style>
 <template>
-	
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
 		  <div class="overlay"></div>
@@ -208,7 +302,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mb-5">
+						<div class="p-5 bg-white">
 						<!-- <form action="#" class="p-5 bg-white"> -->
+							<button @click="rejectModal = true">Show Success Message </button>
 							<h4 class="mb-0">Your Employer Account</h4>
 							<p class="m-0">We wont share your details with anyone.</p>
 							<hr>
@@ -216,42 +312,73 @@
 								<div class="row form-group">
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="" v-model="firstname" @click="resetError('fname')">
+										<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
 										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Middle Name</label>
-										<input type="text" id="" class="form-control" placeholder="" v-model="middlename">
+										<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="" v-model="lastname" @click="resetError('lname')">
+										<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
 										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
+									<div class="col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="businessname">Business name</label>
+										<input type="text" id="businessname" class="form-control" placeholder="Business Name" v-model="business_name" @click="resetError('business')">
+									</div>
+								</div>
+								<!-- <div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="phone">Phone Number</label>
-										<input type="text" id="contact" class="form-control" placeholder="" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+										<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
+									</div>
+								</div> -->
+								<div class="row form-group">
+									<div class="col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<div class="phone-input-group">
+											<select id="country-code" v-model="country_code">
+												<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
+											</select>
+											
+											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+											<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
+										</div>
+										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="" v-model="email" @click="resetError('email')">
+										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')">
 										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Password</label>
-										<input type="password" id="password" class="form-control" placeholder="" v-model="password" @click="resetError('password')">
+										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
-
 									</div>
 								</div>
+								<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
+									<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+								</span>
+
+								<div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="email">Confirm Password</label>
+										<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
+										<p v-if="repass_message">{{ repass_message }}</p>
+									</div>
+								</div>
+
 								<div class="row form-group">
 									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
 								</div>
@@ -279,10 +406,7 @@
 								</div>
 								</form>
 							</div>
-
 							<hr>
-								
-							
 							<!-- <div class="row">
 								<div class="col-lg-12 col-md-12"><h3>Business Details</h3></div>
 							</div>
@@ -325,6 +449,7 @@
 								</div>
 							</div> -->
 						<!-- </form> -->
+						</div>
 					</div>
 	
 					<div class="col-lg-4">
@@ -443,5 +568,52 @@
 			  </div>
 		  </div>
 		</footer>
+		<!-- :class="{ show:successAlert } -->
+		<Transition>
+			<div class="modal p-0 !bg-transparent" :class="{ show:successAlert }">
+				<div @click="closeAlert" class="w-full h-full fixed backdrop-blur-sm bg-white/30"></div>
+				<div class="modal__content !shadow-2xl !rounded-3xl !my-44 w-96 p-0">
+					<div class="flex justify-center">
+						<div class="!border-green-500 border-8 bg-green-500 !h-32 !w-32 -top-16 absolute rounded-full text-center shadow">
+							<div class="p-2 text-white">
+								<CheckIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 "></CheckIcon>
+							</div>
+						</div>
+					</div>
+					<div class="py-5 rounded-t-3xl"></div>
+					<div class="modal_s_items pt-0 !px-8 pb-4">
+						<div class="row">
+							<div class="col-lg-12 col-md-3">
+								<div class="text-center">
+									<h2 class="mb-2  font-bold text-green-400">Success!</h2>
+									<h5 class="leading-tight">{{ success }}</h5>
+								</div>
+							</div>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</Transition>
+		<transition name="modal-fade">
+			<div v-show="rejectModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+				<!-- Modal content -->
+				<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-3/6 shadow-lg relative">
+					<!-- Close button -->
+					<!-- <button @click="rejectModal = false" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800">✖</button> -->
+					<!-- <hr class="my-3"> -->
+					<div class="flex justify-start space-x-4 px-4 pb-2">
+						<div class="flex justify-center">
+							<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+						</div>
+						<div class="text-left mb-4">
+							<h2 class="font-bold text-[#4bb71b] mt-2 mb-0">Success!</h2>
+							<hr class="my-1">
+							<p class="text-gray-600 font-bold m-0">You have successfully registered as an Employer!</p>
+							<p class="text-gray-500 m-0 leading-snug"> Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 	</navigation>
 </template>

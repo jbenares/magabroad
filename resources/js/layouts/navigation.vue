@@ -16,7 +16,7 @@
                         <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Explore Companies</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Candidates</a></li>
-                        <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
+                        <li class="nav-item"><a href="/events" class="nav-link">Events</a></li>
                         <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
                         
                         <!-- Dropdown for Sign In -->

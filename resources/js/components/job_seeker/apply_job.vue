@@ -10,18 +10,19 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-8 mb-5">
                         <form action="#" class="p-5 bg-white rounded-lg">
-                            <div class="job-application-card w-full">
+                            <div class="job-application-card w-full mb-3">
                                 <div class="job-header">
                                     <img src="../../../images/company-1.jpg" alt="Company Logo" class="job-logo">
                                     <div class="job-info">
-                                        <p class="job-title mb-1 text-sm ">Applying for</p>
+                                        <p class="job-title mb-2 text-sm ">Applying for</p>
                                         <h3 class="job-position font-semibold mb-0 leading-tight">Web and Graphic Designer</h3>
                                         <p class="job-company leading-none">Security Bank Corporation</p>
-                                        <a href="/job_seeker/view_job" class="job-link">View job description</a>
+                                        <!-- <a href="/job_seeker/view_job" class="job-link">View job description</a> -->
                                     </div>
                                 </div>
                             </div>
-                            
+                            <h6 class="text-gray-700 font-semibold">Job Description</h6>
+                            <p class="text-gray-500 leading-normal">We’re looking for a skilled Frontend Developer with expertise in React.js and modern JavaScript frameworks. You’ll collaborate with cross-functional teams to build responsive, user-friendly interfaces.</p>
                             <hr class="border-dashed border-gray-200">
 
                             <div class="relative bg-gradient-to-r from-blue-400 to-blue-600 w-full rounded-2xl p-3 px-5 mb-4 ">
