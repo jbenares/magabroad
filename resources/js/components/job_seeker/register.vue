@@ -105,6 +105,19 @@
 		}); 
 	}
 
+	const loginWithEmail = () => {
+      axios .post('/login/email', {
+			email: email.value,
+          password: password.value,
+        }).then(response => {
+          // Store user data or redirect
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error.response.data);
+        });
+    }
+
 	const resetError = (button) => {
 		
 		if(button==='fname'){
