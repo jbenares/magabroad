@@ -54,58 +54,97 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6 col-lg-6 mb-5">
-						<!-- <form action="#" class="p-5 bg-white"> -->
-							<h2 class="text-center mb-4">Login</h2>
+						<div action="#" class="p-5 bg-white">
+							<h2 class="text-center mb-2">Login</h2>
 							<hr>
-
-							<div class="btn-group d-flex mb-4" role="group" aria-label="Role Selection">
-								<button type="button" class="btn btn-secondary w-50" :class="{ active: role === 'Jobseeker' }"  v-on:click="role = 'Jobseeker'">Jobseeker</button>
-								<button type="button" class="btn !bg-gray-100 w-50" :class="{ active: role === 'Employer' }" v-on:click="role = 'Employer'">Employer</button>
+							<div class="btn-group d-flex mb-2" role="group" aria-label="Role Selection">
+								<button 
+									type="button" 
+									class="btn w-50" 
+									:class="{ 
+										'btn-secondary': role === 'Jobseeker', 
+										'border !border-orange-200': role !== 'Jobseeker',
+										'active': role === 'Jobseeker'
+									}"
+									v-on:click="role = 'Jobseeker'"
+								>
+									Jobseeker
+								</button>
+								<button 
+									type="button" 
+									class="btn w-50" 
+									:class="{ 
+										'btn-secondary': role === 'Employer', 
+										'border border-orange-200': role !== 'Employer',
+										'active': role === 'Employer'
+									}"
+									v-on:click="role = 'Employer'"
+								>
+									Employer
+								</button>
 							</div>
-								<div class="alert alert-danger" v-if="error">
-									<div class="flex justify-start space-x-2">
-										<div>
-											<ExclamationCircleIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"></ExclamationCircleIcon>
-										</div> 
-										<div> {{ error }} </div>
-									</div>
+							<div class="alert alert-danger" v-if="error">
+								<div class="flex justify-start space-x-2">
+									<div>
+										<ExclamationCircleIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"></ExclamationCircleIcon>
+									</div> 
+									<div> {{ error }} </div>
 								</div>
-								<form class="pt-3" @submit.prevent="login()">
-									<div class="form-group">
-									<label for="email" class="font-weight-bold">Email Address</label>
-									<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
-									</div>
+							</div>
+							<form class="pt-3" @submit.prevent="login()">
+								<div class="form-group">
+								<label for="email" class="font-weight-bold">Email Address</label>
+								<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
+								</div>
 
-									<div class="form-group">
-										<label for="password" class="font-weight-bold">Password</label>
-										<input type="password" id="password" class="form-control" placeholder="Enter your password" v-model="form.password">
-									</div>
+								<div class="form-group">
+									<label for="password" class="font-weight-bold">Password</label>
+									<input type="password" id="password" class="form-control" placeholder="Enter your password" v-model="form.password">
+								</div>
 
-									<div class="form-group">
-										<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
-									</div>
-									<template v-if="(role =='Jobseeker')">
-										<hr>
-										<span>Or</span>
-											<!-- <a :href="'/google-auth/'" class="btn btn-primary mr-2 w-44">Login with GMAIL</a> -->
-											<div class="form-group">
-												<!-- <button type="button" class="btn btn-primary btn-block py-2" @click="googleLogin">Login with GMAIL</button> -->
-												<!-- <a href="/auth/google" class="btn btn-primary mr-2 w-44">Login with Gmail</a> -->
-												<a :href="'/auth/facebook/'" class="btn btn-primary mr-2 w-44">Login with Facebook</a>
-												<a  :href="'/auth/google/'" class="btn btn-primary mr-2 w-44">Login with Gmail</a>
-											</div>
-									</template>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
+								</div>
+								<div class="flex justify-between space-x-2">
+									<span class="w-full"><hr></span>
+									<span>Or</span>
+									<span class="w-full"><hr></span>
+								</div>
+								<template v-if="(role =='Jobseeker')">
 									
+										<!-- <a :href="'/google-auth/'" class="btn btn-primary mr-2 w-44">Login with GMAIL</a> -->
+										<div class="form-group">
+											<!-- <button type="button" class="btn btn-primary btn-block py-2" @click="googleLogin">Login with GMAIL</button> -->
+											<!-- <a href="/auth/google" class="btn btn-primary mr-2 w-44">Login with Gmail</a> -->
+											<a :href="'/auth/facebook/'" class="btn text-white !bg-blue-600 mr-2 btn-block ">
+												<div class="flex justify-center space-x-2">
+													<span>
+														<svg class="w-6 h-6 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.8 90.7 226.4 209.3 245V327.7h-63V256h63v-54.6c0-62.2 37-96.5 93.7-96.5 27.1 0 55.5 4.8 55.5 4.8v61h-31.3c-30.8 0-40.4 19.1-40.4 38.7V256h68.8l-11 71.7h-57.8V501C413.3 482.4 504 379.8 504 256z"/></svg>
+													</span>
+													<span class="">Login with Facebook</span>
+												</div>
+											</a>
+											<a  :href="'/auth/google/'" class="btn text-white !bg-red-500 mr-2 btn-block">
+												<div class="flex justify-center space-x-2">
+													<span>
+														<svg class="w-6 h-6 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+													</span>
+													<span class="">Login with Gmail</span>
+												</div>
+											</a>
+										</div>
+								</template>
+								<hr>
 
-									<div class="text-center" v-if="(role =='Jobseeker')">
-										<p class="mb-0">Don't have an account? <a href="/job_seeker/register">Register here</a></p>
-									</div>
-									<div class="text-center" v-if="(role =='Employer')">
-										<p class="mb-0">Don't have an account? <a href="/employer/register">Register here</a></p>
-									</div>
-									
-								</form>
-						<!-- </form> -->
+								<div class="text-center" v-if="(role =='Jobseeker')">
+									<p class="mb-0">Don't have an account? <a href="/job_seeker/register">Register here</a></p>
+								</div>
+								<div class="text-center" v-if="(role =='Employer')">
+									<p class="mb-0">Don't have an account? <a href="/employer/register">Register here</a></p>
+								</div>
+								
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
