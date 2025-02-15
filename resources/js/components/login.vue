@@ -105,13 +105,13 @@
 								<div class="form-group">
 									<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
 								</div>
-								<div class="flex justify-between space-x-2">
-									<span class="w-full"><hr></span>
-									<span>Or</span>
-									<span class="w-full"><hr></span>
-								</div>
+								
 								<template v-if="(role =='Jobseeker')">
-									
+									<div class="flex justify-between space-x-2">
+										<span class="w-full"><hr></span>
+										<span>Or</span>
+										<span class="w-full"><hr></span>
+									</div>
 										<!-- <a :href="'/google-auth/'" class="btn btn-primary mr-2 w-44">Login with GMAIL</a> -->
 										<div class="form-group">
 											<!-- <button type="button" class="btn btn-primary btn-block py-2" @click="googleLogin">Login with GMAIL</button> -->
