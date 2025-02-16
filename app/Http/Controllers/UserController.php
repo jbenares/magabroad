@@ -22,6 +22,12 @@ class UserController extends Controller
         return response()->json($countrycodelist);
     }
 
+    public function checkEmployerEmail($email){
+        $exists = User::where('email', $email)->where('usertype_id', '3')->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
+
     public function add_employer(Request $request){
 
         try {
@@ -52,20 +58,27 @@ class UserController extends Controller
         }
     }
 
+    public function checkJobseekerEmail($email){
+        $exists = User::where('email', $email)->where('usertype_id', '2')->where('registration_via', '!=', 'facebook')->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
+
     public function add_jobseeker(Request $request){
 
         try {
             DB::beginTransaction();
-            $employer_details['email']=$request->input('email');
-            $employer_details['password']=$request->input('password');
-            $employer_details['firstname']=$request->input('firstname');
-            $employer_details['middlename']=$request->input('middlename');
-            $employer_details['lastname']=$request->input('lastname');
-            $employer_details['contact_no']=$request->input('contact_no');
-            $employer_details['usertype_id']='2';
-            $employer_details['registration_date']=date("Y-m-d");
-            $employer_details['registration_via']='manual';
-            User::create($employer_details);
+            $jobseeker_details['email']=$request->input('email');
+            $jobseeker_details['password']=$request->input('password');
+            $jobseeker_details['firstname']=$request->input('firstname');
+            $jobseeker_details['middlename']=$request->input('middlename');
+            $jobseeker_details['lastname']=$request->input('lastname');
+            $jobseeker_details['contact_no']=$request->input('contact_no');
+            $jobseeker_details['country_code_id']=$request->input('country_code_id');
+            $jobseeker_details['usertype_id']='2';
+            $jobseeker_details['registration_date']=date("Y-m-d");
+            $jobseeker_details['registration_via']='manual';
+            User::create($jobseeker_details);
         
             DB::commit();
         

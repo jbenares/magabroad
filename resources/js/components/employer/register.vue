@@ -76,6 +76,38 @@
 		showPassword.value = !showPassword.value
 	}
 
+	const EmailChecker = async () => {
+		let response = await axios.get('/api/check_employer_email/'+email.value)
+			if (response.data.exists) {
+				email_message.value = 'This email is already exisiting!'
+				document.getElementById("password").readOnly = true;
+				document.getElementById("re_password").readOnly = true;
+				grecaptcha.reset();
+				document.getElementById('recaptcha').style.display = 'none';
+				document.getElementById("otpbtn").disabled = true;
+			} else {
+				email_message.value = ''
+				document.getElementById("password").readOnly = false;
+				document.getElementById("re_password").readOnly = false;
+				VerifyConfirmPasword()
+			}
+	}
+
+	const VerifyConfirmPasword = () => {
+		if (password.value === re_password.value &&  (password.value != '' || re_password.value != '')) {
+			repass_message.className = 'success';
+			document.getElementById('recaptcha').style.display = 'block';
+		} else {
+			grecaptcha.reset();
+			document.getElementById('recaptcha').style.display = 'none';
+			document.getElementById("otpbtn").disabled = true;
+
+			setTimeout(function() {
+				repass_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		}
+	}
+
 	const ConfirmPasword = () => {
 		if (password.value === re_password.value) {
 			repass_message.value = 'Passwords match!';
@@ -90,6 +122,7 @@
 			repass_message.className = 'error';
 			grecaptcha.reset();
 			document.getElementById('recaptcha').style.display = 'none';
+			document.getElementById("otpbtn").disabled = true;
 		}
 	}
 
@@ -356,7 +389,7 @@
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')">
+										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
 										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 									</div>
 								</div>
@@ -386,7 +419,7 @@
 								<div class="row form-group" v-if="otpSent != true">
 									<div class="col-md-12">
 										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
-										<button type="submit" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
+										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
 									</div>
 								</div>
 							</form>
@@ -400,7 +433,7 @@
 									</div>
 								<div class="row form-group">
 									<div class="col-md-12">
-										<button type="submit" class="btn btn-primary mr-2 w-44">Create Account</button>
+										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button>
 										<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
 									</div>
 								</div>

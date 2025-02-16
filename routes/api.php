@@ -31,3 +31,5 @@ Route::post('/add_employer',[UserController::class,'add_employer']);
 Route::post('/add_jobseeker',[UserController::class,'add_jobseeker']);
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 Route::post('/verify-otp', [OTPController::class, 'verifyOTP']);
+Route::get('/check_employer_email/{email}', [UserController::class,'checkEmployerEmail']);
+Route::get('/check_jobseeker_email/{email}', [UserController::class,'checkJobseekerEmail']);

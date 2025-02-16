@@ -1,16 +1,21 @@
 <script setup>
 	import navigation from '@/layouts/navigation.vue';
+	import{CheckIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
-	import {onMounted, ref} from "vue";
+	import {onBeforeUnmount,onMounted, ref} from "vue";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
+
+	let countrycodelist=ref([]);
 
 	let firstname=ref('');
 	let middlename=ref('');
 	let lastname=ref('');
 	let email=ref('');
 	let password=ref('');
+	let re_password=ref('');
 	let contact_no=ref('');
+	let country_code=ref(1);
 	let otp=ref('');
 	let otpSent=ref(false);
 	let captchaVerified=ref(false);
@@ -22,19 +27,86 @@
 	let contact_message=ref('');
 	let email_message=ref('');
 	let pass_message=ref('');
+	let repass_message=ref('');
+
+	const success =  ref('');
+	const successAlert = ref(true)
+	const showPassword = ref(false)
 
 	onMounted(async () => {
 		loadRecaptcha()
+		getcountrycode()
 	})
 
+	const togglePassword = () => {
+		showPassword.value = !showPassword.value
+	}
+
+	const getcountrycode = async () => {
+		let response = await axios.get("/api/country_code_list");
+		countrycodelist.value=response.data
+	}
+
+	const EmailChecker = async () => {
+		let response = await axios.get('/api/check_jobseeker_email/'+email.value)
+			if (response.data.exists) {
+				email_message.value = 'This email is already exisiting!'
+				document.getElementById("password").readOnly = true;
+				document.getElementById("re_password").readOnly = true;
+				grecaptcha.reset();
+				document.getElementById('recaptcha').style.display = 'none';
+				document.getElementById("otpbtn").disabled = true;
+			} else {
+				email_message.value = ''
+				document.getElementById("password").readOnly = false;
+				document.getElementById("re_password").readOnly = false;
+				VerifyConfirmPasword()
+			}
+	}
+
+	const VerifyConfirmPasword = () => {
+		if (password.value === re_password.value &&  (password.value != '' || re_password.value != '')) {
+			repass_message.className = 'success';
+			document.getElementById('recaptcha').style.display = 'block';
+		} else {
+			grecaptcha.reset();
+			document.getElementById('recaptcha').style.display = 'none';
+			document.getElementById("otpbtn").disabled = true;
+
+			setTimeout(function() {
+				repass_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		}
+	}
+
+	const ConfirmPasword = () => {
+		if (password.value === re_password.value) {
+			repass_message.value = 'Passwords match!';
+			repass_message.className = 'success';
+			document.getElementById('recaptcha').style.display = 'block';
+
+			setTimeout(function() {
+				repass_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		} else {
+			repass_message.value = 'Passwords do not match.';
+			repass_message.className = 'error';
+			grecaptcha.reset();
+			document.getElementById('recaptcha').style.display = 'none';
+			document.getElementById("otpbtn").disabled = true;
+		}
+	}
+
 	const loadRecaptcha = async () => {
+	document.getElementById('recaptcha').style.display = 'none'
       if (typeof grecaptcha !== 'undefined') {
         grecaptcha.render('recaptcha', {
-		sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
+          sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
           callback: onCaptchaVerified,
         });
       }else{
 		captchaVerified.value = false;
+		// console.error('reCAPTCHA is not loaded');
 	  }
     }
 
@@ -49,6 +121,7 @@
 		formData.append('middlename',middlename.value)
 		formData.append('lastname',lastname.value)
 		formData.append('contact_no',contact_no.value)
+		formData.append('country_code_id',country_code.value)
 		formData.append('email',email.value)
 		formData.append('password',password.value)
 			axios.post("/api/add_jobseeker",formData).then(function () {
@@ -104,19 +177,6 @@
 			message.value = error.response.data.message;
 		}); 
 	}
-
-	const loginWithEmail = () => {
-      axios .post('/login/email', {
-			email: email.value,
-          password: password.value,
-        }).then(response => {
-          // Store user data or redirect
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error.response.data);
-        });
-    }
 
 	const resetError = (button) => {
 		
@@ -376,49 +436,75 @@
 								<div class="row form-group">
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="" v-model="firstname" @click="resetError('fname')">
+										<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
 										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Middle Name</label>
-										<input type="text" id="" class="form-control" placeholder="" v-model="middlename">
+										<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="fullname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="" v-model="lastname" @click="resetError('lname')">
+										<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
 										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
 									</div>
 								</div>
-								<div class="row form-group">
+								<!-- <div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="phone">Phone Number</label>
-										<input type="text" id="contact" class="form-control" placeholder="" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+										<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
+									</div>
+								</div> -->
+								<div class="row form-group">
+									<div class="col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<div class="phone-input-group">
+											<select id="country-code" v-model="country_code">
+												<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
+											</select>
+											
+											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+											<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
+										</div>
+										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="" v-model="email" @click="resetError('email')">
+										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
 										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Password</label>
-										<input type="password" id="password" class="form-control" placeholder="" v-model="password" @click="resetError('password')">
+										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
-
 									</div>
 								</div>
+								<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
+									<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+								</span>
+
 								<div class="row form-group">
-									<div id="recaptcha" class="col-lg-12 g-recaptcha" :data-sitekey="siteKey"></div>
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold" for="email">Confirm Password</label>
+										<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
+										<p v-if="repass_message">{{ repass_message }}</p>
+									</div>
+								</div>
+
+								<div class="row form-group">
+									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
 								</div>
 								
 								<div class="row form-group" v-if="otpSent != true">
 									<div class="col-md-12">
-										<button type="submit" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
+										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
+										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
 									</div>
 								</div>
 							</form>
@@ -432,7 +518,7 @@
 									</div>
 								<div class="row form-group">
 									<div class="col-md-12">
-										<button type="submit" class="btn btn-primary mr-2 w-44">Create Account</button>
+										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
 										<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
 									</div>
 								</div>
