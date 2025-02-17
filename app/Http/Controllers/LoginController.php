@@ -25,7 +25,7 @@ class LoginController extends Controller
             $user = Auth::user(); // Get the authenticated user
     
             // Check if user_type_id is 1
-            if ($user->user_type_id != 1) {
+            if ($user->usertype_id != 1) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Unauthorized'
@@ -61,7 +61,7 @@ class LoginController extends Controller
             $user = Auth::user(); // Get the authenticated user
     
             // Check if user_type_id is 1
-            if ($user->user_type_id != 2) {
+            if ($user->usertype_id != 2) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Unauthorized'
@@ -86,7 +86,6 @@ class LoginController extends Controller
         }
     }
 
-    
     public function employer_login_process(Request $request) {
         $credentials = [
             'email' => $request->email,
@@ -97,7 +96,7 @@ class LoginController extends Controller
             $user = Auth::user(); // Get the authenticated user
     
             // Check if user_type_id is 1
-            if ($user->user_type_id != 3) {
+            if ($user->usertype_id != 3) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Unauthorized'
