@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+
+
 class LoginController extends Controller
 {
     // public function login_form(){
@@ -34,7 +37,9 @@ class LoginController extends Controller
     
             // Generate token for authenticated user
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['name'] = $user->name;
+            $success['firstname'] = $user->firstname;
+            $success['middlename'] = $user->middlename;
+            $success['lastname'] = $user->lastname;
             $success['user_type'] = $user->usertype_id; // Ensure correct property name
     
             return response()->json([
@@ -70,7 +75,9 @@ class LoginController extends Controller
     
             // Generate token for authenticated user
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['name'] = $user->name;
+            $success['firstname'] = $user->firstname;
+            $success['middlename'] = $user->middlename;
+            $success['lastname'] = $user->lastname;
             $success['user_type'] = $user->usertype_id; // Ensure correct property name
     
             return response()->json([
@@ -86,7 +93,7 @@ class LoginController extends Controller
         }
     }
 
-    public function employer_login_process(Request $request) {
+    public function EmployerLogin(Request $request) {
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
@@ -105,7 +112,9 @@ class LoginController extends Controller
     
             // Generate token for authenticated user
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['name'] = $user->name;
+            $success['firstname'] = $user->firstname;
+            $success['middlename'] = $user->middlename;
+            $success['lastname'] = $user->lastname;
             $success['user_type'] = $user->usertype_id; // Ensure correct property name
     
             return response()->json([
@@ -120,4 +129,23 @@ class LoginController extends Controller
             ], 401);
         }
     }
+
+    public function dashboard(){
+        if(Auth::check()){
+            $credentials=[
+                'firstname' => Auth::user()?->firstname,
+                'lastname' => Auth::user()?->lastname,
+                'user_type' => Auth::user()?->usertype_id,
+                'password' => Auth::user()?->password,
+            ];
+        }else{
+            $credentials=[
+                'firstname' => '',
+                'lastname' => '',
+                'user_type' => '',
+                'password' => '',
+            ];
+        }
+        return response()->json($credentials);
+   }
 }

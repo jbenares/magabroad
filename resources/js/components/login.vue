@@ -23,7 +23,7 @@
 				}
 			})
 		}else{
-			await axios.post('/api/employeer_login_process', form).then(response =>{
+			await axios.post('/api/emp_login_process', form).then(response =>{
 				if(response.data.success){
 					localStorage.setItem('token', response.data.data.token)
 						router.push('/employer/dashboard')

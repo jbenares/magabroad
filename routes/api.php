@@ -24,7 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('/login_form', [LoginController::class,'login_form']);
 Route::post('/admin_login_process', [LoginController::class,'admin_login_process']);
 Route::post('/jobseeker_login_process', [LoginController::class,'jobseeker_login_process']);
-Route::post('/employer_login_process', [LoginController::class,'employer_login_process']);
+Route::post('/emp_login_process', [LoginController::class,'EmployerLogin']);
+Route::get('/dashboard',[LoginController::class,'dashboard']);
 
 Route::get('/country_code_list', [UserController::class,'all_countrycode']);
 Route::post('/add_employer',[UserController::class,'add_employer']);

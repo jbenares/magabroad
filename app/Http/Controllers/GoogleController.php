@@ -22,10 +22,15 @@ class GoogleController extends Controller
 
             $user = User::where('google_id', $google_user->getId())->first();
             $fullName = $google_user->getName();
-            $nameParts = explode(' ', $fullName, 2); // Split into two parts (first name and last name)
-
-            $firstName = $nameParts[0]; 
-            $lastName = isset($nameParts[1]) ? $nameParts[1] : ''; // Handle cases where there's no last name
+            $nameParts = explode(' ', $fullName); // Split by spaces
+            
+            if (count($nameParts) > 1) {
+                $lastName = array_pop($nameParts); // Get the last word as last name
+                $firstName = implode(' ', $nameParts); // The rest as first name
+            } else {
+                $firstName = $fullName; // If there's only one word, treat it as first name
+                $lastName = ''; // No last name available
+            }
 
             if (!$user) {
                 $new_user = User::create([
