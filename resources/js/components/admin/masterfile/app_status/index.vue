@@ -1,3 +1,47 @@
+<script setup>
+	import navigation from '@/layouts/navigation_admin.vue';
+	import header_admin from '@/layouts/header_admin.vue';
+    import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import { FunnelIcon, MagnifyingGlassIcon, PlusIcon, Bars3Icon, PencilSquareIcon } from '@heroicons/vue/24/solid'
+    /*import DataTable from 'datatables.net-vue3';
+    import DataTablesCore from 'datatables.net-bs5';
+	import 'datatables.net-responsive';
+	import 'datatables.net-select';
+	import 'datatables.net-buttons';
+	import 'datatables.net-buttons-dt';
+	import 'datatables.net-buttons/js/buttons.html5';
+	import 'datatables.net-buttons/js/buttons.print.js';
+	import jszip from 'jszip';
+	import $ from 'jquery'
+    import moment from 'moment'
+	DataTablesCore.Buttons.jszip(jszip);
+    DataTable.use(DataTablesCore);*/
+    // Reactive state to manage modal visibility
+    const addModal = ref(false);
+    const updateModal = ref(false);
+
+    // Reference to the modal content
+    const modalContent = ref(null);
+
+    // Close the modal when clicking outside the content
+    const handleClickOutside = (event) => {
+    if (modalContent.value && !modalContent.value.contains(event.target)) {
+        addModal.value = false;
+        updateModal.value = false;
+    }
+    };
+
+    // Add event listener for clicks outside
+    onMounted(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    });
+
+    // Remove event listener to prevent memory leaks
+    onBeforeUnmount(() => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    });
+</script>
+
 <template>
     <navigation>
         <header_admin>
@@ -137,34 +181,8 @@
         </div>
     </transition>
 </template>
-<script setup>
-	import navigation from '@/layouts/navigation_admin.vue';
-	import header_admin from '@/layouts/header_admin.vue';
-    import { ref, onMounted, onBeforeUnmount } from 'vue';
-    import { FunnelIcon, MagnifyingGlassIcon, PlusIcon, Bars3Icon, PencilSquareIcon } from '@heroicons/vue/24/solid'
-
-    // Reactive state to manage modal visibility
-    const addModal = ref(false);
-    const updateModal = ref(false);
-
-    // Reference to the modal content
-    const modalContent = ref(null);
-
-    // Close the modal when clicking outside the content
-    const handleClickOutside = (event) => {
-    if (modalContent.value && !modalContent.value.contains(event.target)) {
-        addModal.value = false;
-        updateModal.value = false;
-    }
-    };
-
-    // Add event listener for clicks outside
-    onMounted(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    });
-
-    // Remove event listener to prevent memory leaks
-    onBeforeUnmount(() => {
-    document.removeEventListener("mousedown", handleClickOutside);
-    });
-</script>
+<!-- <style>
+    @import 'datatables.net-dt';
+    @import 'datatables.net-buttons-dt';
+    @import 'datatables.net-select-dt';
+</style> -->
