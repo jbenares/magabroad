@@ -38,16 +38,20 @@
                             <hr>
                             <!-- Notification Settings -->
                             <h3>Notification Preferences</h3>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="emailNotifications">
-                                <label class="form-check-label" for="emailNotifications">Receive Email Notifications</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="smsNotifications">
-                                <label class="form-check-label" for="smsNotifications">Receive SMS Notifications</label>
-                            </div>
-                            <div class="col-lg-12 mt-3">
-                                <button class="btn btn-primary">Save Preferences</button>
+                            <div class="row">
+                                <div class="col-lg-12 mt-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications">
+                                        <label class="form-check-label" for="emailNotifications">Receive Email Notifications</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                        <label class="form-check-label" for="smsNotifications">Receive SMS Notifications</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mt-3">
+                                    <button class="btn btn-primary">Save Preferences</button>
+                                </div>
                             </div>
                         </div>
                     </div>
