@@ -1,3 +1,30 @@
+<script setup>
+    import { WrenchIcon, ChevronDownIcon } from '@heroicons/vue/24/solid';
+    import { reactive, ref, onMounted, onBeforeUnmount } from 'vue';
+    import { useRouter } from "vue-router"
+    const router = useRouter();
+
+    let credentials=ref([])
+
+    onMounted(async () => {
+		getDashboard()
+	})
+
+    const getDashboard = async () => {
+		const response = await fetch(`/api/dashboard`);
+		credentials.value = await response.json();
+		// if(!credentials.value.firstname){
+		// 	alert('You have been logged out due to inactivity.')
+        //     localStorage.removeItem('token')
+		// 	router.push('/')
+		// }
+	}
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        router.push('/')
+    }
+</script>
 <template>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -89,12 +116,12 @@
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown  mr-md-1">
                             <a class="nav-link dropdown-toggle " href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Job Seeker Name
+                                Jobseeker Name
                             </a>
                             <div class="dropdown-menu" aria-labelledby="signinDropdown">
                                 <a class="dropdown-item" href="/job_seeker/profile">Profile</a>
                                 <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="/">Logout</a>
+                                <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
                         <li class="nav-item cta cta-colored"><a href="/job_seeker/search_job" class="nav-link">Want a Job</a></li>

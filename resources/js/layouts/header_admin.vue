@@ -16,7 +16,7 @@
                                 class="w-6 h-6 rounded-full"
                                 />
                                 <!-- Admin's Name -->
-                                <span>Admin Name</span>
+                                <span>{{ credentials.firstname }}</span>
                                 <!-- Chevron Icon -->
                                 <ChevronDownIcon class="size-4" />
                             </span>
@@ -28,7 +28,7 @@
                                 <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" @click="logout">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -42,6 +42,14 @@
 <script setup>
     import { WrenchIcon, ChevronDownIcon } from '@heroicons/vue/24/solid';
     import { reactive, ref, onMounted, onBeforeUnmount } from 'vue';
+    import { useRouter } from "vue-router"
+    const router = useRouter();
+
+    let credentials=ref([])
+
+    onMounted(async () => {
+		getDashboard()
+	})
 
     // Reactive object to manage submenu state
     const submenuOpen = reactive({
@@ -77,4 +85,19 @@
     onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside);
     });
+
+    const getDashboard = async () => {
+		const response = await fetch(`/api/dashboard`);
+		credentials.value = await response.json();
+		// if(!credentials.value.firstname){
+		// 	alert('You have been logged out due to inactivity.')
+        //     localStorage.removeItem('token')
+		// 	router.push('/admin')
+		// }
+	}
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        router.push('/admin')
+    }
 </script>
