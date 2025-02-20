@@ -24,6 +24,7 @@ import job_view from  '../components/employer/job_view.vue'
 import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
+import employer_settings from  '../components/employer/settings.vue'
 
 import admin_login from '../components/admin/login.vue'
 import admin_dash from '../components/admin/dashboard.vue'
@@ -53,6 +54,9 @@ const routes = [
         path:'/login',
         name:'login',
         component: loginForm,
+        meta:{
+            requiresAuth:false
+        }
     },
     // ----------------------------------------------------------------------------Job Seeker
     {
@@ -64,11 +68,17 @@ const routes = [
         path:'/job_seeker/profile',
         name:'jobseeker_profile',
         component: jobseeker_profile,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/job_seeker/dashboard',
         name:'jobseeker_dash',
         component: jobseeker_dash,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/job_seeker/search_job',
@@ -101,26 +111,41 @@ const routes = [
         path:'/employer/dashboard',
         name:'employer_dash',
         component: employer_dash,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/profile',
         name:'employer_profile',
         component: employer_profile,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/postjob',
         name:'post_job',
         component: post_job,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/job_list',
         name:'job_list',
         component: job_list,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/job_view',
         name:'job_view',
         component: job_view,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/search_candidate',
@@ -137,6 +162,11 @@ const routes = [
         name:'notif_employer',
         component: notif_employer,
     },
+    {
+        path:'/employer/settings',
+        name:'employer_settings',
+        component: employer_settings,
+    },
 
     // ----------------------------------------------------------------------------Admin
 
@@ -145,11 +175,18 @@ const routes = [
         path:'/admin/',
         name:'admin_login',
         component: admin_login,
+        meta:{
+            requiresAuth:false
+        }
+
     },
     {
         path:'/admin/dashboard',
         name:'admin_dash',
         component: admin_dash,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/admin/employment_category',

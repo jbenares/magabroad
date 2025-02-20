@@ -427,126 +427,129 @@
 
 		<section class="ftco-section bg-light">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-lg-8 mb-5">
-							<!-- <h4 class="mb-0">Your Employer Account</h4> -->
-							<p class="">Be found by employers. Start a MagAbroad Profile.</p>
-							<hr>
-							<form @submit.prevent="sendOTP">
-								<div class="row form-group">
-									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
-										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
-									</div>
-									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">Middle Name</label>
-										<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
-									</div>
-									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
-										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
-									</div>
-								</div>
-								<!-- <div class="row form-group">
-									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="phone">Phone Number</label>
-										<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
-										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
-
-									</div>
-								</div> -->
-								<div class="row form-group">
-									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="phone">Phone Number</label>
-										<div class="phone-input-group">
-											<select id="country-code" v-model="country_code">
-												<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
-											</select>
-											
-											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
-											<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
+				
+					<div class="row">
+						<div class="col-md-12 col-lg-8 mb-3">
+							<div class="p-4 bg-white">
+								<!-- <h4 class="mb-0">Your Employer Account</h4> -->
+								<p class="">Be found by employers. Start a MagAbroad Profile.</p>
+								<hr>
+								<form @submit.prevent="sendOTP">
+									<div class="row form-group">
+										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="fullname">First Name</label>
+											<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
+											<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 										</div>
-										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
+										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="fullname">Middle Name</label>
+											<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
+										</div>
+										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="fullname">Last Name</label>
+											<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
+											<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
+										</div>
 									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
-										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Password</label>
-										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
-										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
-									</div>
-								</div>
-								<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
-									<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-								</span>
+									<!-- <div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="phone">Phone Number</label>
+											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+											<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
-								<div class="row form-group">
-									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Confirm Password</label>
-										<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
-										<p v-if="repass_message">{{ repass_message }}</p>
+										</div>
+									</div> -->
+									<div class="row form-group">
+										<div class="col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="phone">Phone Number</label>
+											<div class="phone-input-group">
+												<select id="country-code" v-model="country_code">
+													<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
+												</select>
+												
+												<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
+												<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
+											</div>
+											<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
+										</div>
 									</div>
-								</div>
-
-								<div class="row form-group">
-									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
-								</div>
-								
-								<div class="row form-group" v-if="otpSent != true">
-									<div class="col-md-12">
-										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
-										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
-									</div>
-								</div>
-							</form>
-							<p v-if="message">{{ message }}</p>
-							<div>
-								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">
 										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-											<input type="text" v-model="otp" class="form-control" placeholder="Enter OTP" required />
+											<label class="font-weight-bold" for="email">Email Address</label>
+											<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
+											<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 										</div>
 									</div>
-								<div class="row form-group">
-									<div class="col-md-12">
-										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
-										<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
+									<div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="email">Password</label>
+											<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
+											<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
+										</div>
 									</div>
-								</div>
+									<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
+										<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+									</span>
+
+									<div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold" for="email">Confirm Password</label>
+											<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
+											<p v-if="repass_message">{{ repass_message }}</p>
+										</div>
+									</div>
+
+									<div class="row form-group">
+										<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
+									</div>
+									
+									<div class="row form-group" v-if="otpSent != true">
+										<div class="col-md-12">
+											<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
+											<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
+										</div>
+									</div>
 								</form>
+								<p v-if="message">{{ message }}</p>
+								<div>
+									<form @submit.prevent="verifyOTP" v-if="otpSent">
+										<div class="row form-group">
+											<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+												<input type="text" v-model="otp" class="form-control" placeholder="Enter OTP" required />
+											</div>
+										</div>
+									<div class="row form-group">
+										<div class="col-md-12">
+											<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
+											<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
+										</div>
+									</div>
+									</form>
+								</div>
+								<hr>
 							</div>
-							<hr>
+						</div>
+		
+						<div class="col-lg-4">
+						<div class="p-4 mb-3 bg-white">
+							<h3 class="h5 text-black mb-3">Contact Info</h3>
+							<p class="mb-0 font-weight-bold">Address</p>
+							<p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+		
+							<p class="mb-0 font-weight-bold">Phone</p>
+							<p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+		
+							<p class="mb-0 font-weight-bold">Email Address</p>
+							<p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
+						</div>
+						
+						<div class="p-4 mb-3 bg-white">
+							<h3 class="h5 text-black mb-3">More Info</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
+							<p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
+						</div>
+						</div>
 					</div>
-	
-					<div class="col-lg-4">
-					<div class="p-4 mb-3 bg-white">
-						<h3 class="h5 text-black mb-3">Contact Info</h3>
-						<p class="mb-0 font-weight-bold">Address</p>
-						<p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
-	
-						<p class="mb-0 font-weight-bold">Phone</p>
-						<p class="mb-4"><a href="#">+1 232 3235 324</a></p>
-	
-						<p class="mb-0 font-weight-bold">Email Address</p>
-						<p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
-					</div>
-					
-					<div class="p-4 mb-3 bg-white">
-						<h3 class="h5 text-black mb-3">More Info</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
-						<p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
-					</div>
-					</div>
-				</div>
 			</div>
 		</section>
 		

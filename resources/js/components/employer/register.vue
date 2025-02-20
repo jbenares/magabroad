@@ -398,12 +398,12 @@
 										<label class="font-weight-bold" for="email">Password</label>
 										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
+										<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 73%; right: 30px; transform: translateY(-50%); cursor: pointer;">
+											<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+										</span>
 									</div>
 								</div>
-								<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 72%; right: 20px; transform: translateY(-50%); cursor: pointer;">
-									<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-								</span>
-
+								
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
 										<label class="font-weight-bold" for="email">Confirm Password</label>

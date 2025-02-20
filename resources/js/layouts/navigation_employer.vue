@@ -1,3 +1,30 @@
+<script setup>
+    import { WrenchIcon, ChevronDownIcon } from '@heroicons/vue/24/solid';
+    import { reactive, ref, onMounted, onBeforeUnmount } from 'vue';
+    import { useRouter } from "vue-router"
+    const router = useRouter();
+
+    let credentials=ref([])
+
+    onMounted(async () => {
+		getDashboard()
+	})
+
+    const getDashboard = async () => {
+		const response = await fetch(`/api/dashboard`);
+		credentials.value = await response.json();
+		// if(!credentials.value.firstname){
+		// 	alert('You have been logged out due to inactivity.')
+        //     localStorage.removeItem('token')
+		// 	router.push('/')
+		// }
+	}
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        router.push('/')
+    }
+</script>
 <template>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -11,8 +38,8 @@
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
+                <div class="collapse navbar-collapse !visible" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto block">
                         <li class="nav-item"><a href="/employer/dashboard" class="nav-link">Dashboard</a></li>
                         <!-- Notification Dropdown -->
                         <li class="nav-item dropdown">
@@ -91,8 +118,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
                                 <a class="dropdown-item" href="/employer/profile">Profile</a>
-                                <a class="dropdown-item" href="">Settings</a>
-                                <a class="dropdown-item" href="/">Logout</a>
+                                <a class="dropdown-item" href="/employer/settings">Settings</a>
+                                <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
                         <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link">Post a Job</a></li>
