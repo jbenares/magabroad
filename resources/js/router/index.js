@@ -24,6 +24,7 @@ import job_view from  '../components/employer/job_view.vue'
 import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
+import employer_settings from  '../components/employer/settings.vue'
 
 import admin_login from '../components/admin/login.vue'
 import admin_dash from '../components/admin/dashboard.vue'
@@ -136,6 +137,11 @@ const routes = [
         path:'/employer/notifications',
         name:'notif_employer',
         component: notif_employer,
+    },
+    {
+        path:'/employer/settings',
+        name:'employer_settings',
+        component: employer_settings,
     },
 
     // ----------------------------------------------------------------------------Admin

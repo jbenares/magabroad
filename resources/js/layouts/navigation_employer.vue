@@ -11,8 +11,8 @@
                     <span class="oi oi-menu"></span> Menu
                 </button>
 
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
+                <div class="collapse navbar-collapse !visible" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto block">
                         <li class="nav-item"><a href="/employer/dashboard" class="nav-link">Dashboard</a></li>
                         <!-- Notification Dropdown -->
                         <li class="nav-item dropdown">
@@ -91,7 +91,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
                                 <a class="dropdown-item" href="/employer/profile">Profile</a>
-                                <a class="dropdown-item" href="">Settings</a>
+                                <a class="dropdown-item" href="/employer/settings">Settings</a>
                                 <a class="dropdown-item" href="/">Logout</a>
                             </div>
                         </li>
