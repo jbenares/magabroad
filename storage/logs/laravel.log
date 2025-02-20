@@ -3363,6 +3363,7 @@
 #0 {main}
 "} 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [2025-02-19 14:54:50] local.ERROR: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: select * from `country_codes` order by `country_name` asc) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: select * from `country_codes` order by `country_name` asc) at D:\\Systems\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:829)
 [stacktrace]
 #0 D:\\Systems\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(983): Illuminate\\Database\\Connection->runQueryCallback()
@@ -4186,3 +4187,5 @@
 #59 D:\\Systems\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
 #60 {main}
 "} 
+=======
+>>>>>>> e0c3572696031ca6b4158a175c9103e65eef24f7
