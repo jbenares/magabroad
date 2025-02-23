@@ -385,6 +385,10 @@
 }
 </style>
 <template>
+	<!-- <div class="loader-overlay">
+		<div class="loader"></div>
+	</div> -->
+
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
 		  <div class="overlay"></div>
@@ -573,7 +577,7 @@
 									</div>
 								</div> -->
 							</form>
-							<p v-if="message">{{ message }}</p>
+							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="message">{{ message }}</p>
 							<div>
 								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">
