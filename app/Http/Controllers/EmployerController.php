@@ -74,6 +74,7 @@ class EmployerController extends Controller
                 'industry'=>Industry::where('id',$e->industry_id)->value('name'),
                 'company_size'=>$e->company_size,
                 'about'=>$e->about,
+                'approved'=>$e->approved,
                 'logo'=>$e->logo
             ];
         }

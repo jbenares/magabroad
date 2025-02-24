@@ -34,6 +34,7 @@ class User extends Authenticatable
         'about',
         'logo',
         'usertype_id',
+        'approved',
         'registration_date',
         'registration_via',
     ];

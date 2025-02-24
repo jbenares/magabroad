@@ -40,9 +40,9 @@
 
                 <div class="collapse navbar-collapse !visible" id="ftco-nav">
                     <ul class="navbar-nav ml-auto block">
-                        <li class="nav-item"><a href="/employer/dashboard" class="nav-link">Dashboard</a></li>
+                        <li class="nav-item"><a href="/employer/dashboard" class="nav-link" v-if="credentials.approved != 0">Dashboard</a></li>
                         <!-- Notification Dropdown -->
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" v-if="credentials.approved != 0">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Notification <span class="badge badge-danger rounded-xl">3</span>
                             </a>
@@ -110,19 +110,19 @@
                                 <a class="dropdown-item text-center text-primary" href="/employer/notifications">View All Notifications</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="/employer/search_candidate" class="nav-link">Candidates</a></li>
+                        <li class="nav-item"><a href="/employer/search_candidate" class="nav-link" v-if="credentials.approved != 0">Candidates</a></li>
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown mr-md-1">
                             <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ credentials.firstname }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
-                                <a class="dropdown-item" href="/employer/profile">Profile</a>
-                                <a class="dropdown-item" href="/employer/settings">Settings</a>
+                                <a class="dropdown-item" href="/employer/profile" v-if="credentials.approved != 0">Profile</a>
+                                <a class="dropdown-item" href="/employer/settings" v-if="credentials.approved != 0">Settings</a>
                                 <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
-                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link">Post a Job</a></li>
+                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link" v-if="credentials.approved != 0">Post a Job</a></li>
                     </ul>
                 </div>
             </div>
