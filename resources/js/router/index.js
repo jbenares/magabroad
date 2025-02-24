@@ -151,21 +151,33 @@ const routes = [
         path:'/employer/search_candidate',
         name:'search_candidate',
         component: search_candidate,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/view_candidate',
         name:'view_candidate',
         component: view_candidate,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/notifications',
         name:'notif_employer',
         component: notif_employer,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/settings',
         name:'employer_settings',
         component: employer_settings,
+        meta:{
+            requiresAuth:true
+        }
     },
 
     // ----------------------------------------------------------------------------Admin

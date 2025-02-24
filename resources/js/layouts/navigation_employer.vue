@@ -114,7 +114,7 @@
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown mr-md-1">
                             <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Employer Name
+                                {{ credentials.firstname }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
                                 <a class="dropdown-item" href="/employer/profile">Profile</a>

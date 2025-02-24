@@ -1,3 +1,8 @@
+<script setup>
+import navigation from '@/layouts/navigation_employer.vue';
+
+
+</script>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3">
@@ -24,20 +29,20 @@
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="font-weight-bold">New Password:</label>
-                                    <input type="password" class="form-control" placeholder="Enter new password">
+                                    <input type="password" class="form-control" placeholder="Enter new password" v-model="new_password">
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="font-weight-bold">Confirm New Password:</label>
-                                    <input type="password" class="form-control" placeholder="Confirm new password">
+                                    <input type="password" class="form-control" placeholder="Confirm new password" v-model="confirm_new_password">
                                 </div>
                                 <div class="col-lg-12">
-                                    <button class="btn btn-primary">Update Password</button>
+                                    <button class="btn btn-primary" @click="change_password()">Update Password</button>
                                 </div>
                             </div>
 
                             <hr>
                             <!-- Notification Settings -->
-                            <h3>Notification Preferences</h3>
+                            <!-- <h3>Notification Preferences</h3>
                             <div class="row">
                                 <div class="col-lg-12 mt-3">
                                     <div class="form-check">
@@ -52,7 +57,7 @@
                                 <div class="col-lg-12 mt-3">
                                     <button class="btn btn-primary">Save Preferences</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     
@@ -87,7 +92,3 @@
 		</footer>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
-</script>
