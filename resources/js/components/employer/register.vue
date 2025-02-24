@@ -2,7 +2,7 @@
 	import navigation from '@/layouts/navigation.vue';
 	import{CheckIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
-	import {onBeforeUnmount,onMounted, ref} from "vue";
+	import {onBeforeUnmount,onMounted, ref, computed } from "vue";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
 
@@ -28,6 +28,10 @@
 	let pass_message=ref('');
 	let repass_message=ref('');
 	let business_message=ref('');
+
+	let timer=ref(null);
+	let timeLeft=ref(0);
+	const isResendDisabled = ref(false)
 
 	const success =  ref('');
 	const otpSent=ref(false);
@@ -202,6 +206,19 @@
 			axios.post(`/api/send-otp`,formOTP).then(function (response) {
 				message.value = response.data.message;
 				otpSent.value = true;
+
+				      // Start 5-minute countdown (300 seconds)
+					timeLeft.value = 300;
+					isResendDisabled.value = true;
+					
+					timer.value = setInterval(() => {
+						if (timeLeft.value > 0) {
+						timeLeft.value--;
+						} else {
+						isResendDisabled.value = false;
+						clearInterval(timer.value);
+						}
+					}, 1000);
 			}, function (error) {
 				message.value = error.response.data.message;
 			});
@@ -233,6 +250,16 @@
 			// const btn_save = document.getElementById("save");
 			// btn_save.disabled = true;
 		}
+	}
+
+	const formattedTime = computed(() => {
+		const minutes = Math.floor(timeLeft.value / 60);
+		const seconds = timeLeft.value % 60;
+		return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+	});
+
+	const beforeUnmount = () => {
+		clearInterval(timer.value);
 	}
 
 	const verifyOTP = () => {
@@ -434,7 +461,8 @@
 								<div class="row form-group">
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button>
-										<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button>
+										<!-- <button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
+										<button @click="sendOTP" :disabled="isResendDisabled">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 									</div>
 								</div>
 								</form>
