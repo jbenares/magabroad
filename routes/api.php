@@ -36,6 +36,9 @@ Route::post('/verify-otp', [OTPController::class, 'verifyOTP']);
 Route::get('/check_employer_email/{email}', [UserController::class,'checkEmployerEmail']);
 Route::get('/check_jobseeker_email/{email}', [UserController::class,'checkJobseekerEmail']);
 
+
+Route::get('/check_employer_password/{password}', [EmployerController::class,'checkEmployerPassword']);
+Route::post('/change_password', [EmployerController::class,'change_password']);
 Route::get('/industry_list', [EmployerController::class,'all_industry']);
 Route::get('/employer_data',[EmployerController::class,'employer_data']);
 Route::post('/update_employeer/{id}',[EmployerController::class,'update_employeer']);

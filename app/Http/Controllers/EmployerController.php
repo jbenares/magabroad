@@ -3,12 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Industry;
 use App\Models\CountryCodes;
 
+
 class EmployerController extends Controller
 {
+
+    public function checkEmployerPassword($password){
+        // $employerid = Auth::id();
+        $employerid = 1;
+        $user = User::find($employerid);
+
+        if ($user && Hash::check($password, $user->password)) {
+            return response()->json(['exists' => true]); // Password matches
+        } else {
+            return response()->json(['exists' => false]); // Wrong password or user not found
+        }
+
+        // if (Auth::attempt(['id' => $employerid, 'password' => $password])) {
+        //     return response()->json(['exists' => true]);
+        // } else {
+        //     return response()->json(['exists' => false]);
+        // }
+    }
+
+    public function change_password(Request $request){
+        // $employerid = Auth::id();
+        $employerid = 1;
+        $employeer=User::where('id',$employerid)->first();
+        $validated=[
+            'password' => $request->password,
+        ];
+        $employeer->update($validated);
+    }
 
     public function all_industry(){
         $industry_list=Industry::orderBy('name','ASC')->get()->unique('name');

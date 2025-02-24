@@ -1,6 +1,52 @@
 <script setup>
 import navigation from '@/layouts/navigation_employer.vue';
+import { onMounted,ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from "vue-router";
+const router = useRouter();
 
+let old_password=ref('');
+let new_password=ref('');
+let confirm_new_password=ref('');
+let checker_message=ref('');
+let confirm_password_message=ref('');
+
+const PasswordChecker = async () => {
+    let response = await axios.get('/api/check_employer_password/'+old_password.value)
+
+    if (response.data.exists === false) {
+        checker_message.value = 'You have entered the wrong password!';
+        document.getElementById("newpass").disabled = true;
+        document.getElementById("confirmnewpass").disabled = true;
+    } else {
+        checker_message.value = '';
+        document.getElementById("newpass").disabled = false;
+        document.getElementById("confirmnewpass").disabled = false;
+    }
+}
+
+    const ConfirmNewPasword = () => {
+		if (new_password.value === confirm_new_password.value) {
+			confirm_password_message.value = 'Passwords match!';
+			document.getElementById("btn").disabled = false;
+
+			setTimeout(function() {
+				confirm_password_message.value = ''; // Clear the message
+			}, 3000); // 3000 milliseconds = 3 seconds
+		} else {
+			confirm_password_message.value = 'Passwords do not match.';
+            document.getElementById("btn").disabled = true;
+		}
+	}
+
+    const ChangePassword = () => {
+        const formData=new FormData()
+        formData.append('password',new_password.value)
+        axios.post('/api/change_password/',formData).then(function (response) {
+            localStorage.removeItem('token')
+            router.push('/')
+        });
+    }
 
 </script>
 <template>
@@ -25,18 +71,20 @@ import navigation from '@/layouts/navigation_employer.vue';
                             <div class="row">
                                 <div class="col-lg-12 mb-3">
                                     <label class="font-weight-bold">Current Password:</label>
-                                    <input type="password" class="form-control" placeholder="Enter current password">
+                                    <input type="password" class="form-control" placeholder="Enter current password" v-model="old_password" @blur="PasswordChecker">
+                                    <p v-if="checker_message" style="color: red;">{{ checker_message }}</p>
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="font-weight-bold">New Password:</label>
-                                    <input type="password" class="form-control" placeholder="Enter new password" v-model="new_password">
+                                    <input type="password" class="form-control" placeholder="Enter new password" v-model="new_password" id="newpass" disabled>
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="font-weight-bold">Confirm New Password:</label>
-                                    <input type="password" class="form-control" placeholder="Confirm new password" v-model="confirm_new_password">
+                                    <input type="password" class="form-control" placeholder="Confirm new password" v-model="confirm_new_password" id="confirmnewpass" @blur="ConfirmNewPasword()" disabled>
+                                    <p v-if="confirm_password_message" style="color: red;">{{ confirm_password_message }}</p>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button class="btn btn-primary" @click="change_password()">Update Password</button>
+                                    <button class="btn btn-primary" @click="ChangePassword()" disabled id="btn">Update Password</button>
                                 </div>
                             </div>
 

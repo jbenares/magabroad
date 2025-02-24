@@ -30,6 +30,7 @@ const getEmployerData = async () => {
 	let response = await axios.get(`/api/employer_data`);
 	form.value=response.data.employer
 }
+
 const toggleEdit = () => {
 	isEditing.value = !isEditing.value;
 };
