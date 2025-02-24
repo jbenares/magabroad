@@ -462,7 +462,7 @@
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button>
 										<!-- <button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
-										<button @click="sendOTP" :disabled="isResendDisabled">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
+										<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 									</div>
 								</div>
 								</form>
