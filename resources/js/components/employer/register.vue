@@ -49,7 +49,7 @@
     // Close the modal when clicking outside the content
     const handleClickOutside = (event) => {
     if (modalContent.value && !modalContent.value.contains(event.target)) {
-        rejectModal.value = false;
+       // rejectModal.value = false;
     }
     };
 
@@ -560,7 +560,7 @@
 										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
 									</div>
 								</div>
-								<!-- <div class="row form-group" v-if="otpSent != true">
+								<div class="row form-group" v-if="otpSent != true">
 									<div class="col-md-12 flex items-center">
 										<button 
 										type="submit" 
@@ -575,7 +575,7 @@
 										<span class="spinner-border spinner-border-sm"></span>
 										</div>
 									</div>
-								</div> -->
+								</div>
 							</form>
 							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="message">{{ message }}</p>
 							<div>

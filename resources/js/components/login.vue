@@ -83,12 +83,12 @@
 									Employer
 								</button>
 							</div>
-							<div class="alert alert-danger !border !border-red-500 !text-red-600 mb-0" v-if="error">
+							<div class="alert alert-danger !border !border-red-500 !text-red-600 mb-0" >
 								<div class="flex justify-start space-x-2">
 									<div>
 										<ExclamationCircleIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"></ExclamationCircleIcon>
 									</div> 
-									<p class="mb-0 leading-tight"> {{ error }}</p>
+									<p class="mb-0 leading-tight"> kemi</p>
 								</div>
 							</div>
 							<form class="pt-3" @submit.prevent="login()">
