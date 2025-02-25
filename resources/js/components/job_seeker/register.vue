@@ -60,27 +60,73 @@
 		showPassword.value = !showPassword.value
 	}
 
+	const toggleConfirmPassword = () => {
+		showConfirmPassword.value = !showConfirmPassword.value;
+	};
+
 	const getcountrycode = async () => {
 		let response = await axios.get("/api/country_code_list");
 		countrycodelist.value=response.data
 	}
 
+	// const EmailChecker = async () => {
+	// 	let response = await axios.get('/api/check_jobseeker_email/'+email.value)
+	// 	if (response.data.exists) {
+	// 		email_message.value = 'This email is already exisiting!'
+	// 		document.getElementById("password").readOnly = true;
+	// 		document.getElementById("re_password").readOnly = true;
+	// 		grecaptcha.reset();
+	// 		document.getElementById('recaptcha').style.display = 'none';
+	// 		document.getElementById("otpbtn").disabled = true;
+	// 	} else {
+	// 		email_message.value = ''
+	// 		document.getElementById("password").readOnly = false;
+	// 		document.getElementById("re_password").readOnly = false;
+	// 		VerifyConfirmPasword()
+	// 	}
+	// }
+
+	const email_exists = ref(false); // Tracks if the email exists
+	const email_accepted = ref(false); // Tracks if the email is valid and available
+
 	const EmailChecker = async () => {
-		let response = await axios.get('/api/check_jobseeker_email/'+email.value)
+		if (!email.value) {
+			email_message.value = "";
+			email_exists.value = false;
+			email_accepted.value = false;
+			return;
+		}
+
+		// try {
+			let response = await axios.get('/api/check_jobseeker_email/' + email.value);
 			if (response.data.exists) {
-				email_message.value = 'This email is already exisiting!'
+				email_message.value = '❌ This email is already existing!';
+				email_exists.value = true;
+				email_accepted.value = false;
+
+				// Disable password fields
 				document.getElementById("password").readOnly = true;
 				document.getElementById("re_password").readOnly = true;
 				grecaptcha.reset();
 				document.getElementById('recaptcha').style.display = 'none';
 				document.getElementById("otpbtn").disabled = true;
 			} else {
-				email_message.value = ''
+				email_message.value = '✅ Email is available!';
+				email_exists.value = false;
+				email_accepted.value = true;
+
+				// Enable password fields
 				document.getElementById("password").readOnly = false;
 				document.getElementById("re_password").readOnly = false;
-				VerifyConfirmPasword()
+				VerifyConfirmPasword();
 			}
-	}
+		// } catch (error) {
+		// 	console.error("Error checking email:", error);
+		// 	email_message.value = "Error checking email. Try again.";
+		// 	email_exists.value = true;
+		// 	email_accepted.value = false;
+		// }
+	};
 
 	const VerifyConfirmPasword = () => {
 		if (password.value === re_password.value &&  (password.value != '' || re_password.value != '')) {
@@ -97,7 +143,7 @@
 		}
 	}
 
-	const ConfirmPasword = () => {
+	const ConfirmPassword = () => {
 		if (!re_password.value) {
 			repass_message.value = ""; // Clear message if confirm password is empty
 			return;
@@ -119,6 +165,30 @@
 			document.getElementById("otpbtn").disabled = true;
 		}
 	}
+
+
+	// const ConfirmPasword = () => {
+	// 	if (!re_password.value) {
+	// 		repass_message.value = ""; 
+	// 		return;
+	// 	}
+
+	// 	if (password.value === re_password.value) {
+	// 		repass_message.value = "✅ Password Matched ";
+	// 		repass_color.value = "text-green-500";
+	// 		document.getElementById('recaptcha').style.display = 'block';
+
+	// 		setTimeout(function() {
+	// 			repass_message.value = ''; 
+	// 		}, 3000);
+	// 	} else {
+	// 		repass_message.value = "❌ Passwords do not match";
+	// 		repass_color.value = "text-red-500";
+	// 		grecaptcha.reset();
+	// 		document.getElementById('recaptcha').style.display = 'none';
+	// 		document.getElementById("otpbtn").disabled = true;
+	// 	}
+	// }
 
 	const loadRecaptchaScript = () => {
       return new Promise((resolve, reject) => {
@@ -292,35 +362,6 @@
     }
 
 </script>
-<style>
-.password-wrapper {
-  position: relative;
-}
-
-.toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.loader {
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
@@ -528,30 +569,33 @@
 				
 					<div class="row">
 						<div class="col-md-12 col-lg-8 mb-3">
-							<div class="p-4 bg-white">
+							<div class="p-5 bg-white">
 								<!-- <h4 class="mb-0">Your Employer Account</h4> -->
 								<p class="">Be found by employers. Start a MagAbroad Profile.</p>
 								<hr>
 								<form @submit.prevent="sendOTP">
 									<div class="row form-group">
 										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="fullname">First Name</label>
+											<label class="font-weight-bold mb-0" for="fullname">First Name</label>
 											<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
 											<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 										</div>
 										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="fullname">Middle Name</label>
+											<label class="font-weight-bold mb-0" for="fullname">Middle Name</label>
 											<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
 										</div>
+										
+									</div>
+									<div class="row form-group">
 										<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="fullname">Last Name</label>
+											<label class="font-weight-bold mb-0" for="fullname">Last Name</label>
 											<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
 											<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
 										</div>
 									</div>
 									<!-- <div class="row form-group">
 										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="phone">Phone Number</label>
+											<label class="font-weight-bold mb-0" for="phone">Phone Number</label>
 											<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 											<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
@@ -559,28 +603,53 @@
 									</div> -->
 									<div class="row form-group">
 										<div class="col-md-12 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="phone">Phone Number</label>
+											<label class="font-weight-bold mb-0" for="phone">Phone Number</label>
 											<div class="phone-input-group">
 												<select id="country-code" v-model="country_code">
 													<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
 												</select>
-												
 												<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 												<!-- <p v-if="contact_message" style="color: red;">{{ contact_message }}</p> -->
 											</div>
 											<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 										</div>
 									</div>
-									<div class="row form-group">
+									<!-- <div class="row form-group">
 										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="email">Email Address</label>
+											<label class="font-weight-bold mb-0" for="email">Email Address</label>
 											<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
 											<p v-if="email_message" style="color: red;">{{ email_message }}</p>
 										</div>
-									</div>
+									</div> -->
 									<div class="row form-group">
 										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="email">Password</label>
+											<label class="font-weight-bold mb-0 mb-0" for="email">Email Address</label>
+											<input 
+												type="email" 
+												id="email" 
+												class="form-control" 
+												:class="{
+													'!border-red-500': email_exists,
+													'!border-green-500': email_accepted
+												}" 
+												placeholder="Email Address" 
+												v-model="email" 
+												@click="resetError('email')" 
+												@blur="EmailChecker()"
+											>
+											<p v-if="email_message" 
+											:class="{
+												'text-red-500': email_exists, 
+												'text-green-500': email_accepted
+											}" 
+											class="text-sm mt-1 flex items-center mb-0">
+												{{ email_message }}
+											</p>
+										</div>
+									</div>
+									<!-- <div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold mb-0" for="email">Password</label>
 											<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 											<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
 										</div>
@@ -591,9 +660,52 @@
 
 									<div class="row form-group">
 										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-											<label class="font-weight-bold" for="email">Confirm Password</label>
+											<label class="font-weight-bold mb-0" for="email">Confirm Password</label>
 											<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
 											<p v-if="repass_message">{{ repass_message }}</p>
+										</div>
+									</div> -->
+									<div class="row form-group">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold mb-0" for="password">Password</label>
+											<div class="relative">
+												<input 
+													:type="showPassword ? 'text' : 'password'" 
+													id="password" 
+													class="form-control"
+													:class="{'!border-green-500': passwordsMatch, '!border-red-500': !passwordsMatch && re_password}" 
+													placeholder="Password" 
+													v-model="password" 
+													@click="resetError('password')"
+												>
+												<p v-if="pass_message" class="text-red-500 text-sm mt-1">{{ pass_message }}</p>
+												<span class="toggle-password" @click="togglePassword">
+													<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="row form-group mb-4">
+										<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+											<label class="font-weight-bold mb-0" for="re_password">Confirm Password</label>
+											<div class="relative">
+												<input 
+													:type="showConfirmPassword ? 'text' : 'password'" 
+													id="re_password" 
+													class="form-control" 
+													:class="{'!border-green-500': passwordsMatch, '!border-red-500': !passwordsMatch && re_password}" 
+													placeholder="Re-enter your password" 
+													v-model="re_password" 
+													@input="ConfirmPassword($event)"
+												>
+												<span class="toggle-password" @click="toggleConfirmPassword">
+													<i :class="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+												</span>
+												<p v-if="repass_message" :class="`${repass_color} text-sm mt-1 flex items-center absolute`">
+													{{ repass_message }}
+												</p>
+											</div>
 										</div>
 									</div>
 
@@ -621,14 +733,14 @@
 												<input type="text" v-model="otp" class="form-control" placeholder="Enter OTP" required />
 											</div>
 										</div>
-									<div class="row form-group">
-										<div class="col-md-12">
-											<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
-											<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
-											<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
-											<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
+										<div class="row form-group">
+											<div class="col-md-12">
+												<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
+												<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
+												<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
+												<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
+											</div>
 										</div>
-									</div>
 									</form>
 								</div>
 								<hr>

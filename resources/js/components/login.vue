@@ -14,6 +14,12 @@
         password:'',
     })
     let error = ref('')
+
+	const showPassword = ref(false);
+
+	const togglePassword = () => {
+		showPassword.value = !showPassword.value
+	}		
     const login = async () =>{
 		if(role.value == 'Jobseeker'){
 			await axios.post('/api/jobseeker_login_process', form).then(response =>{
@@ -107,7 +113,16 @@
 
 								<div class="form-group">
 									<label for="password" class="font-weight-bold">Password</label>
-									<input type="password" id="password" class="form-control" placeholder="Enter your password" v-model="form.password">
+									<div class="relative">
+										<input
+										:type="showPassword ? 'text' : 'password'"  
+										class="form-control" 
+										placeholder="Enter your password" 
+										v-model="form.password">
+										<span class="toggle-password" @click="togglePassword">
+											<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group">
