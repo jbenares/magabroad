@@ -4,6 +4,8 @@
 	import {reactive, ref} from "vue";
 	import { useRouter } from "vue-router";
 	import axios from 'axios';
+	import { nextTick } from 'vue';
+
 	const router = useRouter();
 
 	let role = ref('Jobseeker');
@@ -20,6 +22,9 @@
 						router.push('/job_seeker/dashboard')
 				} else {
 					error.value = response.data.message;
+					setTimeout(function() {
+						error.value = ''; // Clear the message
+					}, 3000); // 3000 milliseconds = 3 seconds
 				}
 			})
 		}else{
@@ -29,6 +34,9 @@
 						router.push('/employer/dashboard')
 				} else {
 					error.value = response.data.message;
+					setTimeout(function() {
+						error.value = ''; // Clear the message
+					}, 3000); // 3000 milliseconds = 3 seconds
 				}
 			})
 		}
