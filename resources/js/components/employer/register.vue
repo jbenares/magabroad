@@ -28,13 +28,16 @@
 	let pass_message=ref('');
 	let repass_message=ref('');
 	let business_message=ref('');
+	let otp_success_message=ref('');
+	let otp_error_message=ref('');
 
 	let timer=ref(null);
 	let timeLeft=ref(0);
 	const isResendDisabled = ref(false)
+	const loading = ref(false);
 
 	let repass_color = ref("text-red-500");
-	
+
 	const success =  ref('');
 	const otpSent=ref(false);
 	const captchaVerified=ref(false);
@@ -96,20 +99,6 @@
 	// 	}
 	// };
 
-	const ConfirmPassword = () => {
-    if (!re_password.value) {
-        repass_message.value = ""; // Clear message if confirm password is empty
-        return;
-    }
-
-    if (password.value === re_password.value) {
-        repass_message.value = "✅ Password Matched ";
-        repass_color.value = "text-green-500";
-    } else {
-        repass_message.value = "❌ Passwords do not match";
-        repass_color.value = "text-red-500";
-    }
-};
 	// const EmailChecker = async () => {
 	// 	let response = await axios.get('/api/check_employer_email/'+email.value)
 	// 		if (response.data.exists) {
@@ -182,23 +171,46 @@
 		}
 	}
 
-	const ConfirmPasword = () => {
+	const ConfirmPassword = () => {
+		if (!re_password.value) {
+			repass_message.value = ""; // Clear message if confirm password is empty
+			return;
+		}
+
 		if (password.value === re_password.value) {
-			repass_message.value = 'Passwords match!';
-			repass_message.className = 'success';
+			repass_message.value = "✅ Password Matched ";
+			repass_color.value = "text-green-500";
 			document.getElementById('recaptcha').style.display = 'block';
 
 			setTimeout(function() {
 				repass_message.value = ''; // Clear the message
 			}, 3000); // 3000 milliseconds = 3 seconds
 		} else {
-			repass_message.value = 'Passwords do not match.';
-			repass_message.className = 'error';
+			repass_message.value = "❌ Passwords do not match";
+			repass_color.value = "text-red-500";
 			grecaptcha.reset();
 			document.getElementById('recaptcha').style.display = 'none';
 			document.getElementById("otpbtn").disabled = true;
 		}
 	}
+
+	// const ConfirmPasword = () => {
+	// 	if (password.value === re_password.value) {
+	// 		repass_message.value = 'Passwords match!';
+	// 		repass_message.className = 'success';
+	// 		document.getElementById('recaptcha').style.display = 'block';
+
+	// 		setTimeout(function() {
+	// 			repass_message.value = ''; // Clear the message
+	// 		}, 3000); // 3000 milliseconds = 3 seconds
+	// 	} else {
+	// 		repass_message.value = 'Passwords do not match.';
+	// 		repass_message.className = 'error';
+	// 		grecaptcha.reset();
+	// 		document.getElementById('recaptcha').style.display = 'none';
+	// 		document.getElementById("otpbtn").disabled = true;
+	// 	}
+	// }
 
 	const loadRecaptchaScript = () => {
       return new Promise((resolve, reject) => {
@@ -246,7 +258,11 @@
 		formData.append('business_name',business_name.value)
 		// if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
 			axios.post("/api/add_employer",formData).then(function () {
-				router.push('/login')
+				rejectModal.value=true;
+					setTimeout(function() {
+						router.push('/login')
+					}, 3000); // 3000 milliseconds = 3 seconds
+				
 			});
 		// }else{
 		// 		if(firstname.value==''){
@@ -270,11 +286,15 @@
 	}
 
 	const sendOTP = () => {
+		loading.value = true;
 		const formOTP= new FormData()
 		formOTP.append('email',email.value)
 		if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
 			axios.post(`/api/send-otp`,formOTP).then(function (response) {
-				message.value = response.data.message;
+				otp_success_message.value = response.data.message;
+					setTimeout(function() {
+						otp_success_message.value = ''
+					}, 3000); // 3000 milliseconds = 3 seconds
 				otpSent.value = true;
 
 				      // Start 5-minute countdown (300 seconds)
@@ -290,7 +310,11 @@
 						}
 					}, 1000);
 			}, function (error) {
-				message.value = error.response.data.message;
+				otp_error_message.value = error.response.data.message;
+				setTimeout(function() {
+					otp_error_message.value = ''
+				}, 3000); // 3000 milliseconds = 3 seconds
+				
 			});
 		}else{
 			if(firstname.value==''){
@@ -339,7 +363,7 @@
 		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
 			// message.value = response.data.message;
 			// otpSent.value = true;
-			alert('You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.')
+			// alert('You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.')
 			// success.value='You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.'
 			// successAlert.value=!successAlert.value
 				// setTimeout(() => {
@@ -347,7 +371,11 @@
 				// }, 2000); // 3000 milliseconds = 3 seconds
 			
 		}, function (error) {
-			message.value = error.response.data.message;
+			otp_error_message.value = error.response.data.message;
+			setTimeout(function() {
+				otp_error_message.value = ''
+			}, 3000); // 3000 milliseconds = 3 seconds
+			
 		}); 
 	}
 
@@ -412,6 +440,22 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+.loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 <template>
 	<!-- <div class="loader-overlay">
@@ -438,7 +482,7 @@
 					<div class="col-md-12 col-lg-8 mb-5">
 						<div class="p-5 bg-white">
 						<!-- <form action="#" class="p-5 bg-white"> -->
-							<button @click="rejectModal = true">Show Success Message </button>
+							<!-- <button @click="rejectModal = true">Show Success Message </button> -->
 							<h4 class="mb-0">Your Employer Account</h4>
 							<p class="m-0">We wont share your details with anyone.</p>
 							<hr>
@@ -586,7 +630,11 @@
 								<div class="row form-group" v-if="otpSent != true">
 									<div class="col-md-12">
 										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
-										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
+										<!-- <button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button> -->
+										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44 flex items-center justify-center" :disabled="captchaVerified === false || loading" @click="sendOTP">
+											<span v-if="loading" class="loader"></span> <!-- Loader when sending OTP -->
+											<span v-else>Send OTP</span>
+       									 </button>
 									</div>
 								</div>
 								<!-- <div class="row form-group" v-if="otpSent != true">
@@ -606,7 +654,8 @@
 									</div>
 								</div> -->
 							</form>
-							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="message">{{ message }}</p>
+							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="otp_success_message">{{ otp_success_message }}</p>
+							<p  class="bg-red-100 px-2 py-1 rounded !border !border-red-400 text-red-600" v-if="otp_error_message">{{ otp_error_message }}</p>
 							<div>
 								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">
@@ -616,7 +665,8 @@
 									</div>
 								<div class="row form-group">
 									<div class="col-md-12">
-										<button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button>
+										<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button> -->
+										<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
 										<!-- <button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
 										<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 									</div>
