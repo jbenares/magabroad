@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Industry;
@@ -13,8 +14,7 @@ class EmployerController extends Controller
 {
 
     public function checkEmployerPassword($password){
-        // $employerid = Auth::id();
-        $employerid = 1;
+        $employerid = Auth::id();
         $user = User::find($employerid);
 
         if ($user && Hash::check($password, $user->password)) {
@@ -31,8 +31,7 @@ class EmployerController extends Controller
     }
 
     public function change_password(Request $request){
-        // $employerid = Auth::id();
-        $employerid = 1;
+        $employerid = Auth::id();
         $employeer=User::where('id',$employerid)->first();
         $validated=[
             'password' => $request->password,
@@ -53,8 +52,7 @@ class EmployerController extends Controller
     }
 
     public function employer_data(){
-        // $employerid = Auth::id();
-        $employerid = 1;
+        $employerid = Auth::id();
 
         // $employerdata = User::find($employerid);
         $employerdata=User::where('id',$employerid)->get();
