@@ -585,7 +585,13 @@
 										<!-- <input type="submit" value="Create New Account" class="btn btn-primary  py-2 px-5"> -->
 										<!-- <button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button> -->
 										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44 flex items-center justify-center" :disabled="captchaVerified === false || loading" @click="sendOTP">
-											<span v-if="loading" class="loader"></span> <!-- Loader when sending OTP -->
+											<span v-if="loading" class="flex justify-center">
+												<svg class="w-5 h-5 animate-spin text-white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+													<circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="8" fill="none" stroke-dasharray="200" stroke-linecap="round">
+														<animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+													</circle>
+												</svg>
+											</span>
 											<span v-else>Send OTP</span>
        									 </button>
 									</div>
