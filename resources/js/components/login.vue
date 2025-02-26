@@ -16,43 +16,80 @@
     let error = ref('')
 
 	const showPassword = ref(false);
+	const isLoading = ref(false);
 
 	const togglePassword = () => {
 		showPassword.value = !showPassword.value
 	}		
-    const login = async () =>{
-		if(role.value == 'Jobseeker'){
-			await axios.post('/api/jobseeker_login_process', form).then(response =>{
-				if(response.data.success){
-					localStorage.setItem('token', response.data.data.token)
-						router.push('/job_seeker/dashboard')
-				} else {
-					error.value = response.data.message;
-					setTimeout(function() {
-						error.value = ''; // Clear the message
-					}, 3000); // 3000 milliseconds = 3 seconds
-				}
-			})
-		}else{
-			await axios.post('/api/emp_login_process', form).then(response =>{
-				if(response.data.success){
-					localStorage.setItem('token', response.data.data.token)
-						router.push('/employer/dashboard')
-				} else {
-					error.value = response.data.message;
-					setTimeout(function() {
-						error.value = ''; // Clear the message
-					}, 3000); // 3000 milliseconds = 3 seconds
-				}
-			})
-		}
-    }
+    // const login = async () =>{
+	// 	if(role.value == 'Jobseeker'){
+	// 		await axios.post('/api/jobseeker_login_process', form).then(response =>{
+	// 			if(response.data.success){
+	// 				localStorage.setItem('token', response.data.data.token)
+	// 					router.push('/job_seeker/dashboard')
+	// 			} else {
+	// 				error.value = response.data.message;
+	// 				setTimeout(function() {
+	// 					error.value = '';
+	// 				}, 3000);
+	// 			}
+	// 		})
+	// 	}else{
+	// 		await axios.post('/api/emp_login_process', form).then(response =>{
+	// 			if(response.data.success){
+	// 				localStorage.setItem('token', response.data.data.token)
+	// 					router.push('/employer/dashboard')
+	// 			} else {
+	// 				error.value = response.data.message;
+	// 				setTimeout(function() {
+	// 					error.value = ''; 
+	// 				}, 3000);
+	// 			}
+	// 		})
+	// 	}
+    // }
+	const login = async () => {
+    isLoading.value = true; // Start loading
 
+    try {
+        if (role.value === 'Jobseeker') {
+            const response = await axios.post('/api/jobseeker_login_process', form);
+            if (response.data.success) {
+                localStorage.setItem('token', response.data.data.token);
+                router.push('/job_seeker/dashboard');
+            } else {
+                error.value = response.data.message;
+                setTimeout(() => {
+                    error.value = ''; // Clear the message
+                }, 3000);
+            }
+        } else {
+            const response = await axios.post('/api/emp_login_process', form);
+            if (response.data.success) {
+                localStorage.setItem('token', response.data.data.token);
+                router.push('/employer/dashboard');
+            } else {
+                error.value = response.data.message;
+                setTimeout(() => {
+                    error.value = ''; // Clear the message
+                }, 3000);
+            }
+        }
+    } catch (err) {
+        console.error('Login failed:', err);
+        error.value = "An error occurred during login.";
+        setTimeout(() => {
+            error.value = ''; // Clear the message
+        }, 3000);
+    } finally {
+        isLoading.value = false; // Stop loading
+    }
+};
 </script>
 
 <template>
 	<navigation>
-		<div class="hero-wrap hero-wrap-3">
+		<div class="hero-wrap hero-wrap-3" id="_page">
 			<div class="overlay"></div>
 			<div class="container">
 				<!-- <div class="row no-gutters slider-text align-items-end justify-content-start">
@@ -64,7 +101,7 @@
 			</div>
 		</div>
 
-		<section class="ftco-section bg-light">
+		<section class="ftco-section bg-light" id="login">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6 col-lg-6 mb-5">
@@ -107,12 +144,12 @@
 							</div>
 							<form class="pt-3" @submit.prevent="login()">
 								<div class="form-group">
-								<label for="email" class="font-weight-bold">Email Address</label>
+								<label for="email" class="font-weight-bold mb-0">Email Address</label>
 								<input type="email" id="email" class="form-control" placeholder="Enter your email" v-model="form.email">
 								</div>
 
 								<div class="form-group">
-									<label for="password" class="font-weight-bold">Password</label>
+									<label for="password" class="font-weight-bold mb-0">Password</label>
 									<div class="relative">
 										<input
 										:type="showPassword ? 'text' : 'password'"  
@@ -126,7 +163,13 @@
 								</div>
 
 								<div class="form-group">
-									<button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button>
+									<!-- <button type="button" class="btn btn-primary btn-block py-2" @click="login">Login</button> -->
+									<button type="button" class="btn btn-primary btn-block py-2" @click="login" :disabled="isLoading">
+										<span v-if="isLoading">
+											<i class="fa fa-spinner fa-spin"></i> Logging in...
+										</span>
+										<span v-else>Login</span>
+									</button>
 								</div>
 								
 								<template v-if="(role =='Jobseeker')">
