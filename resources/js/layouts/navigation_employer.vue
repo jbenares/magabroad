@@ -117,8 +117,8 @@
                                 {{ credentials.firstname }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
-                                <a class="dropdown-item" href="/employer/profile">Profile</a>
-                                <a class="dropdown-item" href="/employer/settings">Settings</a>
+                                <a class="dropdown-item" href="/employer/profile" v-if="credentials.approved == 1">Profile</a>
+                                <a class="dropdown-item" href="/employer/settings" v-if="credentials.approved == 1">Settings</a>
                                 <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
