@@ -33,7 +33,7 @@
 	let email_accepted=ref('');
 	let email_exists=ref('');
 	
-
+	const isLoading = ref(false)
 	let timer=ref(null);
 	let timeLeft=ref(0);
 	const isResendDisabled = ref(false)
@@ -329,28 +329,42 @@
 		clearInterval(timer.value);
 	}
 
+	// const verifyOTP = () => {
+	// 	const formOTP= new FormData()
+	// 	formOTP.append('email',email.value)
+	// 	formOTP.append('otp',otp.value)
+	// 	axios.post(`/api/verify-otp`,formOTP).then(function (response) {
+	// 		SaveNewEmployer()			
+	// 	}, function (error) {
+	// 		otp_error_message.value = error.response.data.message;
+	// 		setTimeout(function() {
+	// 			otp_error_message.value = ''
+	// 		}, 3000);
+			
+	// 	}); 
+	// }
+
 	const verifyOTP = () => {
-		const formOTP= new FormData()
-		formOTP.append('email',email.value)
-		formOTP.append('otp',otp.value)
-		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
-			// message.value = response.data.message;
-			// otpSent.value = true;
-			// alert('You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.')
-			// success.value='You have successfully registered as an Employer. Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.'
-			// successAlert.value=!successAlert.value
-				// setTimeout(() => {
-			SaveNewEmployer()
-				// }, 2000); // 3000 milliseconds = 3 seconds
-			
-		}, function (error) {
-			otp_error_message.value = error.response.data.message;
-			setTimeout(function() {
-				otp_error_message.value = ''
-			}, 3000); // 3000 milliseconds = 3 seconds
-			
-		}); 
-	}
+		isLoading.value = true; // Start loading
+		const formOTP = new FormData();
+		formOTP.append('email', email.value);
+		formOTP.append('otp', otp.value);
+
+		axios.post(`/api/verify-otp`, formOTP)
+			.then(function (response) {
+				SaveNewEmployer();
+			})
+			.catch(function (error) {
+				otp_error_message.value = error.response.data.message;
+				setTimeout(() => {
+					otp_error_message.value = '';
+				}, 3000);
+			})
+			.finally(() => {
+				isLoading.value = false; // Stop loading
+			});
+	};
+
 
 	const resetError = (button) => {
 		
@@ -629,7 +643,13 @@
 								<div class="row form-group">
 									<div class="col-md-12">
 										<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewEmployer()">Create Account</button> -->
-										<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
+										<!-- <button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button> -->
+										<button type="submit" class="btn btn-primary mr-2 w-44" :disabled="isLoading">
+											<span v-if="isLoading">
+												<i class="fa fa-spinner fa-spin"></i> Creating...
+											</span>
+											<span v-else>Create Account</span>
+										</button>
 										<!-- <button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
 										<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 									</div>

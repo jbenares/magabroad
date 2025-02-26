@@ -326,7 +326,7 @@
 	// 	}); 
 	// }
 	const verifyOTP = () => {
-		isLoading.value = true; // Start loading
+		isLoading.value = true; 
 		const formOTP = new FormData();
 		formOTP.append('email', email.value);
 		formOTP.append('otp', otp.value);
@@ -344,7 +344,7 @@
 				}, 3000);
 			})
 			.finally(() => {
-				isLoading.value = false; // Stop loading
+				isLoading.value = false;
 			});
 	};
 
