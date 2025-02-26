@@ -242,6 +242,7 @@
 	}
 
 	const sendOTP = () => {
+		loading.value = true;
 		const formOTP= new FormData()
 		formOTP.append('email',email.value)
 		if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
@@ -296,6 +297,12 @@
 			// btn_save.disabled = true;
 		}
 	}
+
+	const formattedTime = computed(() => {
+		const minutes = Math.floor(timeLeft.value / 60);
+		const seconds = timeLeft.value % 60;
+		return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+	});
 
 	const beforeUnmount = () => {
 		clearInterval(timer.value);

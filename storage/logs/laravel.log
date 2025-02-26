@@ -7923,4 +7923,5 @@
 #59 D:\\Systems\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
 #60 {main}
 "} 
-
+=======
+>>>>>>> e170d99e8a882ced9b4ee58fb95baa29e73e5e89
