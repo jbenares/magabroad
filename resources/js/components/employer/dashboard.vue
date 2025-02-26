@@ -47,14 +47,14 @@ const getEmployerData = async () => {
 		<section class="ftco-section bg-light">
 			<div class="container">
 				<!-- Dashboard Section -->
-				<div class="row">
+				<div class="row"  v-if="form.approved == 0">
 					<div class="col-lg-12">
 						<div class="p-3 px-4 mb-4 rounded-lg bg-white border border-yellow-600">
 							<div class="flex justify-start space-x-3">
 								<div class="text-yellow-500">
 									<ExclamationTriangleIcon class="size-14"/>
 								</div>
-								<div>
+								<div >
 									<h4 class="text-yellow-500 font-bold mb-0 leading-tight">Warning!</h4>
 									<p class="leading-snug m-0">Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p>
 								</div>
@@ -62,7 +62,7 @@ const getEmployerData = async () => {
 						</div>
 					</div>
 				</div>
-				<div class="row"  v-if="form.approved != 0">
+				<div class="row" v-if="form.approved == 1">
 					<div class="col-lg-3 mb-4">
 						<div class="p-3 bg-white text-center rounded-lg">
 							<p class="text-left text-muted text-sm mb-0">Profile Completion: 75%</p>
@@ -139,7 +139,7 @@ const getEmployerData = async () => {
 				</div>
 			</div>
 		</section>
-		<template v-if="form.approved != 0">
+		<template v-if="form.approved == 1">
 		<section class="ftco-section-parallax">
 		  <div class="parallax-img d-flex align-items-center">
 				<div class="container">
