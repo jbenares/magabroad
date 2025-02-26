@@ -35,7 +35,7 @@
 	const loading = ref(false);
 
 	let repass_color = ref("text-red-500");
-
+	const isLoading = ref(false)
 	const success =  ref('');
 	const otpSent=ref(false);
 	const captchaVerified=ref(false);
@@ -143,6 +143,7 @@
 		}
 	}
 
+	
 	const ConfirmPassword = () => {
 		if (!re_password.value) {
 			repass_message.value = ""; // Clear message if confirm password is empty
@@ -308,21 +309,43 @@
 		clearInterval(timer.value);
 	}
 
+	// const verifyOTP = () => {
+	// 	const formOTP= new FormData()
+	// 	formOTP.append('email',email.value)
+	// 	formOTP.append('otp',otp.value)
+	// 	axios.post(`/api/verify-otp`,formOTP).then(function (response) {
+	// 		message.value = response.data.message;
+	// 		otpSent.value = true;
+	// 		SaveNewJobseeker()
+	// 	}, function (error) {
+	// 		otp_error_message.value = error.response.data.message;
+	// 		setTimeout(function() {
+	// 			otp_error_message.value = ''
+	// 		}, 3000);
+	// 	}); 
+	// }
 	const verifyOTP = () => {
-		const formOTP= new FormData()
-		formOTP.append('email',email.value)
-		formOTP.append('otp',otp.value)
-		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
-			message.value = response.data.message;
-			otpSent.value = true;
-			SaveNewJobseeker()
-		}, function (error) {
-			otp_error_message.value = error.response.data.message;
-			setTimeout(function() {
-				otp_error_message.value = ''
-			}, 3000); // 3000 milliseconds = 3 seconds
-		}); 
-	}
+		isLoading.value = true; // Start loading
+		const formOTP = new FormData();
+		formOTP.append('email', email.value);
+		formOTP.append('otp', otp.value);
+
+		axios.post(`/api/verify-otp`, formOTP)
+			.then(function (response) {
+				message.value = response.data.message;
+				otpSent.value = true;
+				SaveNewJobseeker();
+			})
+			.catch(function (error) {
+				otp_error_message.value = error.response.data.message;
+				setTimeout(() => {
+					otp_error_message.value = '';
+				}, 3000);
+			})
+			.finally(() => {
+				isLoading.value = false; // Stop loading
+			});
+	};
 
 	const resetError = (button) => {
 		
@@ -753,7 +776,13 @@
 											<div class="col-md-12">
 												<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
 												<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
-												<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
+												<!-- <button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button> -->
+												<button type="submit" class="btn btn-primary mr-2 w-44" :disabled="isLoading">
+													<span v-if="isLoading">
+														<i class="fa fa-spinner fa-spin"></i> Creating...
+													</span>
+													<span v-else>Create Account</span>
+												</button>
 												<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 											</div>
 										</div>
