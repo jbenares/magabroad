@@ -33,16 +33,19 @@
 	let timeLeft=ref(0);
 	const isResendDisabled = ref(false)
 
+	let repass_color = ref("text-red-500");
 	const success =  ref('');
 	const otpSent=ref(false);
 	const captchaVerified=ref(false);
 	const successAlert = ref(true)
 	const showPassword = ref(false)
-
+	const showConfirmPassword = ref(false);
 	const closeAlert = () => {
 		successAlert.value = !hideAlert.value
 	}
-
+	const passwordsMatch = computed(() => {
+		return password.value && re_password.value && password.value === re_password.value;
+	});
 	const rejectModal = ref(false);
 
     // Reference to the modal content
@@ -80,23 +83,89 @@
 		showPassword.value = !showPassword.value
 	}
 
+	const toggleConfirmPassword = () => {
+		showConfirmPassword.value = !showConfirmPassword.value;
+	};
+	
+	// const ConfirmPassword = () => {
+	// 	if (password.value !== re_password.value) {
+	// 		repass_message.value = "Passwords do not match!";
+	// 	} else {
+	// 		repass_message.value = "";
+	// 	}
+	// };
+
+	const ConfirmPassword = () => {
+    if (!re_password.value) {
+        repass_message.value = ""; // Clear message if confirm password is empty
+        return;
+    }
+
+    if (password.value === re_password.value) {
+        repass_message.value = "✅ Password Matched ";
+        repass_color.value = "text-green-500";
+    } else {
+        repass_message.value = "❌ Passwords do not match";
+        repass_color.value = "text-red-500";
+    }
+};
+	// const EmailChecker = async () => {
+	// 	let response = await axios.get('/api/check_employer_email/'+email.value)
+	// 		if (response.data.exists) {
+	// 			email_message.value = '❌ This email is already exisiting!'
+	// 			document.getElementById("password").readOnly = true;
+	// 			document.getElementById("re_password").readOnly = true;
+	// 			grecaptcha.reset();
+	// 			document.getElementById('recaptcha').style.display = 'none';
+	// 			document.getElementById("otpbtn").disabled = true;
+	// 		} else {
+	// 			email_message.value = ''
+	// 			document.getElementById("password").readOnly = false;
+	// 			document.getElementById("re_password").readOnly = false;
+	// 			VerifyConfirmPasword()
+	// 		}
+	// }
+	const email_exists = ref(false); // Tracks if the email exists
+	const email_accepted = ref(false); // Tracks if the email is valid and available
+
 	const EmailChecker = async () => {
-		let response = await axios.get('/api/check_employer_email/'+email.value)
+		if (!email.value) {
+			email_message.value = "";
+			email_exists.value = false;
+			email_accepted.value = false;
+			return;
+		}
+
+		// try {
+			let response = await axios.get('/api/check_employer_email/' + email.value);
 			if (response.data.exists) {
-				email_message.value = 'This email is already exisiting!'
+				email_message.value = '❌ This email is already existing!';
+				email_exists.value = true;
+				email_accepted.value = false;
+
+				// Disable password fields
 				document.getElementById("password").readOnly = true;
 				document.getElementById("re_password").readOnly = true;
 				grecaptcha.reset();
 				document.getElementById('recaptcha').style.display = 'none';
 				document.getElementById("otpbtn").disabled = true;
 			} else {
-				email_message.value = ''
+				email_message.value = '✅ Email is available!';
+				email_exists.value = false;
+				email_accepted.value = true;
+
+				// Enable password fields
 				document.getElementById("password").readOnly = false;
 				document.getElementById("re_password").readOnly = false;
-				VerifyConfirmPasword()
+				VerifyConfirmPasword();
 			}
-	}
-
+		// } catch (error) {
+		// 	console.error("Error checking email:", error);
+		// 	email_message.value = "Error checking email. Try again.";
+		// 	email_exists.value = true;
+		// 	email_accepted.value = false;
+		// }
+	};
 	const VerifyConfirmPasword = () => {
 		if (password.value === re_password.value &&  (password.value != '' || re_password.value != '')) {
 			repass_message.className = 'success';
@@ -338,12 +407,16 @@
 .toggle-password {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 15px;
   transform: translateY(-50%);
   cursor: pointer;
 }
 </style>
 <template>
+	<!-- <div class="loader-overlay">
+		<div class="loader"></div>
+	</div> -->
+
 	<navigation>
 		<div class="hero-wrap hero-wrap-2" >
 		  <div class="overlay"></div>
@@ -371,29 +444,32 @@
 							<form @submit.prevent="sendOTP">
 								<div class="row form-group">
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">First Name</label>
+										<label class="font-weight-bold mb-0" for="fullname">First Name</label>
 										<input type="text" id="fname" class="form-control" placeholder="First Name" v-model="firstname" @click="resetError('fname')">
 										<p v-if="fname_message" style="color: red;">{{ fname_message }}</p>
 									</div>
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">Middle Name</label>
+										<label class="font-weight-bold mb-0" for="fullname">Middle Name</label>
 										<input type="text" id="" class="form-control" placeholder="Middle Name" v-model="middlename">
 									</div>
+									
+								</div>
+								<div class="row form-group">
 									<div class="col-lg-6 col-md-6 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="fullname">Last Name</label>
+										<label class="font-weight-bold mb-0" for="fullname">Last Name</label>
 										<input type="text" id="lname" class="form-control" placeholder="Last Name" v-model="lastname" @click="resetError('lname')">
 										<p v-if="lname_message" style="color: red;">{{ lname_message }}</p>
 									</div>
 								</div>
 								<div class="row form-group">
 									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="businessname">Business name</label>
+										<label class="font-weight-bold mb-0" for="businessname">Business name</label>
 										<input type="text" id="businessname" class="form-control" placeholder="Business Name" v-model="business_name" @click="resetError('business')">
 									</div>
 								</div>
 								<!-- <div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<label class="font-weight-bold mb-0" for="phone">Phone Number</label>
 										<input type="text" id="contact" class="form-control" placeholder="Phone Number" v-model="contact_no" @keypress="isNumber($event)" @click="resetError('contact')">
 										<p v-if="contact_message" style="color: red;">{{ contact_message }}</p>
 
@@ -401,7 +477,7 @@
 								</div> -->
 								<div class="row form-group">
 									<div class="col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="phone">Phone Number</label>
+										<label class="font-weight-bold mb-0" for="phone">Phone Number</label>
 										<div class="phone-input-group">
 											<select id="country-code" v-model="country_code">
 												<option :value="cc.id" v-for="cc in countrycodelist" :key="cc.id">{{ cc.country_name }} ({{ cc.country_code }})</option>
@@ -415,14 +491,77 @@
 								</div>
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Email Address</label>
-										<input type="email" id="email" class="form-control" placeholder="Email Address" v-model="email" @click="resetError('email')" @blur="EmailChecker()">
-										<p v-if="email_message" style="color: red;">{{ email_message }}</p>
+										<label class="font-weight-bold mb-0" for="email">Email Address</label>
+										<input 
+											type="email" 
+											id="email" 
+											class="form-control" 
+											:class="{
+												'!border-red-500': email_exists,
+                								'!border-green-500': email_accepted
+											}" 
+											placeholder="Email Address" 
+											v-model="email" 
+											@click="resetError('email')" 
+											@blur="EmailChecker()"
+										>
+										<p v-if="email_message" 
+										:class="{
+											'text-red-500': email_exists, 
+											'text-green-500': email_accepted
+										}" 
+										class="text-sm mt-1 flex items-center mb-0">
+											{{ email_message }}
+										</p>
 									</div>
 								</div>
+								
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Password</label>
+										<label class="font-weight-bold mb-0" for="password">Password</label>
+										<div class="relative">
+											<input 
+												:type="showPassword ? 'text' : 'password'" 
+												id="password" 
+												class="form-control"
+												:class="{'!border-green-500': passwordsMatch, '!border-red-500': !passwordsMatch && re_password}" 
+												placeholder="Password" 
+												v-model="password" 
+												@click="resetError('password')"
+											>
+											<p v-if="pass_message" class="text-red-500 text-sm mt-1">{{ pass_message }}</p>
+											<span class="toggle-password" @click="togglePassword">
+												<i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="row form-group mb-4">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold mb-0" for="re_password">Confirm Password</label>
+										<div class="relative">
+											<input 
+												:type="showConfirmPassword ? 'text' : 'password'" 
+												id="re_password" 
+												class="form-control" 
+												:class="{'!border-green-500': passwordsMatch, '!border-red-500': !passwordsMatch && re_password}" 
+												placeholder="Re-enter your password" 
+												v-model="re_password" 
+												@input="ConfirmPassword($event)"
+											>
+											<span class="toggle-password" @click="toggleConfirmPassword">
+												<i :class="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+											</span>
+											<p v-if="repass_message" :class="`${repass_color} text-sm mt-1 flex items-center absolute`">
+												{{ repass_message }}
+											</p>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="row form-group">
+									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
+										<label class="font-weight-bold mb-0" for="email">Password</label>
 										<input :type="showPassword ? 'text' : 'password'" id="password" class="form-control" placeholder="Password" v-model="password" @click="resetError('password')">
 										<p v-if="pass_message" style="color: red;">{{ pass_message }}</p>
 										<span class="toggle-password" @click="togglePassword"  style="position: absolute; top: 73%; right: 30px; transform: translateY(-50%); cursor: pointer;">
@@ -433,11 +572,11 @@
 								
 								<div class="row form-group">
 									<div class="col-lg-12 col-md-12 mb-3 mb-md-0">
-										<label class="font-weight-bold" for="email">Confirm Password</label>
+										<label class="font-weight-bold mb-0" for="email">Confirm Password</label>
 										<input type="password" id="re_password" class="form-control" placeholder="Re-enter your password" v-model="re_password" @input="ConfirmPasword($event)">
 										<p v-if="repass_message">{{ repass_message }}</p>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="row form-group">
 									<div id="recaptcha" class="col-lg-12 g-recaptcha"></div>
@@ -449,8 +588,24 @@
 										<button type="submit" id="otpbtn" class="btn btn-primary mr-2 w-44" :disabled = "captchaVerified == false">Send OTP</button>
 									</div>
 								</div>
+								<!-- <div class="row form-group" v-if="otpSent != true">
+									<div class="col-md-12 flex items-center">
+										<button 
+										type="submit" 
+										id="otpbtn" 
+										class="btn btn-primary mr-2 w-44" 
+										:disabled="captchaVerified == false || loading" 
+										@click="sendOTP"
+										>
+										Send OTP
+										</button>
+										<div v-if="loading" class="ml-2">
+										<span class="spinner-border spinner-border-sm"></span>
+										</div>
+									</div>
+								</div> -->
 							</form>
-							<p v-if="message">{{ message }}</p>
+							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="message">{{ message }}</p>
 							<div>
 								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">
@@ -467,19 +622,18 @@
 								</div>
 								</form>
 							</div>
-							<hr>
 							<!-- <div class="row">
 								<div class="col-lg-12 col-md-12"><h3>Business Details</h3></div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="businessname">Business name</label>
+									<label class="font-weight-bold mb-0" for="businessname">Business name</label>
 									<input type="text" id="businessname" class="form-control" placeholder="">
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="country">Country</label>
+									<label class="font-weight-bold mb-0" for="country">Country</label>
 									<select id="country" class="form-control">
 										<option value="">
 											Select Country
@@ -490,7 +644,7 @@
 
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="phone">Phone Number</label>
+									<label class="font-weight-bold mb-0" for="phone">Phone Number</label>
 									<div class="phone-input-group">
 										<select id="country-code">
 											<option value="+63">Philippines (+63)</option>

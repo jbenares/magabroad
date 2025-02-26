@@ -56,14 +56,14 @@
 					<div class="col-md-6 col-lg-6 mb-5">
 						<div action="#" class="p-5 bg-white">
 							<h2 class="text-center mb-2">Login</h2>
-							<hr>
-							<div class="btn-group d-flex mb-2" role="group" aria-label="Role Selection">
+							<!-- <hr> -->
+							<div class="btn-group d-flex mb-2 border-b" role="group" aria-label="Role Selection">
 								<button 
 									type="button" 
-									class="btn w-50" 
+									class="w-full text-right px-4" 
 									:class="{ 
-										'btn-secondary': role === 'Jobseeker', 
-										'border !border-orange-200': role !== 'Jobseeker',
+										'!text-orange-500 !font-bold !border-b-2 !border-orange-400': role === 'Jobseeker', 
+										'': role !== 'Jobseeker',
 										'active': role === 'Jobseeker'
 									}"
 									v-on:click="role = 'Jobseeker'"
@@ -72,10 +72,10 @@
 								</button>
 								<button 
 									type="button" 
-									class="btn w-50" 
+									class="w-full text-left px-4" 
 									:class="{ 
-										'btn-secondary': role === 'Employer', 
-										'border border-orange-200': role !== 'Employer',
+										'!text-orange-500 !font-bold !border-b-2 !border-orange-400': role === 'Employer', 
+										'': role !== 'Employer',
 										'active': role === 'Employer'
 									}"
 									v-on:click="role = 'Employer'"
@@ -83,12 +83,12 @@
 									Employer
 								</button>
 							</div>
-							<div class="alert alert-danger" v-if="error">
+							<div class="alert alert-danger !border !border-red-500 !text-red-600 mb-0" v-if="error">
 								<div class="flex justify-start space-x-2">
 									<div>
 										<ExclamationCircleIcon fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"></ExclamationCircleIcon>
 									</div> 
-									<div> {{ error }} </div>
+									<p class="mb-0 leading-tight"> {{ error }}</p>
 								</div>
 							</div>
 							<form class="pt-3" @submit.prevent="login()">
