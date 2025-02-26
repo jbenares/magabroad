@@ -237,7 +237,7 @@
 				rejectModal.value=true;
 					setTimeout(function() {
 						router.push('/login')
-					}, 3000); // 3000 milliseconds = 3 seconds
+					}, 5000); // 5000 milliseconds = 5 seconds
 			});
 	}
 
