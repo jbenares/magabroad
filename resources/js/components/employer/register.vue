@@ -30,6 +30,9 @@
 	let business_message=ref('');
 	let otp_success_message=ref('');
 	let otp_error_message=ref('');
+	let email_accepted=ref('');
+	let email_exists=ref('');
+	
 
 	let timer=ref(null);
 	let timeLeft=ref(0);
@@ -613,7 +616,8 @@
 									</div>
 								</div> -->
 							</form>
-							<p v-if="message">{{ message }}</p>
+							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="otp_success_message">{{ otp_success_message }}</p>
+							<p  class="bg-red-100 px-2 py-1 rounded !border !border-red-400 text-red-600" v-if="otp_error_message">{{ otp_error_message }}</p>
 							<div>
 								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">
