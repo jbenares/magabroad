@@ -261,7 +261,7 @@
 		loading.value = true;
 		const formOTP= new FormData()
 		formOTP.append('email',email.value)
-		if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
+		if(firstname.value != '' && lastname.value != '' && email.value != '' && password.value != ''){
 			axios.post(`/api/send-otp`,formOTP).then(function (response) {
 				otp_success_message.value = response.data.message;
 					setTimeout(function() {
@@ -289,6 +289,7 @@
 				
 			});
 		}else{
+			loading.value = false;
 			if(firstname.value==''){
 				// document.getElementById('fname').style.backgroundColor = '#FAA0A0';
 				fname_message.value = 'First Name is required!'
@@ -297,10 +298,10 @@
 				// document.getElementById('lname').style.backgroundColor = '#FAA0A0';
 				lname_message.value = 'Last Name is required!'
 			}
-			if(contact.value==''){
-				// document.getElementById('contact').style.backgroundColor = '#FAA0A0';
-				contact_message.value = 'Contact No is required!'
-			}
+			// if(contact.value==''){
+			// 	// document.getElementById('contact').style.backgroundColor = '#FAA0A0';
+			// 	contact_message.value = 'Contact No is required!'
+			// }
 			if(email.value==''){
 				// document.getElementById('email').style.backgroundColor = '#FAA0A0';
 				email_message.value = 'Email is required!'
