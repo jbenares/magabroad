@@ -87,37 +87,6 @@
 		showPassword.value = !showPassword.value
 	}
 
-	const toggleConfirmPassword = () => {
-		showConfirmPassword.value = !showConfirmPassword.value;
-	};
-	
-	// const ConfirmPassword = () => {
-	// 	if (password.value !== re_password.value) {
-	// 		repass_message.value = "Passwords do not match!";
-	// 	} else {
-	// 		repass_message.value = "";
-	// 	}
-	// };
-
-	// const EmailChecker = async () => {
-	// 	let response = await axios.get('/api/check_employer_email/'+email.value)
-	// 		if (response.data.exists) {
-	// 			email_message.value = '❌ This email is already exisiting!'
-	// 			document.getElementById("password").readOnly = true;
-	// 			document.getElementById("re_password").readOnly = true;
-	// 			grecaptcha.reset();
-	// 			document.getElementById('recaptcha').style.display = 'none';
-	// 			document.getElementById("otpbtn").disabled = true;
-	// 		} else {
-	// 			email_message.value = ''
-	// 			document.getElementById("password").readOnly = false;
-	// 			document.getElementById("re_password").readOnly = false;
-	// 			VerifyConfirmPasword()
-	// 		}
-	// }
-	const email_exists = ref(false); // Tracks if the email exists
-	const email_accepted = ref(false); // Tracks if the email is valid and available
-
 	const EmailChecker = async () => {
 		if (!email.value) {
 			email_message.value = "";
@@ -428,6 +397,19 @@
     }
 
 </script>
+<style>
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+</style>
 <template>
 	<!-- <div class="loader-overlay">
 		<div class="loader"></div>
@@ -631,8 +613,7 @@
 									</div>
 								</div> -->
 							</form>
-							<p  class="bg-yellow-100 px-2 py-1 rounded !border !border-yellow-400 text-yellow-600" v-if="otp_success_message">{{ otp_success_message }}</p>
-							<p  class="bg-red-100 px-2 py-1 rounded !border !border-red-400 text-red-600" v-if="otp_error_message">{{ otp_error_message }}</p>
+							<p v-if="message">{{ message }}</p>
 							<div>
 								<form @submit.prevent="verifyOTP" v-if="otpSent">
 									<div class="row form-group">

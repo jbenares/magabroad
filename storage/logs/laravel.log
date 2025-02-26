@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2025-01-07 12:34:08] local.ERROR: Too few arguments to function Illuminate\Foundation\Vite::__invoke(), 0 passed in D:\Systems\magabroad_prac\storage\framework\views\208e5531eb52304bd4509e4556ee459c.php on line 24 and at least 1 expected {"view":{"view":"D:\\Systems\\magabroad_prac\\resources\\views\\welcome.blade.php","data":[]},"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Too few arguments to function Illuminate\\Foundation\\Vite::__invoke(), 0 passed in D:\\Systems\\magabroad_prac\\storage\\framework\\views\\208e5531eb52304bd4509e4556ee459c.php on line 24 and at least 1 expected at D:\\Systems\\magabroad_prac\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Vite.php:279)
 [stacktrace]
 #0 D:\\Systems\\magabroad_prac\\resources\\views\\welcome.blade.php(24): Illuminate\\Foundation\\Vite->__invoke()
@@ -7938,3 +7939,5 @@
 #59 D:\\Systems\\magabroad\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
 #60 {main}
 "} 
+=======
+>>>>>>> e170d99e8a882ced9b4ee58fb95baa29e73e5e89
