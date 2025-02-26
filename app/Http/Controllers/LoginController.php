@@ -145,7 +145,7 @@ class LoginController extends Controller
         }else{
             $credentials=[
                 'firstname' => '',
-                'approved' => 0,
+                'approved' => '',
                 'user_type' => '',
                 'password' => '',
             ];

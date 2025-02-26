@@ -13,11 +13,11 @@
     const getDashboard = async () => {
 		const response = await fetch(`/api/dashboard`);
 		credentials.value = await response.json();
-		// if(!credentials.value.firstname){
-		// 	alert('You have been logged out due to inactivity.')
-        //     localStorage.removeItem('token')
-		// 	router.push('/')
-		// }
+		if(!credentials.value.firstname){
+			alert('You have been logged out due to inactivity.')
+            localStorage.removeItem('token')
+			router.push('/')
+		}
 	}
 
     const logout = () => {
@@ -40,9 +40,9 @@
 
                 <div class="collapse navbar-collapse !visible" id="ftco-nav">
                     <ul class="navbar-nav ml-auto block">
-                        <li class="nav-item"><a href="/employer/dashboard" class="nav-link" v-if="credentials.approved != 0">Dashboard</a></li>
+                        <li class="nav-item"><a href="/employer/dashboard" class="nav-link" v-if="credentials.approved == 1">Dashboard</a></li>
                         <!-- Notification Dropdown -->
-                        <li class="nav-item dropdown" v-if="credentials.approved != 0">
+                        <li class="nav-item dropdown" v-if="credentials.approved == 1">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Notification <span class="badge badge-danger rounded-xl">3</span>
                             </a>
@@ -110,19 +110,19 @@
                                 <a class="dropdown-item text-center text-primary" href="/employer/notifications">View All Notifications</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="/employer/search_candidate" class="nav-link" v-if="credentials.approved != 0">Candidates</a></li>
+                        <li class="nav-item"><a href="/employer/search_candidate" class="nav-link" v-if="credentials.approved == 1">Candidates</a></li>
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown mr-md-1">
                             <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ credentials.firstname }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-wrapper" aria-labelledby="signinDropdown">
-                                <a class="dropdown-item" href="/employer/profile" v-if="credentials.approved != 0">Profile</a>
-                                <a class="dropdown-item" href="/employer/settings" v-if="credentials.approved != 0">Settings</a>
+                                <a class="dropdown-item" href="/employer/profile" v-if="credentials.approved == 1">Profile</a>
+                                <a class="dropdown-item" href="/employer/settings" v-if="credentials.approved == 1">Settings</a>
                                 <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
-                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link" v-if="credentials.approved != 0">Post a Job</a></li>
+                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link" v-if="credentials.approved == 1">Post a Job</a></li>
                     </ul>
                 </div>
             </div>
