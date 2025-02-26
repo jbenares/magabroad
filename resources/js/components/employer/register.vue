@@ -289,6 +289,7 @@
 				
 			});
 		}else{
+			loading.value = false;
 			if(firstname.value==''){
 				// document.getElementById('fname').style.backgroundColor = '#FAA0A0';
 				fname_message.value = 'First Name is required!'
