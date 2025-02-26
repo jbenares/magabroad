@@ -29,10 +29,11 @@ class LoginController extends Controller
     
             // Check if user_type_id is 1
             if ($user->usertype_id != 1) {
-                return response()->json([
+                $response = [
                     'success' => false,
                     'message' => 'Unauthorized'
-                ], 403);
+                ];
+                return response()->json($response,200);
             }
     
             // Generate token for authenticated user
@@ -68,10 +69,11 @@ class LoginController extends Controller
 
         // Ensure user is a Jobseeker
         if ($user->usertype_id != 2) {
-            return response()->json([
+            $response = [
                 'success' => false,
                 'message' => 'Unauthorized'
-            ], 403);
+            ];
+            return response()->json($response,200); 
         }
 
         // Generate Sanctum token
@@ -105,10 +107,11 @@ class LoginController extends Controller
     
             // Check if user_type_id is 1
             if ($user->usertype_id != 3) {
-                return response()->json([
+                $response = [
                     'success' => false,
                     'message' => 'Unauthorized'
-                ], 403);
+                ];
+                return response()->json($response,200); 
             }
     
             // Generate token for authenticated user
