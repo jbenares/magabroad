@@ -35,7 +35,7 @@
 	const loading = ref(false);
 
 	let repass_color = ref("text-red-500");
-
+	const isLoading = ref(false)
 	const success =  ref('');
 	const otpSent=ref(false);
 	const captchaVerified=ref(false);
@@ -143,6 +143,7 @@
 		}
 	}
 
+	
 	const ConfirmPassword = () => {
 		if (!re_password.value) {
 			repass_message.value = ""; // Clear message if confirm password is empty
@@ -309,21 +310,43 @@
 		clearInterval(timer.value);
 	}
 
+	// const verifyOTP = () => {
+	// 	const formOTP= new FormData()
+	// 	formOTP.append('email',email.value)
+	// 	formOTP.append('otp',otp.value)
+	// 	axios.post(`/api/verify-otp`,formOTP).then(function (response) {
+	// 		message.value = response.data.message;
+	// 		otpSent.value = true;
+	// 		SaveNewJobseeker()
+	// 	}, function (error) {
+	// 		otp_error_message.value = error.response.data.message;
+	// 		setTimeout(function() {
+	// 			otp_error_message.value = ''
+	// 		}, 3000);
+	// 	}); 
+	// }
 	const verifyOTP = () => {
-		const formOTP= new FormData()
-		formOTP.append('email',email.value)
-		formOTP.append('otp',otp.value)
-		axios.post(`/api/verify-otp`,formOTP).then(function (response) {
-			message.value = response.data.message;
-			otpSent.value = true;
-			SaveNewJobseeker()
-		}, function (error) {
-			otp_error_message.value = error.response.data.message;
-			setTimeout(function() {
-				otp_error_message.value = ''
-			}, 3000); // 3000 milliseconds = 3 seconds
-		}); 
-	}
+		isLoading.value = true; 
+		const formOTP = new FormData();
+		formOTP.append('email', email.value);
+		formOTP.append('otp', otp.value);
+
+		axios.post(`/api/verify-otp`, formOTP)
+			.then(function (response) {
+				message.value = response.data.message;
+				otpSent.value = true;
+				SaveNewJobseeker();
+			})
+			.catch(function (error) {
+				otp_error_message.value = error.response.data.message;
+				setTimeout(() => {
+					otp_error_message.value = '';
+				}, 3000);
+			})
+			.finally(() => {
+				isLoading.value = false;
+			});
+	};
 
 	const resetError = (button) => {
 		
@@ -754,7 +777,13 @@
 											<div class="col-md-12">
 												<!-- <button type="submit" class="btn btn-primary mr-2 w-44" @click="SaveNewJobseeker()">Create Account</button>
 												<button type="button" @click="sendOTP()" id="save" class="btn btn-primary mr-2 w-44">Resend OTP</button> -->
-												<button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button>
+												<!-- <button type="submit" class="btn btn-primary mr-2 w-44" >Create Account</button> -->
+												<button type="submit" class="btn btn-primary mr-2 w-44" :disabled="isLoading">
+													<span v-if="isLoading">
+														<i class="fa fa-spinner fa-spin"></i> Creating...
+													</span>
+													<span v-else>Create Account</span>
+												</button>
 												<button @click="sendOTP" :disabled="isResendDisabled" class="btn btn-primary mr-2 w-44">{{ isResendDisabled ? `Resend OTP in ${formattedTime}` : 'Send OTP' }}</button>
 											</div>
 										</div>
@@ -880,5 +909,26 @@
 			  </div>
 		  </div>
 		</footer>
+		<transition name="modal-fade">
+			<div v-show="rejectModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+				<!-- Modal content -->
+				<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-2/8 shadow-lg relative">
+					<!-- Close button -->
+					<!-- <button @click="rejectModal = false" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800">✖</button> -->
+					<!-- <hr class="my-3"> -->
+					<div class="flex justify-start space-x-4 px-4 pb-2">
+						<div class="flex justify-center">
+							<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+						</div>
+						<div class="text-left mb-4 mt-3">
+							<h2 class="font-bold text-[#4bb71b] mt-2 mb-0">Success!</h2>
+							<hr class="my-1">
+							<p class="text-gray-600 font-semibold m-0">You have successfully registered as a Job Seeker!</p>
+							<!-- <p class="text-gray-500 m-0 leading-snug"> Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 	</navigation>
 </template>
