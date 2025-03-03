@@ -8256,3 +8256,11 @@
 #33 D:\\Systems\\magabroad\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #34 {main}
 "} 
+[2025-03-02 14:43:25] local.ERROR: Google Login Error: Undefined variable $googleUser  
+[2025-03-02 14:44:00] local.ERROR: Google Login Error: Client error: `POST https://www.googleapis.com/oauth2/v4/token` resulted in a `400 Bad Request` response:
+{
+  "error": "invalid_grant",
+  "error_description": "Bad Request"
+}
+  
+[2025-03-02 14:44:09] local.ERROR: Google Login Error: Undefined variable $googleUser  

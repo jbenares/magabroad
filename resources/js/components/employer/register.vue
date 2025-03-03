@@ -77,7 +77,7 @@
 
 	onMounted(async () => {
 		loadRecaptcha()
-		loadRecaptchaScript()
+		// loadRecaptchaScript()
 		getcountrycode()
 	})
 
@@ -184,33 +184,33 @@
 	// 	}
 	// }
 
-	const loadRecaptchaScript = () => {
-      return new Promise((resolve, reject) => {
-        if (typeof grecaptcha !== 'undefined') {
-          resolve();
-        } else {
-          const script = document.createElement('script');
-          script.src = 'https://www.google.com/recaptcha/api.js';
-          script.async = true;
-          script.defer = true;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.head.appendChild(script);
-        }
-      });
-    };
+	// const loadRecaptchaScript = () => {
+    //   return new Promise((resolve, reject) => {
+    //     if (typeof grecaptcha !== 'undefined') {
+    //       resolve();
+    //     } else {
+    //       const script = document.createElement('script');
+    //       script.src = 'https://www.google.com/recaptcha/api.js';
+    //       script.async = true;
+    //       script.defer = true;
+    //       script.onload = resolve;
+    //       script.onerror = reject;
+    //       document.head.appendChild(script);
+    //     }
+    //   });
+    // }
 
 	const loadRecaptcha = async () => {
-	document.getElementById('recaptcha').style.display = 'none'
-      if (typeof grecaptcha !== 'undefined') {
-        grecaptcha.render('recaptcha', {
-          sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
-          callback: onCaptchaVerified,
-        });
-      }else{
-		captchaVerified.value = false;
-		// console.error('reCAPTCHA is not loaded');
-	  }
+		document.getElementById('recaptcha').style.display = 'none'
+		if (typeof grecaptcha !== 'undefined') {
+			grecaptcha.render('recaptcha', {
+			sitekey: '6Lcsrr4qAAAAABRyxv3qYA6U437gXKYAqB88z4K7', // Replace with your site key
+			callback: onCaptchaVerified,
+			});
+		}else{
+			captchaVerified.value = false;
+			// console.error('reCAPTCHA is not loaded');
+		}
     }
 
 	const onCaptchaVerified = (response) => {
@@ -231,6 +231,7 @@
 		// if(firstname.value != '' && lastname.value != '' && contact.value != '' && email.value != '' && password.value != ''){
 			axios.post("/api/add_employer",formData).then(function () {
 				rejectModal.value=true;
+				loadRecaptcha()
 					setTimeout(function() {
 						router.push('/login')
 					}, 5000); // 5000 milliseconds = 5 seconds

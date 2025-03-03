@@ -52,7 +52,7 @@
 
 	onMounted(async () => {
 		loadRecaptcha()
-		loadRecaptchaScript()
+		// loadRecaptchaScript()
 		getcountrycode()
 	})
 
@@ -191,21 +191,21 @@
 	// 	}
 	// }
 
-	const loadRecaptchaScript = () => {
-      return new Promise((resolve, reject) => {
-        if (typeof grecaptcha !== 'undefined') {
-          resolve();
-        } else {
-          const script = document.createElement('script');
-          script.src = 'https://www.google.com/recaptcha/api.js';
-          script.async = true;
-          script.defer = true;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.head.appendChild(script);
-        }
-      });
-    };
+	// const loadRecaptchaScript = () => {
+    //   return new Promise((resolve, reject) => {
+    //     if (typeof grecaptcha !== 'undefined') {
+    //       resolve();
+    //     } else {
+    //       const script = document.createElement('script');
+    //       script.src = 'https://www.google.com/recaptcha/api.js';
+    //       script.async = true;
+    //       script.defer = true;
+    //       script.onload = resolve;
+    //       script.onerror = reject;
+    //       document.head.appendChild(script);
+    //     }
+    //   });
+    // };
 
 	const loadRecaptcha = async () => {
 	document.getElementById('recaptcha').style.display = 'none'
@@ -236,6 +236,7 @@
 		formData.append('password',password.value)
 			axios.post("/api/add_jobseeker",formData).then(function () {
 				rejectModal.value=true;
+				loadRecaptcha()
 					setTimeout(function() {
 						router.push('/login')
 					}, 5000); // 5000 milliseconds = 5 seconds
