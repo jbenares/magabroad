@@ -14,9 +14,9 @@
 		const response = await fetch(`/api/dashboard`);
 		credentials.value = await response.json();
 		if(!credentials.value.firstname){
-			alert('You have been logged out due to inactivity.')
-            localStorage.removeItem('token')
-			router.push('/')
+			//alert('You have been logged out due to inactivity.')
+            //localStorage.removeItem('token')
+			//router.push('/')
 		}
 	}
 

@@ -76,9 +76,9 @@ const routes = [
         path:'/job_seeker/dashboard',
         name:'jobseeker_dash',
         component: jobseeker_dash,
-        meta:{
-            requiresAuth:true
-        }
+        // meta:{
+        //     requiresAuth:true
+        // }
     },
     {
         path:'/job_seeker/search_job',
