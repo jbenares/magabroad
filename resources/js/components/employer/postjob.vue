@@ -95,7 +95,7 @@
 									<textarea id="jobsum" class="form-control" placeholder=""></textarea>
 								</div>
 							</div>
-							<div class="row form-group">
+							<!-- <div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobdesc">Responsibilities</label>
 									<div class="flex justify-start">
@@ -115,8 +115,8 @@
 										<button class="btn !text-red-500"> <XCircleIcon class="size-6"/></button>
 									</div>
 								</div>
-							</div>
-							<div class="row form-group">
+							</div> -->
+							<!-- <div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobdesc">Skills</label>
 									<div class="flex justify-start">
@@ -136,8 +136,83 @@
 										<button class="btn !text-red-500"> <XCircleIcon class="size-6"/></button>
 									</div>
 								</div>
-							</div>
+							</div> -->
+							<div class="box-container p-4 rounded-lg border border-gray-300 bg-white">
+								<label class="font-bold text-gray-700 mb-2 block">Responsibilities</label>
 
+								<!-- Input Box -->
+								<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
+								<input 
+									v-model="newResponsibility" 
+									@keyup.enter="addResponsibility" 
+									type="text" 
+									class="flex-grow outline-none text-gray-700" 
+									placeholder="Enter a responsibility"
+								/>
+								<button @click.prevent="addResponsibility()" class="text-green-500">
+									<PlusCircleIcon class="w-6 h-6" />
+								</button>
+								</div>
+
+								<!-- Responsibilities List -->
+								<div v-if="responsibilities.length" class="mt-3">
+								<ul class="space-y-2">
+									<li 
+									v-for="(responsibility, index) in responsibilities" 
+									:key="index" 
+									class="responsibility-item flex justify-between items-center bg-green-100 px-3 py-2 rounded-lg"
+									>
+									<span class="text-gray-700 font-medium">{{ responsibility }}</span>
+									<XCircleIcon 
+										@click="removeResponsibility(index)" 
+										class="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700"
+									/>
+									</li>
+								</ul>
+								</div>
+							</div>
+							<div class="box-container p-4 rounded-lg border border-gray-300 bg-white">
+								<label class="font-bold text-gray-700 mb-2 block">Skills</label>
+
+								<!-- Input Box -->
+								<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
+								<input 
+									v-model="newSkill" 
+									@keyup.enter="addSkill" 
+									type="text" 
+									class="flex-grow outline-none text-gray-700" 
+									placeholder="Enter a skill"
+								/>
+								<button @click.prevent="addSkill()" class="text-blue-500">
+									<PlusCircleIcon class="w-6 h-6" />
+								</button>
+								<!-- Selected Skills -->
+								</div>
+									<div class="mt-3 flex flex-wrap gap-2">
+									<span 
+										v-for="(skill, index) in skills" 
+										:key="index" 
+										class="selected-skill bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center"
+									>
+										{{ skill }}
+										<XCircleIcon @click="removeSkill(index)" class="w-4 h-4 ml-2 cursor-pointer hover:text-red-300" />
+									</span>
+								</div>
+								<!-- Suggested Skills -->
+								<div v-if="skillSuggestions.length" class="mt-3 p-2 bg-gray-100 rounded-md">
+								<span 
+									v-for="(suggestion, index) in skillSuggestions" 
+									:key="index" 
+									@click="addSkill(suggestion)" 
+									class="suggestion-chip cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 px-2 py-1 rounded-md m-1 inline-block"
+								>
+									+ {{ suggestion }}
+								</span>
+								</div>
+
+								
+								
+							</div>
 							<br>
 							<hr>
 							<div class="row form-group">
@@ -273,8 +348,55 @@
 		</footer>
 	</navigation>
 </template>
-
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
-	import { PlusCircleIcon, XCircleIcon } from '@heroicons/vue/24/solid'
+	import { ref } from "vue";
+	import { PlusCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
+
+	// Reactive variables
+	const newSkill = ref("");
+	const skills = ref([]);
+	const skillSuggestions = ref([
+	"Educational Leadership",
+	"User Interface",
+	"User Experience",
+	"Organizational Leadership",
+	"Leadership Development",
+	"Innovation Leadership",
+	"Information Security",
+	"Design Leadership",
+	"Strategic Leadership",
+	"Computer Security"
+	]);
+
+	// Add skill function
+	const addSkill = (skill) => {
+	if (!skill) skill = newSkill.value; // Use input value if no argument is provided
+	if (skill && !skills.value.includes(skill)) {
+		skills.value.push(skill);
+		newSkill.value = "";
+	}
+	};
+
+	// Remove skill function
+	const removeSkill = (index) => {
+	skills.value.splice(index, 1);
+	};
+
+	// Reactive variables
+	const newResponsibility = ref("");
+	const responsibilities = ref([]);
+
+	// Add responsibility function
+	const addResponsibility = () => {
+	if (newResponsibility.value.trim() && !responsibilities.value.includes(newResponsibility.value)) {
+		responsibilities.value.push(newResponsibility.value.trim());
+		newResponsibility.value = "";
+	}
+	};
+
+	// Remove responsibility function
+	const removeResponsibility = (index) => {
+	responsibilities.value.splice(index, 1);
+	};
 </script>
