@@ -10,4 +10,7 @@ export default defineConfig({
         }),
         vue()
     ],
+    optimizeDeps: {
+        include: ['@tiptap/starter-kit', '@tiptap/vue-3']
+    }
 });

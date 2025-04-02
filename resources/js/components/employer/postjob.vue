@@ -137,6 +137,19 @@
 									</div>
 								</div>
 							</div> -->
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+								<label class="font-weight-bold">Job Description</label>
+								<editor-content :editor="jobDescEditor" />
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+								<label class="font-weight-bold">Job Summary</label>
+								<editor-content :editor="jobSummaryEditor" />
+								</div>
+							</div>
 							<div class="box-container p-4 rounded-lg border border-gray-300 bg-white">
 								<label class="font-bold text-gray-700 mb-2 block">Responsibilities</label>
 
@@ -209,9 +222,6 @@
 									+ {{ suggestion }}
 								</span>
 								</div>
-
-								
-								
 							</div>
 							<br>
 							<hr>
@@ -350,8 +360,30 @@
 </template>
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
-	import { ref } from "vue";
 	import { PlusCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
+	import { ref, onMounted, onBeforeUnmount } from "vue";
+	import { Editor, EditorContent } from "@tiptap/vue-3";
+	import StarterKit from "@tiptap/starter-kit";
+
+	const jobDescEditor = ref(null);
+	const jobSummaryEditor = ref(null);
+
+	onMounted(() => {
+	jobDescEditor.value = new Editor({
+		extensions: [StarterKit],
+		content: "<p>Type job description here...</p>",
+	});
+
+	jobSummaryEditor.value = new Editor({
+		extensions: [StarterKit],
+		content: "<p>Type job summary here...</p>",
+	});
+	});
+
+	onBeforeUnmount(() => {
+	jobDescEditor.value.destroy();
+	jobSummaryEditor.value.destroy();
+	});
 
 	// Reactive variables
 	const newSkill = ref("");

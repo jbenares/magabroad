@@ -16,6 +16,8 @@
     "dependencies": {
         "@heroicons/vue": "^2.2.0",
         "@popperjs/core": "^2.11.8",
+        "@tiptap/starter-kit": "^2.11.7",
+        "@tiptap/vue-3": "^2.11.7",
         "@vitejs/plugin-vue": "^5.2.1",
         "aos": "^2.3.4",
         "datatables.net": "^2.2.1",
