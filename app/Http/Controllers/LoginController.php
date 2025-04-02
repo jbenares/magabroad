@@ -29,69 +29,72 @@ class LoginController extends Controller
     
             // Check if user_type_id is 1
             if ($user->usertype_id != 1) {
-                return response()->json([
+                $response = [
                     'success' => false,
                     'message' => 'Unauthorized'
-                ], 403);
+                ];
+                return response()->json($response,200);
             }
     
             // Generate token for authenticated user
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
             $success['firstname'] = $user->firstname;
-            $success['middlename'] = $user->middlename;
-            $success['lastname'] = $user->lastname;
             $success['user_type'] = $user->usertype_id; // Ensure correct property name
-    
-            return response()->json([
+
+            $response = [
                 'success' => true,
                 'data' => $success,
                 'message' => 'User login successfully'
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-    }
-
-
-    public function jobseeker_login_process(Request $request) {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-    
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user(); // Get the authenticated user
-    
-            // Check if user_type_id is 1
-            if ($user->usertype_id != 2) {
-                return response()->json([
+            ];
+                return response()->json($response, 200);
+            } else {
+                $response = [
                     'success' => false,
                     'message' => 'Unauthorized'
-                ], 403);
+                ];
+                return response()->json($response,200);     
             }
-    
-            // Generate token for authenticated user
-            $success['token'] = $user->createToken('MyApp')->plainTextToken;
-            $success['firstname'] = $user->firstname;
-            $success['middlename'] = $user->middlename;
-            $success['lastname'] = $user->lastname;
-            $success['user_type'] = $user->usertype_id; // Ensure correct property name
-    
-            return response()->json([
+    }
+
+
+    public function jobseeker_login_process(Request $request)
+{
+    $credentials = [
+        'email' => $request->email,
+        'password' => $request->password,
+    ];
+
+    if (Auth::attempt($credentials)) {
+        $user = $request->user(); // Get authenticated user
+
+        // Ensure user is a Jobseeker
+        if ($user->usertype_id != 2) {
+            $response = [
+                'success' => false,
+                'message' => 'Unauthorized'
+            ];
+            return response()->json($response,200); 
+        }
+
+        // Generate Sanctum token
+        $success['token'] = $user->createToken('MyApp')->plainTextToken;
+        $success['firstname'] = $user->firstname;
+        $success['approved'] = $user->approved;
+        $success['user_type'] = $user->usertype_id;
+            $response = [
                 'success' => true,
                 'data' => $success,
                 'message' => 'User login successfully'
-            ], 200);
+            ];
+            return response()->json($response, 200);
         } else {
-            return response()->json([
+            $response = [
                 'success' => false,
                 'message' => 'Unauthorized'
-            ], 401);
+            ];
+            return response()->json($response,200);     
         }
-    }
+}
 
     public function EmployerLogin(Request $request) {
         $credentials = [
@@ -100,48 +103,49 @@ class LoginController extends Controller
         ];
     
         if (Auth::attempt($credentials)) {
-            $user = Auth::user(); // Get the authenticated user
+            $user = $request->user(); // Get the authenticated user
     
             // Check if user_type_id is 1
             if ($user->usertype_id != 3) {
-                return response()->json([
+                $response = [
                     'success' => false,
                     'message' => 'Unauthorized'
-                ], 403);
+                ];
+                return response()->json($response,200); 
             }
     
             // Generate token for authenticated user
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
             $success['firstname'] = $user->firstname;
-            $success['middlename'] = $user->middlename;
-            $success['lastname'] = $user->lastname;
-            $success['user_type'] = $user->usertype_id; // Ensure correct property name
-    
-            return response()->json([
-                'success' => true,
-                'data' => $success,
-                'message' => 'User login successfully'
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
+            $success['approved'] = $user->approved;
+            $success['user_type'] = $user->usertype_id;
+                $response = [
+                    'success' => true,
+                    'data' => $success,
+                    'message' => 'User login successfully'
+                ];
+                return response()->json($response, 200);
+            } else {
+                $response = [
+                    'success' => false,
+                    'message' => 'Unauthorized'
+                ];
+                return response()->json($response,200);     
+            }
     }
 
     public function dashboard(){
         if(Auth::check()){
             $credentials=[
                 'firstname' => Auth::user()?->firstname,
-                'lastname' => Auth::user()?->lastname,
+                'approved' => Auth::user()?->approved,
                 'user_type' => Auth::user()?->usertype_id,
                 'password' => Auth::user()?->password,
             ];
         }else{
             $credentials=[
                 'firstname' => '',
-                'lastname' => '',
+                'approved' => '',
                 'user_type' => '',
                 'password' => '',
             ];

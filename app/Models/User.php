@@ -28,7 +28,13 @@ class User extends Authenticatable
         'contact_no',
         'country_code_id',
         'business_name',
+        'website',
+        'industry_id',
+        'company_size',
+        'about',
+        'logo',
         'usertype_id',
+        'approved',
         'registration_date',
         'registration_via',
     ];

@@ -1,3 +1,42 @@
+  
+<script setup>
+import navigation from '@/layouts/navigation_employer.vue';
+import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid'
+import { onMounted,ref} from 'vue';
+// // Get the elements
+// const ExperienceToggle = {
+// 	data() {
+// 		return {
+// 		hasExperience: false, // Default state for the toggle
+// 		};
+// 	},
+// 	computed: {
+// 		label() {
+// 		return this.hasExperience ? "I have experience" : "I have no experience";
+// 		},
+// 	},
+// 	methods: {
+// 		toggleExperience() {
+// 		// Logic can be added here if needed, such as saving the state to a server
+// 		console.log(`Experience: ${this.hasExperience}`);
+// 		},
+// 	},
+// };
+
+let form = ref([]);
+
+onMounted(async () => {
+	getEmployerData()
+})
+
+const getEmployerData = async () => {
+	let response = await axios.get(`/api/employer_data`);
+	form.value=response.data.employer
+}
+
+
+
+</script>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3">
@@ -8,22 +47,22 @@
 		<section class="ftco-section bg-light">
 			<div class="container">
 				<!-- Dashboard Section -->
-				<div class="row">
+				<div class="row"  v-if="form.approved == 0">
 					<div class="col-lg-12">
 						<div class="p-3 px-4 mb-4 rounded-lg bg-white border border-yellow-600">
 							<div class="flex justify-start space-x-3">
 								<div class="text-yellow-500">
 									<ExclamationTriangleIcon class="size-14"/>
 								</div>
-								<div>
-									<h4 class="text-yellow-500 font-bold mb-0 leading-tight">Opps!</h4>
-									<p class="leading-snug m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								<div >
+									<h4 class="text-yellow-500 font-bold mb-0 leading-tight">Warning!</h4>
+									<p class="leading-snug m-0">Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" v-if="form.approved == 1">
 					<div class="col-lg-3 mb-4">
 						<div class="p-3 bg-white text-center rounded-lg">
 							<p class="text-left text-muted text-sm mb-0">Profile Completion: 75%</p>
@@ -100,7 +139,7 @@
 				</div>
 			</div>
 		</section>
-
+		<template v-if="form.approved == 1">
 		<section class="ftco-section-parallax">
 		  <div class="parallax-img d-flex align-items-center">
 				<div class="container">
@@ -123,7 +162,6 @@
 				</div>
 		  </div>
 		</section>
-  
 		<footer class="ftco-footer ftco-bg-dark ftco-section">
 		  <div class="container">
 			  <div class="row mb-5">
@@ -194,30 +232,6 @@
 			  </div>
 		  </div>
 		</footer>
+	</template>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
-	import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid'
-	// // Get the elements
-	// const ExperienceToggle = {
-	// 	data() {
-	// 		return {
-	// 		hasExperience: false, // Default state for the toggle
-	// 		};
-	// 	},
-	// 	computed: {
-	// 		label() {
-	// 		return this.hasExperience ? "I have experience" : "I have no experience";
-	// 		},
-	// 	},
-	// 	methods: {
-	// 		toggleExperience() {
-	// 		// Logic can be added here if needed, such as saving the state to a server
-	// 		console.log(`Experience: ${this.hasExperience}`);
-	// 		},
-	// 	},
-	// };
-
-</script>

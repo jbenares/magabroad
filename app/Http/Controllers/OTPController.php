@@ -50,8 +50,11 @@ class OTPController extends Controller
         if ($cachedOTP && $cachedOTP == $otp) {
             Cache::forget('otp_' . $email); // Invalidate OTP after successful verification
             return response()->json(['message' => 'OTP verified successfully']);
+        } else {
+
+            return response()->json(['message' => 'Invalid OTP or OTP expired'], 422);
         }
 
-        return response()->json(['message' => 'Invalid OTP or OTP expired'], 422);
+       // return response()->json(['message' => "'".$cachedOTP . "' = '" . $otp."'"], 422);
     }
 }

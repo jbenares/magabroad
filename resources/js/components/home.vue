@@ -7,7 +7,7 @@
 				<div class="col-md-10 d-flex align-items-center " data-aos="fade-up" data-aos-duration="800">
 					<div class="text text-center pt-5 mt-md-5">
 						<p class="mb-4">Find Job, Employment, and Career Opportunities</p>
-						<h1 class="mb-5">The Eassiest Way to Get Your New Job</h1>
+						<h1 class="mb-5">The Easiest Way to Get Your New Job</h1>
 						<div class="ftco-counter ftco-no-pt ftco-no-pb">
 							<div class="row">
 							<div class="col-md-4 d-flex justify-content-center counter-wrap" data-aos="fade-up">

@@ -13,11 +13,11 @@
     const getDashboard = async () => {
 		const response = await fetch(`/api/dashboard`);
 		credentials.value = await response.json();
-		// if(!credentials.value.firstname){
-		// 	alert('You have been logged out due to inactivity.')
-        //     localStorage.removeItem('token')
-		// 	router.push('/')
-		// }
+		if(!credentials.value.firstname){
+			//alert('You have been logged out due to inactivity.')
+            //localStorage.removeItem('token')
+			//router.push('/')
+		}
 	}
 
     const logout = () => {
@@ -116,7 +116,7 @@
                         <!-- Dropdown for Sign In -->
                         <li class="nav-item dropdown  mr-md-1">
                             <a class="nav-link dropdown-toggle " href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Jobseeker Name
+                                {{ credentials.firstname }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="signinDropdown">
                                 <a class="dropdown-item" href="/job_seeker/profile">Profile</a>

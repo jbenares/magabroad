@@ -76,9 +76,9 @@ const routes = [
         path:'/job_seeker/dashboard',
         name:'jobseeker_dash',
         component: jobseeker_dash,
-        meta:{
-            requiresAuth:true
-        }
+        // meta:{
+        //     requiresAuth:true
+        // }
     },
     {
         path:'/job_seeker/search_job',
@@ -151,21 +151,33 @@ const routes = [
         path:'/employer/search_candidate',
         name:'search_candidate',
         component: search_candidate,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/view_candidate',
         name:'view_candidate',
         component: view_candidate,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/notifications',
         name:'notif_employer',
         component: notif_employer,
+        meta:{
+            requiresAuth:true
+        }
     },
     {
         path:'/employer/settings',
         name:'employer_settings',
         component: employer_settings,
+        meta:{
+            requiresAuth:true
+        }
     },
 
     // ----------------------------------------------------------------------------Admin
