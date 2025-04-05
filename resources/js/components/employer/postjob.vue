@@ -132,49 +132,31 @@
 							<div class="mb-4">
 								<label class="font-bold text-gray-500 mb-2 block">Skills</label>
 								<div class="relative">
-								<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
-									<input 
-									v-model="newSkill" 
-									@input="filterSuggestions" 
-									@keyup.enter="addSkill" 
-									type="text" 
-									class="flex-grow outline-none text-gray-500" 
-									placeholder="Enter a skill"
-									/>
-									<button @click.prevent="addSkill()" class="text-blue-500">
-									<PlusCircleIcon class="w-6 h-6" />
-									</button>
-								</div>
-								
-								<!-- Dropdown suggestions -->
-								<div v-if="filteredSuggestions.length" class="absolute top-full left-0 w-full mt-1 bg-white border border-gray-400 rounded-md shadow-lg z-10">
-									<div 
-									v-for="(suggestion, index) in filteredSuggestions" 
-									:key="index" 
-									@click="addSkill(suggestion)" 
-									class="cursor-pointer p-2 hover:bg-gray-200"
-									>
-									{{ suggestion }}
+									<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
+										<input  v-model="newSkill"  @input="filterSuggestions" @keyup.enter="addSkill" type="text" class="flex-grow outline-none text-gray-500" placeholder="Enter a skill" />
+										<button @click.prevent="addSkill()" class="text-blue-500">
+										<PlusCircleIcon class="w-6 h-6" />
+										</button>
 									</div>
-								</div>
-								</div>
+									
+									<div v-if="filteredSuggestions.length" class="absolute top-full left-0 w-full mt-1 bg-white border border-gray-400 rounded-md shadow-lg z-10">
+										<div  v-for="(suggestion, index) in filteredSuggestions"  :key="index"  @click="addSkill(suggestion)" class="cursor-pointer p-2 hover:bg-gray-200" >
+											{{ suggestion }}
+											</div>
+										</div>
+									</div>
 
-								<!-- Selected skills -->
-								<div class="mt-3 flex flex-wrap gap-2">
-								<span 
-									v-for="(skill, index) in skills" 
-									:key="index"  
-									class="selected-skill bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center"
-								>
-									{{ skill }}
-									<XCircleIcon @click="removeSkill(index)" class="w-4 h-4 ml-2 cursor-pointer hover:text-red-300" />
-								</span>
-								<div v-if="skillSuggestions.length" class="mt-3 p-2 bg-gray-100 rounded-md">
-									<span class="block w-full font-bold px-2 text-sm">Suggested Skill</span>
-									<span v-for="(suggestion, index) in skillSuggestions" :key="index" @click="addSkill(suggestion)"class="suggestion-chip cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 px-2 py-1 rounded-md m-1 inline-block" > 
-										+ {{ suggestion }} 
+									<div class="mt-3 flex flex-wrap gap-2">
+									<span v-for="(skill, index) in skills"  :key="index" class="selected-skill bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
+										{{ skill }}
+										<XCircleIcon @click="removeSkill(index)" class="w-4 h-4 ml-2 cursor-pointer hover:text-red-300" />
 									</span>
-								</div>
+									<div v-if="skillSuggestions.length" class="mt-3 p-2 bg-gray-100 rounded-md">
+										<span class="block w-full font-bold px-2 text-sm">Suggested Skill</span>
+										<span v-for="(suggestion, index) in skillSuggestions" :key="index" @click="addSkill(suggestion)"class="suggestion-chip cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 px-2 py-1 rounded-md m-1 inline-block" > 
+											+ {{ suggestion }} 
+										</span>
+									</div>
 								</div>
 							</div>
 							<hr>
@@ -321,59 +303,27 @@
 
 
 	const jobDescEditor = new Editor({
-	extensions: [
-		StarterKit,
-		Blockquote,
-		BulletList,
-		OrderedList,
-		ListItem,
-	],
-	content: '<p>Type job description here...</p>',
+		extensions: [
+			StarterKit,
+			Blockquote,
+			BulletList,
+			OrderedList,
+			ListItem,
+		],
+		content: '<p>Type job description here...</p>',
 	});
 
 	const jobSummaryEditor = new Editor({
-	extensions: [
-		StarterKit,
-		Blockquote,
-		BulletList,
-		OrderedList,
-		ListItem,
-	],
-	content: '<p>Type job description here...</p>',
-	});
-	// const jobDescEditor = ref(null);
-	// const jobSummaryEditor = ref(null);
+		extensions: [
+			StarterKit,
+			Blockquote,
+			BulletList,
+			OrderedList,
+			ListItem,
+		],
+		content: '<p>Type job description here...</p>',
+	}); 
 
-	// onMounted(() => {
-	// 	jobDescEditor.value = new Editor({
-	// 		extensions: [
-	// 			StarterKit,
-	// 			Blockquote,
-	// 			BulletList,
-	// 			OrderedList,
-	// 			ListItem,
-	// 		],
-	// 		content: "<p>Type job description here...</p>",
-	// 	});
-
-	// 	jobSummaryEditor.value = new Editor({
-	// 		extensions: [
-	// 			StarterKit,
-	// 			Blockquote,
-	// 			BulletList,
-	// 			OrderedList,
-	// 			ListItem,
-	// 		],
-	// 		content: "<p>Type job summary here...</p>",
-	// 	});
-	// });
-
-	// onBeforeUnmount(() => {
-	// jobDescEditor.value.destroy();
-	// jobSummaryEditor.value.destroy();
-	// });
-
-	// Reactive variables
 	const newSkill = ref("");
 	const skills = ref([]);
 	const skillSuggestions = ref([
@@ -393,19 +343,17 @@
 	// Add skill function
 	const addSkill = (skill) => {
 	if (!skill) skill = newSkill.value; // Use input value if no argument is provided
-	if (skill && !skills.value.includes(skill)) {
-		skills.value.push(skill);
-		newSkill.value = "";
-		filteredSuggestions.value = [];
-	}
+		if (skill && !skills.value.includes(skill)) {
+			skills.value.push(skill);
+			newSkill.value = "";
+			filteredSuggestions.value = [];
+		}
 	};
 
-	// Remove skill function
 	const removeSkill = (index) => {
 	skills.value.splice(index, 1);
 	};
 
-	// Filter suggestions based on input
 	const filterSuggestions = () => {
 	if (!newSkill.value) {
 		filteredSuggestions.value = [];
@@ -416,27 +364,17 @@
 	);
 	};
 
-	onMounted(() => {
-	// Code to run on mount if needed
-	});
 
-	onBeforeUnmount(() => {
-	// Cleanup if necessary before the component is destroyed
-	});
-
-	// Reactive variables
 	const newResponsibility = ref("");
 	const responsibilities = ref([]);
 
-	// Add responsibility function
 	const addResponsibility = () => {
-	if (newResponsibility.value.trim() && !responsibilities.value.includes(newResponsibility.value)) {
-		responsibilities.value.push(newResponsibility.value.trim());
-		newResponsibility.value = "";
-	}
+		if (newResponsibility.value.trim() && !responsibilities.value.includes(newResponsibility.value)) {
+			responsibilities.value.push(newResponsibility.value.trim());
+			newResponsibility.value = "";
+		}
 	};
 
-	// Remove responsibility function
 	const removeResponsibility = (index) => {
 	responsibilities.value.splice(index, 1);
 	};
