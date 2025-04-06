@@ -1,3 +1,28 @@
+<script setup>
+	import navigation from '@/layouts/navigation_employer.vue';
+    import { MapPinIcon, GlobeAsiaAustraliaIcon, ClockIcon, BanknotesIcon } from '@heroicons/vue/24/outline'
+    import { DocumentDuplicateIcon, TrashIcon, PencilSquareIcon, EllipsisVerticalIcon } from '@heroicons/vue/24/solid'
+	import axios from 'axios';
+	import { onMounted, ref } from "vue"
+
+	const jobdets = ref([])
+	const props = defineProps({
+		id:{
+			type:String,
+			default:''
+		}
+	})
+
+	onMounted(async () => {
+		JobView()
+	})
+
+	const JobView = async () => {
+		let response = await axios.get("/api/job_details/"+props.id);
+		jobdets.value = response.data.jobdets;
+		console.log(response.data.jobdets);
+	}
+</script>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3">
@@ -54,7 +79,7 @@
                             </p>
                             <br>
                             <h5>Job Description</h5>
-                            <p class="text-gray-500 leading-normal">We’re looking for a skilled Frontend Developer with expertise in React.js and modern JavaScript frameworks. You’ll collaborate with cross-functional teams to build responsive, user-friendly interfaces.</p>
+                            <p class="text-gray-500 leading-normal">{{ jobdets.job_description }}</p>
                             <h5>Job Summary</h5>
                             <p class="text-gray-500 leading-normal">The Interaction Designer’s role is to turn the division’s User Experience vision into tangible, navigable reality. The Designer uses customer-driven insights and iterative methodologies to design and create usable, relevant and elegant user flows, interfaces, structure and interactions. 
 
@@ -190,29 +215,3 @@
 		</footer>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
-    import { MapPinIcon, GlobeAsiaAustraliaIcon, ClockIcon, BanknotesIcon } from '@heroicons/vue/24/outline'
-    import { DocumentDuplicateIcon, TrashIcon, PencilSquareIcon, EllipsisVerticalIcon } from '@heroicons/vue/24/solid'
-	// // Get the elements
-	// const ExperienceToggle = {
-	// 	data() {
-	// 		return {
-	// 		hasExperience: false, // Default state for the toggle
-	// 		};
-	// 	},
-	// 	computed: {
-	// 		label() {
-	// 		return this.hasExperience ? "I have experience" : "I have no experience";
-	// 		},
-	// 	},
-	// 	methods: {
-	// 		toggleExperience() {
-	// 		// Logic can be added here if needed, such as saving the state to a server
-	// 		console.log(`Experience: ${this.hasExperience}`);
-	// 		},
-	// 	},
-	// };
-
-</script>

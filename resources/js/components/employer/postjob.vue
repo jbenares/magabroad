@@ -1,3 +1,149 @@
+<script setup>
+	import navigation from '@/layouts/navigation_employer.vue';
+	import { PlusCircleIcon, XCircleIcon } from '@heroicons/vue/24/solid'
+	import axios from 'axios';
+    import { onMounted, ref } from "vue"
+	import { useRouter } from "vue-router";
+	const router = useRouter();
+
+	let categorylist=ref([]);
+	let industrylist=ref([]);
+	let citylist=ref([]);
+	let regionlist=ref([]);
+	let countrylist=ref([]);
+	let jobtypelist=ref([]);
+	let currencylist=ref([]);
+	let responsibility_list=ref([]);
+	let skilllist=ref([]);
+	let job_title=ref('');
+	let industry=ref('');
+	let work_category=ref('');
+	let city=ref('');
+	let region=ref('');
+	let country=ref('');
+	let workplace=ref('');
+	let jobtype=ref('');
+	let currency=ref('');
+	let job_description=ref('');
+	let job_summary=ref('');
+	let salary_from=ref('');
+	let salary_to=ref('');
+	let start_date=ref('');
+	let end_date=ref('');
+	let responsibility=ref('');
+	let skill=ref('');
+
+	onMounted(async () => {
+		getcategory()
+		getindustry()
+		getcity()
+		getregion()
+		getcountry()
+		getjobtype()
+		getcurrency()
+		getskill()
+	})
+
+	const getcategory = async () => {
+		let response = await axios.get("/api/category_list");
+		categorylist.value=response.data
+	}
+
+	const getindustry = async () => {
+		let response = await axios.get("/api/industry_list");
+		industrylist.value=response.data
+	}
+
+	const getcity = async () => {
+		let response = await axios.get("/api/city_list");
+		citylist.value=response.data
+	}
+
+	const getregion = async () => {
+		let response = await axios.get("/api/region_list");
+		regionlist.value=response.data
+	}
+
+	const getcountry = async () => {
+		let response = await axios.get("/api/country_list");
+		countrylist.value=response.data
+	}
+
+	const getjobtype = async () => {
+		let response = await axios.get("/api/job_type_list");
+		jobtypelist.value=response.data
+	}
+
+	const getcurrency = async () => {
+		let response = await axios.get("/api/currency_list");
+		currencylist.value=response.data
+	}
+
+	const getskill = async () => {
+		let response = await axios.get("/api/skill_list");
+		skilllist.value=response.data
+	}
+
+	const addResponsibility= () => {
+		if(responsibility.value!=''){
+			const respo = {
+				responsibility:responsibility.value,
+			}
+			responsibility_list.value.push(respo)
+			responsibility.value='';
+			document.getElementById('check_responsibility').placeholder=""
+			document.getElementById('check_responsibility').style.backgroundColor = '#FEFCE8';
+		}else{
+			document.getElementById('check_responsibility').placeholder="Please fill in Responsibility."
+			document.getElementById('check_responsibility').style.backgroundColor = '#FAA0A0';
+		}
+	}
+	const removeResponsibility = (index) => {
+		responsibility_list.value.splice(index,1)
+	}
+
+	const isNumber = (evt)=> {
+		evt = (evt) ? evt : window.event;
+		var charCode = (evt.which) ? evt.which : evt.keyCode;
+		if (charCode == 46) {
+			//Check if the text already contains the . character
+			if (evt.target.value.indexOf('.') === -1) {
+				return true;
+			} else {
+				evt.preventDefault();
+			}
+		} else {
+			if (charCode > 31 && (charCode < 48 || charCode > 57))
+				evt.preventDefault();
+		}
+		return true;
+    }
+
+	const PostJob = () => {
+		const formData= new FormData()
+		formData.append('job_title', job_title.value)
+		formData.append('industry', industry.value)
+		formData.append('employment_category', work_category.value)
+		formData.append('city', city.value)
+		formData.append('region', region.value)
+		formData.append('country', country.value)
+		formData.append('workplace', workplace.value)
+		formData.append('job_type', jobtype.value)
+		formData.append('currency', currency.value)
+		formData.append('job_description', job_description.value)
+		formData.append('job_summary', job_summary.value)
+		formData.append('salary_from', salary_from.value)
+		formData.append('salary_to', salary_to.value)
+		formData.append('start_date', start_date.value)
+		formData.append('end_date', end_date.value)
+		formData.append('responsibilities', JSON.stringify(responsibility_list.value))
+		formData.append('skills', JSON.stringify(skill_list.value))
+		axios.post("/api/add_new_job", formData).then(function (response) {
+			router.push('/employer/job_view/'+response.data)
+			});
+	}
+
+</script>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3" >
@@ -16,47 +162,72 @@
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobtitle">Job Title</label>
-									<input type="text" id="jobtitle" class="form-control" placeholder="">
+									<input type="text" id="jobtitle" class="form-control" placeholder="" v-model="job_title">
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="location">Location</label>
-									<input type="text" id="location" class="form-control" placeholder="">
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="workplace">Workplace Option</label>
-									<select id="workplace" class="form-control" >
-										<option value="">On-site</option>
-										<option value="">Remote</option>
-										<option value="">Hybrid</option>
+									<label class="font-weight-bold" for="workplace">Industry</label>
+									<select class="form-control" v-model="industry">
+										<option :value="i.industry_name" v-for="i in industrylist" :key="i.industry_name">{{ i.industry_name }}</option>
 									</select>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
-									<label class="font-weight-bold" for="workplace">Work Type</label>
-									<label for="fulltime" class="block !mb-0">
-										<input type="radio" id="fulltime" class="mr-2" name="worktype">Full-time
-									</label>
-									<label for="parttime" class="block !mb-0">
-										<input type="radio" id="parttime" class="mr-2" name="worktype">Part-time
-									</label>
-									<label for="contract" class="block !mb-0">
-										<input type="radio" id="contract" class="mr-2" name="worktype">Contract
-									</label>
-									<label for="casual" class="block !mb-0">
-										<input type="radio" id="casual" class="mr-2" name="worktype">Casual
-									</label>
+									<label class="font-weight-bold" for="workplace">Work Category</label>
+									<select class="form-control" v-model="work_category">
+										<option :value="c.category_name" v-for="c in categorylist" :key="c.category_name">{{ c.category_name }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="workplace">City</label>
+									<select class="form-control" v-model="city">
+										<option :value="cl.city_name" v-for="cl in citylist" :key="cl.city_name">{{ cl.city_name }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="workplace">Region</label>
+									<select class="form-control" v-model="region">
+										<option :value="rl.region_name" v-for="rl in regionlist" :key="rl.region_name">{{ rl.region_name }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="workplace">Country</label>
+									<select class="form-control" v-model="country">
+										<option :value="cyl.country_name" v-for="cyl in countrylist" :key="cyl.country_name">{{ cyl.country_name }}</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="workplace">Workplace Option</label>
+									<select id="workplace" class="form-control" v-model="workplace">
+										<option value="On-site">On-site</option>
+										<option value="Remote">Remote</option>
+										<option value="Hybrid">Hybrid</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold">Job Type</label>
+									<select class="form-control" v-model="jobtype">
+										<option :value="jtl.name" v-for="jtl in jobtypelist" :key="jtl.name">{{ jtl.name }}</option>
+									</select>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="workplace">Pay Type</label>
 									<label for="hourly" class="block !mb-0">
-										<input type="radio" id="hourly" class="mr-2" name="paytype">Hourly Rate
+										<input type="radio" id="hourly" class="mr-2" value="On-site">Hourly Rate
 									</label>
 									<label for="monthly" class="block !mb-0">
 										<input type="radio" id="monthly" class="mr-2" name="paytype">Monthly Salary
@@ -70,32 +241,32 @@
 							<div class="row form-group">
 								<div class="col-md-3 mb-3 mb-md-0 !pr-0">
 									<label class="mb-0" for="workplace">Currency</label>
-									<select id="workplace" class="form-control" >
-										<option value="">Php</option>
+									<select class="form-control" v-model="currency">
+										<option :value="c.code" v-for="c in currencylist" :key="c.code">{{ c.code }}</option>
 									</select>
 								</div>
 								<div class="col-md-4 mb-4 mb-md-0 !pr-0">
 									<label class="mb-0" for="workplace">From</label>
-									<input type="text" class="form-control" placeholder="Enter minimum pay">
+									<input type="text" class="form-control" placeholder="Enter minimum pay" v-model="salary_from" @keypress="isNumber($event)" >
 								</div>
 								<div class="col-md-4 mb-4 mb-md-0 !pr-0">
 									<label class="mb-0" for="workplace">To</label>
-									<input type="text" class="form-control" placeholder="Enter maximum pay">
+									<input type="text" class="form-control" placeholder="Enter maximum pay"  v-model="salary_to" @keypress="isNumber($event)" >
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobdesc">Job Description</label>
-									<textarea id="jobdesc" class="form-control" placeholder=""></textarea>
+									<textarea id="jobdesc" class="form-control" placeholder="" v-model="job_description"></textarea>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobsum">Job Summary</label>
-									<textarea id="jobsum" class="form-control" placeholder=""></textarea>
+									<textarea id="jobsum" class="form-control" placeholder="" v-model="job_summary"></textarea>
 								</div>
 							</div>
-							<div class="row form-group">
+							<!-- <div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobdesc">Responsibilities</label>
 									<div class="flex justify-start">
@@ -115,8 +286,33 @@
 										<button class="btn !text-red-500"> <XCircleIcon class="size-6"/></button>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="row form-group">
+								<table class="table-bordered !text-xs w-full">
+									<tr>
+										<td class="p-1 uppercase" colspan="3">Responsibilities</td>
+									</tr>
+									<tr>
+										<td class="p-0" colspan="2">
+											<input type="text" v-model="responsibility" class="form-control" id="check_responsibility">
+										</td>
+										<td class="p-0" width="1">
+											<button type="button" @click="addResponsibility" class="btn !text-blue-500">
+												<PlusCircleIcon class="size-6"></PlusCircleIcon>
+											</button>
+										</td>
+									</tr>
+									<tr v-for="(rl, rl_index) in responsibility_list">
+										<td class="px-1" colspan="2">{{ rl.responsibility }}</td>
+										<td class="p-0 align-top" width="1">
+											<button type="button" @click="removeResponsibility(rl_index)" class="btn !text-red-500">
+												<XCircleIcon class="size-6"></XCircleIcon>
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<!-- <div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="jobdesc">Skills</label>
 									<div class="flex justify-start">
@@ -136,8 +332,27 @@
 										<button class="btn !text-red-500"> <XCircleIcon class="size-6"/></button>
 									</div>
 								</div>
+							</div> -->
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold">Skills</label>
+									<select class="form-control" v-model="skill">
+										<option :value="sl.name" v-for="sl in skilllist" :key="sl.name">{{ sl.name }}</option>
+									</select>
+								</div>
 							</div>
-
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="jobtitle">Start Date</label>
+									<input type="date" class="form-control" placeholder="" v-model="start_date">
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="jobtitle">End Date</label>
+									<input type="date" class="form-control" placeholder="" v-model="end_date">
+								</div>
+							</div>
 							<br>
 							<hr>
 							<div class="row form-group">
@@ -146,7 +361,8 @@
 										<button class="btn btn-outline-primary py-2 px-5">Preview</button>
 										<div class="flex justify-end space-x-1">
 											<button class="btn !bg-orange-400 text-white py-2 px-5">Save Draft</button>
-											<input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5">
+											<!-- <input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5"> -->
+											<button @click="PostJob()" type="button" class="btn btn-primary  py-2 px-5" id="save">Post Job</button>
 										</div>
 									</div>
 									
@@ -273,8 +489,3 @@
 		</footer>
 	</navigation>
 </template>
-
-<script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
-	import { PlusCircleIcon, XCircleIcon } from '@heroicons/vue/24/solid'
-</script>

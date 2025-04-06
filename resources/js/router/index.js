@@ -140,8 +140,8 @@ const routes = [
         }
     },
     {
-        path:'/employer/job_view',
-        name:'job_view',
+        path:'/employer/job_view/:id',
+        props:true,
         component: job_view,
         meta:{
             requiresAuth:true

@@ -36,9 +36,19 @@ Route::post('/verify-otp', [OTPController::class, 'verifyOTP']);
 Route::get('/check_employer_email/{email}', [UserController::class,'checkEmployerEmail']);
 Route::get('/check_jobseeker_email/{email}', [UserController::class,'checkJobseekerEmail']);
 
+Route::get('/industry_list', [EmployerController::class,'all_industry']);
+Route::get('/category_list', [EmployerController::class,'all_category']);
+Route::get('/city_list', [EmployerController::class,'all_city']);
+Route::get('/region_list', [EmployerController::class,'all_region']);
+Route::get('/country_list', [EmployerController::class,'all_country']);
+Route::get('/job_type_list', [EmployerController::class,'all_job_type']);
+Route::get('/currency_list', [EmployerController::class,'all_currency']);
+Route::get('/skill_list', [EmployerController::class,'all_skill']);
+
 
 Route::get('/check_employer_password/{password}', [EmployerController::class,'checkEmployerPassword']);
 Route::post('/change_password', [EmployerController::class,'change_password']);
-Route::get('/industry_list', [EmployerController::class,'all_industry']);
 Route::get('/employer_data',[EmployerController::class,'employer_data']);
 Route::post('/update_employeer/{id}',[EmployerController::class,'update_employeer']);
+Route::post('/add_new_job',[EmployerController::class,'add_new_job']);
+Route::get('/job_details/{job_id}', [EmployerController::class,'job_details']);
