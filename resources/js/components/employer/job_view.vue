@@ -6,6 +6,8 @@
 	import { onMounted, ref } from "vue"
 
 	const jobdets = ref([])
+	const jobres = ref([])
+	const jobskills = ref([])
 	const props = defineProps({
 		id:{
 			type:String,
@@ -19,8 +21,10 @@
 
 	const JobView = async () => {
 		let response = await axios.get("/api/job_details/"+props.id);
-		jobdets.value = response.data.jobdets;
-		console.log(response.data.jobdets);
+		jobdets.value = response.data.job_dets;
+		jobres.value = response.data.job_responsibilities;
+		jobskills.value = response.data.job_skills;
+
 	}
 </script>
 <template>
@@ -58,45 +62,49 @@
                             </div>
                             <!-- End Ellipsis Dropdown -->
 
-                            <h3 class="mb-0 leading-tight">Frontend Developer</h3>
-                            <p class="mb-3 leading-tight !text-gray-500">Company Name here</p>
+                            <h3 class="mb-0 leading-tight">{{ jobdets.job_title }}</h3>
+                            <p class="mb-3 leading-tight !text-gray-500">{{ jobdets.company_name }}</p>
 
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
-                                <span>Bacolod City Negros Occidental</span>
+                                <span>{{ jobdets.city }}, {{ jobdets.region }}, {{ jobdets.country }}</span>
                             </p>
-                            <p class="mb-0 flex space-x-3">
+							<p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
-                                <span>Part Time</span>
+                                <span>{{ jobdets.industry }}</span>
+                            </p>
+							<p class="mb-0 flex space-x-3">
+                                <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+                                <span>{{ jobdets.employment_category }}</span>
+                            </p>
+							<p class="mb-0 flex space-x-3">
+                                <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+                                <span>{{ jobdets.job_type }}</span>
                             </p>
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
-                                <span>On Site</span>
+                                <span>{{ jobdets.workplace }}</span>
                             </p>
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
-                                <span><span>P</span>90,000 - <span>P</span>90,000 per hour</span>
+                                <span><span>{{ jobdets.currency }}</span>{{ jobdets.salary_from }} - <span>{{ jobdets.currency }}</span>{{ jobdets.salary_to }} {{ jobdets.pay_type }} Confidential: {{ (jobdets.confidential == 1) ? 'Yes' : 'No'}}</span>
                             </p>
                             <br>
                             <h5>Job Description</h5>
                             <p class="text-gray-500 leading-normal">{{ jobdets.job_description }}</p>
                             <h5>Job Summary</h5>
-                            <p class="text-gray-500 leading-normal">The Interaction Designer’s role is to turn the division’s User Experience vision into tangible, navigable reality. The Designer uses customer-driven insights and iterative methodologies to design and create usable, relevant and elegant user flows, interfaces, structure and interactions. 
-
-							The Interaction Design team also establishes an interface design system organizing the best practices across the division’s digital banking products. </p>
+                            <p class="text-gray-500 leading-normal">{{ jobdets.job_summary }}</p>
                             <h5>Responsibilities</h5>
                             <ul class="text-gray-500 leading-normal">
-                                <li>Develop and maintain user-facing features.</li>
-                                <li>Ensure technical feasibility of UI/UX designs.</li>
-                                <li>Optimize application for maximum speed and scalability.</li>
-                                <li>Collaborate with other team members and stakeholders.</li>
+								<template v-for="jr in jobres">
+									<li>{{ jr.responsibility }}</li>
+								</template>
                             </ul>
                             <h5>Requirements</h5>
                             <ul class="text-gray-500 leading-normal">
-                                <li>Proficiency in React.js, JavaScript, and modern front-end libraries.</li>
-                                <li>Experience with responsive design and cross-browser compatibility.</li>
-                                <li>Strong understanding of version control systems (e.g., Git).</li>
-                                <li>Excellent problem-solving and communication skills.</li>
+                                <template v-for="js in jobskills">
+									<li>{{ js.skill }}</li>
+								</template>
                             </ul>
                             <div class="mt-4">
                                 <!-- <a href="/apply/frontend-developer" class="btn btn-primary">Apply Now</a> -->
@@ -107,18 +115,15 @@
                         <div class="p-3 bg-white shadow-sm">
                             <hr>
                             <h6 class="mb-0">Posted By</h6>
-                            <p class="text-muted">Jane Smith (HR Manager)</p>
+                            <p class="text-muted">{{ jobdets.firstname}} {{jobdets.lastname}}</p>
                             <h6 class="mb-0">Posted On</h6>
-                            <p class="text-muted">January 10, 2025</p>
+                            <p class="text-muted">{{ jobdets.start_date}}</p>
                             <!-- <a href="/employer/postjob" class="btn btn-primary btn-block">Post a New Job</a> -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
-
 
 		<section class="ftco-section-parallax">
 		  <div class="parallax-img d-flex align-items-center">

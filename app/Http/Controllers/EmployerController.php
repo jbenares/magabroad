@@ -207,14 +207,17 @@ class EmployerController extends Controller
         $job['country']=$request->input('country');
         $job['workplace']=$request->input('workplace');
         $job['job_type']=$request->input('job_type');
+        $job['pay_type']=$request->input('pay_type');
         $job['currency']=$request->input('currency');
         $job['job_description']=$request->input('job_description');
         $job['job_summary']=$request->input('job_summary');
         $job['salary_from']=$request->input('salary_from') ?? 0;
         $job['salary_to']=$request->input('salary_to') ?? 0;
+        $job['confidential']=$request->input('confidential') ?? 0;
         $job['start_date']=$request->input('start_date');
         $job['end_date']=$request->input('end_date');
         $job['employer_id']=$employerid;
+        $job['status']='Active';
         $job['created_at']=date('Y-m-d H:i:s');
         $job_id=Job::insertGetId($job);
 
@@ -228,22 +231,50 @@ class EmployerController extends Controller
                 JobResponsibilities::create($res);
         }
 
-        $skill_list = $request->input('skills');
-        foreach(json_decode($skill_list) as $sl){
-                $skill['job_id']=$job_id;
-                $skill['skill']=$sl->skill;
-                $skill['employer_id']=$employerid;
-                $skill['created_at']=date('Y-m-d H:i:s');
-                JobSkills::create($skill);
-        }
+        // $skill_list = $request->input('skills');
+        // foreach(json_decode($skill_list) as $sl){
+        //         $skill['job_id']=$job_id;
+        //         $skill['skill']=$sl->skill;
+        //         $skill['employer_id']=$employerid;
+        //         $skill['created_at']=date('Y-m-d H:i:s');
+        //         JobSkills::create($skill);
+        // }
 
         return $job_id;
     }
 
     public function job_details($job_id){
-        $job_dets = Job::where('id',$job_id)->first();
+        $jd = Job::where('id', $job_id)->first();
+        $job_responsibilities = JobResponsibilities::where('job_id', $job_id)->get();
+        $job_skills = JobSkills::where('job_id', $job_id)->get();
+        $job_dets = [
+            'job_id' => $jd->id,
+            'job_description' => $jd->job_description,
+            'job_summary' => $jd->job_summary,
+            'job_title' => $jd->job_title,
+            'city' => $jd->city,
+            'region' => $jd->region,
+            'country' => $jd->country,
+            'industry' => $jd->industry,
+            'employment_category' => $jd->employment_category,
+            'workplace' => $jd->workplace,
+            'job_type' => $jd->job_type,
+            'pay_type' => $jd->pay_type,
+            'currency' => $jd->currency,
+            'salary_from' => $jd->salary_from,
+            'salary_to' => $jd->salary_to,
+            'confidential' => $jd->confidential,
+            'start_date'=>date('F j, Y', strtotime($jd->start_date)),
+            'end_date'=>date('F j, Y', strtotime($jd->end_date)),
+            'company_name'=>User::where('id',$jd->employer_id)->value('business_name'),
+            'firstname'=>User::where('id',$jd->employer_id)->value('firstname'),
+            'lastname'=>User::where('id',$jd->employer_id)->value('lastname'),
+        ];
+    
         return response()->json([
-            'job_dets'=>$job_dets,
-        ],200);
+            'job_dets' => $job_dets,
+            'job_responsibilities' => $job_responsibilities,
+            'job_skills' => $job_skills,
+        ], 200);
     }
 }

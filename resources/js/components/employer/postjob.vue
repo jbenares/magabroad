@@ -23,11 +23,13 @@
 	let country=ref('');
 	let workplace=ref('');
 	let jobtype=ref('');
+	let paytype=ref('');
 	let currency=ref('');
 	let job_description=ref('');
 	let job_summary=ref('');
 	let salary_from=ref('');
 	let salary_to=ref('');
+	let confidential=ref(false);
 	let start_date=ref('');
 	let end_date=ref('');
 	let responsibility=ref('');
@@ -129,15 +131,18 @@
 		formData.append('country', country.value)
 		formData.append('workplace', workplace.value)
 		formData.append('job_type', jobtype.value)
+		formData.append('pay_type', paytype.value)
 		formData.append('currency', currency.value)
 		formData.append('job_description', job_description.value)
 		formData.append('job_summary', job_summary.value)
 		formData.append('salary_from', salary_from.value)
 		formData.append('salary_to', salary_to.value)
+		formData.append('confidential', confidential.value ? '1' : '0') // Add confidential checkbox state
 		formData.append('start_date', start_date.value)
 		formData.append('end_date', end_date.value)
 		formData.append('responsibilities', JSON.stringify(responsibility_list.value))
-		formData.append('skills', JSON.stringify(skill_list.value))
+		// formData.append('skills', JSON.stringify(skill_list.value))
+
 		axios.post("/api/add_new_job", formData).then(function (response) {
 			router.push('/employer/job_view/'+response.data)
 			});
@@ -223,7 +228,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="row form-group">
+							<!-- <div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0">
 									<label class="font-weight-bold" for="workplace">Pay Type</label>
 									<label for="hourly" class="block !mb-0">
@@ -235,6 +240,16 @@
 									<label for="annual" class="block !mb-0">
 										<input type="radio" id="annual" class="mr-2" name="paytype">Annual Salary
 									</label>
+								</div>
+							</div> -->
+							<div class="row form-group">
+								<div class="col-md-12 mb-3 mb-md-0">
+									<label class="font-weight-bold" for="paytype">Pay Type</label>
+									<select id="paytype" class="form-control" v-model="paytype">
+										<option value="Hourly Rate">Hourly Rate</option>
+										<option value="Monthly Salary">Monthly Salary</option>
+										<option value="Annual Salary">Annual Salary</option>
+									</select>
 								</div>
 							</div>
 							<label class="font-weight-bold" for="workplace">Pay Range</label>
@@ -252,6 +267,14 @@
 								<div class="col-md-4 mb-4 mb-md-0 !pr-0">
 									<label class="mb-0" for="workplace">To</label>
 									<input type="text" class="form-control" placeholder="Enter maximum pay"  v-model="salary_to" @keypress="isNumber($event)" >
+								</div>
+								<div class="col-md-4 mb-4 mb-md-0 d-flex align-items-end">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" v-model="confidential" id="confidentialCheck">
+										<label class="form-check-label" for="confidentialCheck">
+											Confidential
+										</label>
+									</div>
 								</div>
 							</div>
 							<div class="row form-group">

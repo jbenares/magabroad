@@ -28,5 +28,6 @@ class Job extends Model
         'start_date',
         'end_date',
         'employer_id',
+        'status',
     ];
 }
