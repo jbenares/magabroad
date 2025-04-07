@@ -59,7 +59,7 @@ class UserController extends Controller
     }
 
     public function checkJobseekerEmail($email){
-        $exists = User::where('email', $email)->where('usertype_id', '2')->where('registration_via', '!=', 'facebook')->exists();
+        $exists = User::where('email', $email)->where('usertype_id', '2')->where('registration_via', 'manual')->exists();
 
         return response()->json(['exists' => $exists]);
     }
