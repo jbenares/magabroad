@@ -277,4 +277,20 @@ class EmployerController extends Controller
             'job_skills' => $job_skills,
         ], 200);
     }
+
+    public function get_alljob(){
+        $jobs=Job::orderBy('id','ASC')->get();
+        $alljobs=[];
+        foreach($jobs AS $j){
+            $alljobs[]=[
+                'job_id'=>$j->id,
+                'job_title'=>$j->job_title,
+                'status'=>$j->status,
+                'workplace'=>$j->workplace,
+            ];
+        }
+        return response()->json([
+            'alljobs'=>$alljobs,
+        ],200);
+    }
 }

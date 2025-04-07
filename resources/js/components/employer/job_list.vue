@@ -1,3 +1,38 @@
+<script setup>
+	import navigation from '@/layouts/navigation_employer.vue';
+	import $ from 'jquery';
+	import 'datatables.net-dt/css/dataTables.dataTables.min.css';
+	import 'datatables.net';
+	import { onMounted, nextTick, ref, watch } from 'vue';
+	import { useRouter } from "vue-router"
+	const router = useRouter()
+	const get_alljob = ref([])
+	onMounted(() => {
+		getallJob()
+		watch(
+			() => get_alljob.value,
+			async (val) => {
+				if (val.length) {
+				await nextTick() // wait for DOM to update
+				if ($.fn.DataTable.isDataTable('#jobTable')) {
+					$('#jobTable').DataTable().destroy()
+				}
+				$('#jobTable').DataTable()
+				}
+			},
+			{ immediate: true }
+			)
+	})
+
+	const getallJob = async () => {
+		let response = await axios.get("/api/get_all_job");
+		get_alljob.value = response.data.alljobs;
+	}
+
+	const showJobDetails = (id) => {
+		router.push('/employer/job_view/'+id)
+	}
+</script>
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3">
@@ -9,7 +44,7 @@
             <div class="container">
                 <h2 class="mb-2 text-left">Job Listings</h2>
                 <div class="table-responsive border rounded-xl">
-                    <table class="table text-base">
+                    <table id="jobTable" class="table text-base">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th width="5">Status</th>
@@ -20,58 +55,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Job 1 -->
-                            <tr>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-                                <td>Frontend Developer</td>
-                                <td>Remote</td>
-                                <td class="text-center">2</td>
-                                <td class="flex justify-center space-x-1">
-                                    <a href="/employer/job_view" class="btn btn-sm btn-primary">View</a>
-                                    <a href="" class="btn btn-sm btn-secondary">Edit</a>
-                                </td>
-                            </tr>
-                            <!-- Job 2 -->
-                            <tr>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-                                <td>Backend Engineer</td>
-                                <td>San Francisco, CA</td>
-                                <td class="text-center">2</td>
-                                <td class="flex justify-center space-x-1">
-                                    <a href="/employer/job_view" class="btn btn-sm btn-primary">View</a>
-                                    <a href="" class="btn btn-sm btn-secondary">Edit</a>
-                                </td>
-                            </tr>
-                            <!-- Job 3 -->
-                            <tr>
-                                <td>
-                                    <span class="badge badge-warning">Pending</span>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>Hybrid</td>
-                                <td class="text-center">3</td>
-                                <td class="flex justify-center space-x-1">
-                                    <a href="/employer/job_view" class="btn btn-sm btn-primary">View</a>
-                                    <a href="" class="btn btn-sm btn-secondary">Edit</a>
-                                </td>
-                            </tr>
-                            <!-- Job 4 -->
-                            <tr>
-                                <td>
-                                    <span class="badge badge-danger">Closed</span>
-                                </td>
-                                <td>Project Manager</td>
-                                <td>Remote</td>
-                                <td class="text-center">2</td>
-                                <td class="flex justify-center space-x-1">
-                                    <a href="/employer/job_view" class="btn btn-sm btn-primary">View</a>
-                                    <a href="" class="btn btn-sm btn-secondary">Edit</a>
-                                </td>
-                            </tr>
+                            <tr v-for="aj in get_alljob" :key="aj.job_id">
+								<td>
+								<span class="badge badge-success" v-if="aj.status == 'Active'">{{ aj.status }}</span>
+								<span class="badge badge-warning" v-if="aj.status == 'Draft' || aj.status == 'Pending'">{{ aj.status }}</span>
+								<span class="badge badge-danger" v-if="aj.status == 'Deactivated'">{{ aj.status }}</span>
+								</td>
+								<td>{{ aj.job_title }}</td>
+								<td>{{ aj.workplace }}</td>
+								<td class="text-center"></td>
+								<td class="flex justify-center space-x-1">
+								<a  @click="showJobDetails(aj.job_id)" class="btn btn-sm btn-primary">View</a>
+								<a href="" class="btn btn-sm btn-secondary">Edit</a>
+								</td>
+							</tr>
                         </tbody>
                     </table>
                 </div>
@@ -174,27 +171,3 @@
 		</footer>
 	</navigation>
 </template>
-  
-<script setup>
-	import navigation from '@/layouts/navigation_employer.vue';
-	// // Get the elements
-	// const ExperienceToggle = {
-	// 	data() {
-	// 		return {
-	// 		hasExperience: false, // Default state for the toggle
-	// 		};
-	// 	},
-	// 	computed: {
-	// 		label() {
-	// 		return this.hasExperience ? "I have experience" : "I have no experience";
-	// 		},
-	// 	},
-	// 	methods: {
-	// 		toggleExperience() {
-	// 		// Logic can be added here if needed, such as saving the state to a server
-	// 		console.log(`Experience: ${this.hasExperience}`);
-	// 		},
-	// 	},
-	// };
-
-</script>
