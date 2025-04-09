@@ -153,7 +153,7 @@
 									</span>
 									<div v-if="skillSuggestions.length" class="mt-3 p-2 bg-gray-100 rounded-md">
 										<span class="block w-full font-bold px-2 text-sm">Suggested Skill</span>
-										<span v-for="(suggestion, index) in skillSuggestions" :key="index" @click="addSkill(suggestion)"class="suggestion-chip cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 px-2 py-1 rounded-md m-1 inline-block" > 
+										<span v-for="(suggestion, index) in skillSuggestions" :key="index" @click="addSkill(suggestion)" class="suggestion-chip cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 px-2 py-1 rounded-md m-1 inline-block" > 
 											+ {{ suggestion }} 
 										</span>
 									</div>
@@ -300,7 +300,7 @@
 	import BulletList from '@tiptap/extension-bullet-list'
 	import OrderedList from '@tiptap/extension-ordered-list'
 	import ListItem from '@tiptap/extension-list-item'
-
+	
 
 	const jobDescEditor = new Editor({
 		extensions: [
