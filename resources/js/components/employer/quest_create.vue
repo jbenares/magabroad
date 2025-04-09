@@ -1,6 +1,6 @@
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
-	import { PlusCircleIcon, XCircleIcon, ListBulletIcon, NumberedListIcon, ItalicIcon, BoldIcon, QuestionMarkCircleIcon} from '@heroicons/vue/24/solid'
+	import { PlusCircleIcon, XCircleIcon, ListBulletIcon, NumberedListIcon, ItalicIcon, BoldIcon, DocumentDuplicateIcon, TrashIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
     import { onMounted, ref , onBeforeUnmount } from "vue"
 	import { useRouter } from "vue-router";
@@ -15,11 +15,15 @@
 		])
 
 		const addQuestion = () => {
-		questions.value.push({
-			text: '',
-			type: 'Checkboxes',
-			options: ['Option 1', 'Option 2'],
-		})
+			questions.value.push({
+				text: '',
+				type: 'Checkboxes',
+				options: ['Option 1', 'Option 2'],
+				range: {
+					min: 1,
+					max: 5,
+				},
+			})
 		}
 
 		const removeQuestion = (index) => {
@@ -33,6 +37,12 @@
 		const removeOption = (qIndex, optIndex) => {
 		questions.value[qIndex].options.splice(optIndex, 1)
 		}
+
+		const duplicateQuestion = (index) => {
+			const questionToDuplicate = { ...questions.value[index] }; // Create a copy of the question
+			questions.value.splice(index + 1, 0, questionToDuplicate); // Insert the copy after the original
+		};
+
 </script>
 <template>
 	<navigation>
@@ -44,67 +54,107 @@
 		<section class="ftco-section bg-light">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-8 col-md-12  mb-5">
-						<div class="p-4 bg-white">
-                            <div class="space-y-6">
-								<div
-								v-for="(question, index) in questions"
-								:key="index"
-								class="border p-4 rounded-lg bg-white shadow-sm space-y-4"
-								>
-								<!-- Question Text -->
-								<div>
-									<input
-									v-model="question.text"
-									type="text"
-									placeholder="Untitled Question"
-									class="w-full border border-gray-300 p-2 rounded-md"
-									/>
-								</div>
+					<div class="col-lg-10 offset-lg-1  mb-5">
+						<div class="bg-white p-4">
+							<h2 class="mb-1 leading-none">Questionnaire</h2>
+							<p class="leading-tight px-1">Create some questions to learn more about the job seeker, gather specific insights, and assess qualifications more effectively. These questions will be added after you create a job ad. </p>
+							<div class="space-y-6">
+								<div v-for="(question, index) in questions" :key="index" class="rounded-lg bg-white border space-y-4" >
+									<div class="p-4 border-b">
+										<div class="flex justify-between space-x-2">
+										<!-- Question Text -->
+											<div class="w-full">
+												<label class="block text-sm font-medium text-gray-700 mb-1">Question #{{ index + 1 }}</label>
+												<input v-model="question.text" type="text" placeholder="e.g. What's your monthly basic salary?" class="form-control" />
+											</div>
+											<!-- Question Type -->
+											<div class="w-60">
+												<label class="block text-sm font-medium text-gray-700 mb-1">Question Type</label>
+												<select v-model="question.type" class="form-control" >
+													<option>Checkboxes</option>
+													<option>Multiple choice</option>
+													<option>Drop-down</option>
+													<option>Short answer</option>
+													<option>Paragraph</option>
+													<option>Range</option>
+													<option>Number</option>
+													<option>Time</option>
+													<option>Date</option>
+												</select>
+											</div>
+										</div>
+										<!-- Options -->
+										<div v-if="question.type === 'Checkboxes' || question.type === 'Multiple choice'" class="space-y-2 mt-3">
+											<div v-for="(option, optIndex) in question.options" :key="optIndex" class="flex items-center space-x-2" >
+												<input :type="question.type === 'Checkboxes' ? 'checkbox' : 'radio'" disabled class="form-checkbox text-indigo-600" />
+												<input v-model="question.options[optIndex]" placeholder="Option" class="border border-gray-300 p-1 rounded w-full" />
+												<button @click="removeOption(index, optIndex)" class="text-red-500 hover:text-red-700">✕</button>
+											</div>
+											<button @click="addOption(index)" class="text-blue-600 text-base mt-2">+ Add option</button>
+										</div>
 
-								<!-- Options -->
-								<div v-if="question.type === 'Checkboxes' || question.type === 'Multiple choice'" class="space-y-2">
-									<div
-									v-for="(option, optIndex) in question.options"
-									:key="optIndex"
-									class="flex items-center space-x-2"
-									>
-									<input
-										:type="question.type === 'Checkboxes' ? 'checkbox' : 'radio'"
-										disabled
-										class="form-checkbox text-indigo-600"
-									/>
-									<input
-										v-model="question.options[optIndex]"
-										placeholder="Option"
-										class="border border-gray-300 p-1 rounded w-full"
-									/>
-									<button @click="removeOption(index, optIndex)" class="text-red-500 hover:text-red-700">✕</button>
+										<div v-if="question.type === 'Drop-down'" class="space-y-2 mt-3">
+											<div v-for="(option, optIndex) in question.options" :key="optIndex" class="flex items-center space-x-2">
+												<span class="w-3 h-3 rounded-full bg-gray-400 mt-1">{{ optIndex + 1 }}</span>
+												<input v-model="question.options[optIndex]" placeholder="Dropdown option" class="border border-gray-300 p-1 rounded w-full" />
+												<button @click="removeOption(index, optIndex)" class="text-red-500 hover:text-red-700">✕</button>
+											</div>
+											<button @click="addOption(index)" class="text-blue-600 text-base mt-2">+ Add option</button>
+										</div>
+
+										<!-- Input for Short Answer -->
+										<div v-if="question.type === 'Short answer'" class="mt-3">
+											<input type="text" placeholder="Short answer text" class="form-control text-gray-500" />
+										</div>
+
+										<!-- Textarea for Paragraph -->
+										<div v-if="question.type === 'Paragraph'" class="mt-3">
+											<textarea placeholder="Long answer text" class="form-control text-gray-500 h-24 resize-none"></textarea>
+										</div>
+										<!-- Textarea for Paragraph -->
+										 
+										<div v-if="question.type === 'Range'" class="mt-3 space-y-3">
+											<div class="flex items-center space-x-3">
+												<div class="form-group">
+													<label class="text-sm text-gray-700">Min</label>
+													<input  type="number" min="0" class="w-20 form-control" />
+												</div>
+												<div class="form-group">
+													<label class="text-sm text-gray-700">Max</label>
+													<input  type="number" min="1" class="w-20 form-control" />
+												</div>
+											</div>
+										</div>
+
+										<div v-if="question.type === 'Number'" class="mt-3">
+											<input type="number" placeholder="0" class="form-control text-gray-500" />
+										</div>
+
+										<div v-if="question.type === 'Time'" class="mt-3">
+											<input type="time" placeholder="0" class="form-control text-gray-500" />
+										</div>
+
+										<div v-if="question.type === 'Date'" class="mt-3">
+											<input type="date" placeholder="0" class="form-control text-gray-500" />
+										</div>
 									</div>
-									<button @click="addOption(index)" class="text-blue-600 text-sm mt-2">+ Add option</button>
-								</div>
-
-								<!-- Question Type -->
-								<div>
-									<label class="block text-sm font-medium text-gray-700 mb-1">Question Type</label>
-									<select
-									v-model="question.type"
-									class="block w-full mt-1 p-2 border border-gray-300 rounded-md"
-									>
-									<option>Checkboxes</option>
-									<option>Multiple choice</option>
-									<option>Drop-down</option>
-									<option>Short answer</option>
-									<option>Paragraph</option>
-									</select>
-								</div>
-
-								<!-- Remove Question -->
-								<div class="text-right">
-									<button @click="removeQuestion(index)" class="text-red-500 hover:text-red-700 text-sm">
-									Remove question
-									</button>
-								</div>
+										
+									<div class="px-4 py-3 m-0 ">
+										<!-- Remove Question -->
+										<div class="flex justify-end space-x-2">
+											<button @click="duplicateQuestion(index)" class="text-gray-400 hover:text-gray-500 text-sm" title="Duplicate Question">
+												<DocumentDuplicateIcon class="size-5"></DocumentDuplicateIcon>
+											</button>
+											<button @click="removeQuestion(index)" class="text-gray-400 hover:text-gray-500 text-sm" title="Delete Question">
+												<TrashIcon class="size-5"></TrashIcon>
+											</button>
+											<div class="border-r"></div>
+											<div class="flex space-x-1 border-l"> 
+												<span class="text-sm">Required</span>
+												<input type="checkbox">
+											</div>
+										</div>
+									</div>
 								</div>
 
 								<!-- Add Question -->
@@ -115,26 +165,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-lg-4">
-                        <div class="p-4 mb-3 bg-white">
-                            <h3 class="h5 text-black mb-3">Contact Info</h3>
-                            <p class="mb-0 font-weight-bold">Address</p>
-                            <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
-
-                            <p class="mb-0 font-weight-bold">Phone</p>
-                            <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
-
-                            <p class="mb-0 font-weight-bold">Email Address</p>
-                            <p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
-                        </div>
-                        
-                        <div class="p-4 mb-3 bg-white">
-                            <h3 class="h5 text-black mb-3">More Info</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
-                            <p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
-                        </div>
 					</div>
 				</div>
 			</div>

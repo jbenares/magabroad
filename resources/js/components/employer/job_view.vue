@@ -1,7 +1,7 @@
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
-    import { MapPinIcon, GlobeAsiaAustraliaIcon, ClockIcon, BanknotesIcon } from '@heroicons/vue/24/outline'
-    import { DocumentDuplicateIcon, TrashIcon, PencilSquareIcon, EllipsisVerticalIcon } from '@heroicons/vue/24/solid'
+    import { MapPinIcon, GlobeAsiaAustraliaIcon, ClockIcon, BanknotesIcon ,BuildingOfficeIcon, BuildingOffice2Icon} from '@heroicons/vue/24/outline'
+    import { DocumentDuplicateIcon, TrashIcon, PencilSquareIcon, EllipsisVerticalIcon,  } from '@heroicons/vue/24/solid'
 	import axios from 'axios';
 	import { onMounted, ref } from "vue"
 
@@ -70,7 +70,7 @@
                                 <span>{{ jobdets.city }}, {{ jobdets.region }}, {{ jobdets.country }}</span>
                             </p>
 							<p class="mb-0 flex space-x-3">
-                                <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+                                <span class="pt-1"><BuildingOfficeIcon class="size-5 text-gray-400" /></span>
                                 <span>{{ jobdets.industry }}</span>
                             </p>
 							<p class="mb-0 flex space-x-3">
@@ -87,7 +87,7 @@
                             </p>
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
-                                <span><span>{{ jobdets.currency }}</span>{{ jobdets.salary_from }} - <span>{{ jobdets.currency }}</span>{{ jobdets.salary_to }} {{ jobdets.pay_type }} Confidential: {{ (jobdets.confidential == 1) ? 'Yes' : 'No'}}</span>
+                                <span><span>{{ jobdets.currency }}</span>{{ jobdets.salary_from }} - <span>{{ jobdets.currency }}</span>{{ jobdets.salary_to }} {{ jobdets.pay_type }} </span>
                             </p>
                             <br>
                             <h5>Job Description</h5>
