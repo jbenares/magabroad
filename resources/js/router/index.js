@@ -25,6 +25,8 @@ import search_candidate from  '../components/employer/search_candidate.vue'
 import view_candidate from  '../components/employer/view_candidate.vue'
 import notif_employer from  '../components/employer/notifications.vue'
 import employer_settings from  '../components/employer/settings.vue'
+import quest_create from  '../components/employer/quest_create.vue'
+import quest_list from  '../components/employer/quest_list.vue'
 
 import admin_login from '../components/admin/login.vue'
 import admin_dash from '../components/admin/dashboard.vue'
@@ -175,6 +177,23 @@ const routes = [
         path:'/employer/settings',
         name:'employer_settings',
         component: employer_settings,
+        meta:{
+            requiresAuth:true
+        }
+    },
+
+    {
+        path:'/employer/create_questions',
+        name:'quest_create',
+        component: quest_create,
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
+        path:'/employer/question_list',
+        name:'quest_list',
+        component: quest_list,
         meta:{
             requiresAuth:true
         }
