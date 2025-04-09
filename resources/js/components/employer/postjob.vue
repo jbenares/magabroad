@@ -8,9 +8,11 @@
 
 	let categorylist=ref([]);
 	let industrylist=ref([]);
-	let citylist=ref([]);
-	let regionlist=ref([]);
 	let countrylist=ref([]);
+	let allregions=ref([]);
+	let regionlist=ref([]);
+	let allcities=ref([]);
+	let citylist=ref([]);
 	let jobtypelist=ref([]);
 	let currencylist=ref([]);
 	let responsibility_list=ref([]);
@@ -18,9 +20,9 @@
 	let job_title=ref('');
 	let industry=ref('');
 	let work_category=ref('');
-	let city=ref('');
-	let region=ref('');
 	let country=ref('');
+	let region=ref('');
+	let city=ref('');
 	let workplace=ref('');
 	let jobtype=ref('');
 	let paytype=ref('');
@@ -56,19 +58,39 @@
 		industrylist.value=response.data
 	}
 
-	const getcity = async () => {
-		let response = await axios.get("/api/city_list");
-		citylist.value=response.data
+	const getcountry = async () => {
+		let response = await axios.get("/api/country_list");
+		countrylist.value=response.data
 	}
 
 	const getregion = async () => {
 		let response = await axios.get("/api/region_list");
-		regionlist.value=response.data
+		allregions.value=response.data
 	}
 
-	const getcountry = async () => {
-		let response = await axios.get("/api/country_list");
-		countrylist.value=response.data
+	const loadRegions = () => {
+		document.getElementById("regions").disabled = false;
+		let selected_country = country.value
+		const sc= selected_country.split("_")
+		let countryid= sc[0]
+		regionlist.value = allregions.value.filter(
+			(r) => String(r.country_id) === countryid
+		);
+	}
+
+	const getcity = async () => {
+		let response = await axios.get("/api/city_list");
+		allcities.value=response.data
+	}
+
+	const loadCities = () => {
+		document.getElementById("cities").disabled = false;
+		let selected_region = region.value
+		const sr= selected_region.split("_")
+		let regionid= sr[0]
+		citylist.value = allcities.value.filter(
+			(c) => String(c.region_id) === regionid
+		);
 	}
 
 	const getjobtype = async () => {
@@ -271,22 +293,22 @@
 							<div class="row form-group">
 								<div class="col-md-12 mb-3 mb-md-0 leading-none">
 									<label class="font-weight-bold text-gray-500" for="workplace">Country</label>
-									<select class="form-control" v-model="country">
-										<option :value="cyl.country_name" v-for="cyl in countrylist" :key="cyl.country_name">{{ cyl.country_name }}</option>
+									<select class="form-control" v-model="country" @change="loadRegions">
+										<option :value="cyl.id+ '_' +cyl.country_name" v-for="cyl in countrylist" :key="cyl.id">{{ cyl.country_name }}</option>
 									</select>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-6 col-sm-12 mb-3 mb-md-0 leading-none">
-									<label class="font-weight-bold text-gray-500" for="workplace">City</label>
-									<select class="form-control" v-model="city">
-										<option :value="cl.city_name" v-for="cl in citylist" :key="cl.city_name">{{ cl.city_name }}</option>
+									<label class="font-weight-bold text-gray-500" for="workplace">Region</label>
+									<select class="form-control" id="regions" v-model="region" @change="loadCities" disabled>
+										<option :value="rl.id+ '_' +rl.region_name" v-for="rl in regionlist" :key="rl.id">{{ rl.region_name }}</option>
 									</select>
 								</div>
 								<div class="col-md-6 col-sm-12 mb-3 mb-md-0 leading-none">
-									<label class="font-weight-bold text-gray-500" for="workplace">Region</label>
-									<select class="form-control" v-model="region">
-										<option :value="rl.region_name" v-for="rl in regionlist" :key="rl.region_name">{{ rl.region_name }}</option>
+									<label class="font-weight-bold text-gray-500" for="workplace">City</label>
+									<select class="form-control" id="cities" v-model="city" disabled>
+										<option :value="cl.city_name" v-for="cl in citylist" :key="cl.city_name">{{ cl.city_name }}</option>
 									</select>
 								</div>
 							</div>
