@@ -51,6 +51,7 @@ class EmployerController extends Controller
         foreach($city_list AS $cl){
             $citylist[] = [
                 'id'=>$cl->id,
+                'region_id'=>$cl->region_id,
                 'city_name'=>$cl->city_name,
             ];
         }
@@ -63,6 +64,7 @@ class EmployerController extends Controller
         foreach($region_list AS $rl){
             $regionlist[] = [
                 'id'=>$rl->id,
+                'country_id'=>$rl->country_id,
                 'region_name'=>$rl->region_name,
             ];
         }
