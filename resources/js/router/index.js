@@ -19,6 +19,7 @@ import employer_register from  '../components/employer/register.vue'
 import employer_dash from  '../components/employer/dashboard.vue'
 import employer_profile from  '../components/employer/profile.vue'
 import post_job from  '../components/employer/postjob.vue'
+import post_job_qa from  '../components/employer/postjob_qa.vue'
 import job_list from  '../components/employer/job_list.vue'
 import job_view from  '../components/employer/job_view.vue'
 import search_candidate from  '../components/employer/search_candidate.vue'
@@ -129,6 +130,14 @@ const routes = [
         path:'/employer/postjob',
         name:'post_job',
         component: post_job,
+        meta:{
+            requiresAuth:true
+        }
+    },
+    {
+        path:'/employer/postjob_qa',
+        name:'post_job_qa',
+        component: post_job_qa,
         meta:{
             requiresAuth:true
         }

@@ -95,7 +95,7 @@
 
 										<div v-if="question.type === 'Drop-down'" class="space-y-2 mt-3">
 											<div v-for="(option, optIndex) in question.options" :key="optIndex" class="flex items-center space-x-2">
-												<span class="w-3 h-3 rounded-full bg-gray-400 mt-1">{{ optIndex + 1 }}</span>
+												<span class="">{{ optIndex + 1 }}</span>
 												<input v-model="question.options[optIndex]" placeholder="Dropdown option" class="border border-gray-300 p-1 rounded w-full" />
 												<button @click="removeOption(index, optIndex)" class="text-red-500 hover:text-red-700">✕</button>
 											</div>
@@ -149,7 +149,7 @@
 												<TrashIcon class="size-5"></TrashIcon>
 											</button>
 											<div class="border-r"></div>
-											<div class="flex space-x-1 border-l"> 
+											<div class="flex space-x-1 "> 
 												<span class="text-sm">Required</span>
 												<input type="checkbox">
 											</div>
@@ -159,9 +159,9 @@
 
 								<!-- Add Question -->
 								<div class="text-center">
-								<button @click="addQuestion" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
-									+ Add Question
-								</button>
+									<button @click="addQuestion" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+										+ Add Question
+									</button>
 								</div>
 							</div>
 						</div>
