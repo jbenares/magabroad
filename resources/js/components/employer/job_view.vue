@@ -63,8 +63,12 @@
                             <!-- End Ellipsis Dropdown -->
 
                             <h3 class="mb-0 leading-tight">{{ jobdets.job_title }}</h3>
-                            <p class="mb-3 leading-tight !text-gray-500">{{ jobdets.company_name }}</p>
-
+                            <p class="mb-2 leading-tight !text-gray-500">{{ jobdets.company_name }}</p>
+							<div class="flex justify-start space-x-1 mb-2">
+								<!-- <span class="bg-purple-400 rounded-lg px-2 text-sm text-white">asd</span> -->
+								<span class="bg-emerald-400 rounded-lg px-2 text-sm text-white">{{ jobdets.job_type }}</span>
+								<span class="bg-orange-400 rounded-lg px-2 text-sm text-white">{{ jobdets.workplace }}</span>
+							</div>
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
                                 <span>{{ jobdets.city }}, {{ jobdets.region }}, {{ jobdets.country }}</span>
@@ -74,33 +78,44 @@
                                 <span>{{ jobdets.industry }}</span>
                             </p>
 							<p class="mb-0 flex space-x-3">
-                                <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+                                <span class="pt-1"><BuildingOffice2Icon class="size-5 text-gray-400" /></span>
                                 <span>{{ jobdets.employment_category }}</span>
                             </p>
-							<p class="mb-0 flex space-x-3">
+							<!-- <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
                                 <span>{{ jobdets.job_type }}</span>
                             </p>
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
                                 <span>{{ jobdets.workplace }}</span>
-                            </p>
+                            </p> -->
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
-                                <span><span>{{ jobdets.currency }}</span>{{ jobdets.salary_from }} - <span>{{ jobdets.currency }}</span>{{ jobdets.salary_to }} {{ jobdets.pay_type }} </span>
+                                <div class="flex justify-start space-x-1">
+									<div class="flex justify-start space-x-1">
+										<span class="font-semibold">{{ jobdets.currency }}</span>
+										<span>{{ jobdets.salary_from }}</span>
+									</div> 
+									<span>-</span>
+									<div class="flex justify-start space-x-1">
+										<span class="font-semibold">{{ jobdets.currency }}</span>
+										<span>{{ jobdets.salary_to }}</span>
+									</div>
+									<span>{{ jobdets.pay_type }}</span>
+								</div>
                             </p>
                             <br>
-                            <h5>Job Description</h5>
+                            <h5 class="text-lg mb-0 leading-none">Job Description</h5>
                             <p class="text-gray-500 leading-normal">{{ jobdets.job_description }}</p>
-                            <h5>Job Summary</h5>
+                            <h5 class="text-lg mb-0 leading-none">Job Summary</h5>
                             <p class="text-gray-500 leading-normal">{{ jobdets.job_summary }}</p>
-                            <h5>Responsibilities</h5>
+                            <h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
                             <ul class="text-gray-500 leading-normal">
 								<template v-for="jr in jobres">
 									<li>{{ jr.responsibility }}</li>
 								</template>
                             </ul>
-                            <h5>Requirements</h5>
+                            <h5 class="text-lg mb-0 leading-none">Requirements</h5>
                             <ul class="text-gray-500 leading-normal">
                                 <template v-for="js in jobskills">
 									<li>{{ js.skill }}</li>
