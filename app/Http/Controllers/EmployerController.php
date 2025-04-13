@@ -117,7 +117,11 @@ class EmployerController extends Controller
                 'name'=>$sk->name,
             ];
         }
-        return response()->json($skill_list);
+        $skillSuggestions = Skills::orderBy('name', 'ASC') ->get()->unique('name')->take(10);
+        return response()->json([
+            'skill_list'=>$skill_list,
+            'skillSuggestions'=>$skillSuggestions,
+        ],200);
     }
 
     public function checkEmployerPassword($password){
