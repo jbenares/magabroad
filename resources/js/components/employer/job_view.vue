@@ -106,9 +106,9 @@
                             </p>
                             <br>
                             <h5 class="text-lg mb-0 leading-none">Job Description</h5>
-                            <p class="text-gray-500 leading-normal">{{ jobdets.job_description }}</p>
+                            <p class="text-gray-500 leading-normal"><div v-html="jobdets.job_description"></div></p>
                             <h5 class="text-lg mb-0 leading-none">Job Summary</h5>
-                            <p class="text-gray-500 leading-normal">{{ jobdets.job_summary }}</p>
+                            <p class="text-gray-500 leading-normal"><div v-html="jobdets.job_summary"></div></p>
                             <h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
                             <ul class="text-gray-500 leading-normal">
 								<template v-for="jr in jobres">

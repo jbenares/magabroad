@@ -14,7 +14,7 @@ class Job extends Model
         'job_description',
         'job_summary',
         'industry',
-        'employement_category',
+        'employment_category',
         'workplace',
         'city',
         'region',

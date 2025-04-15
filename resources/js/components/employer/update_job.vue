@@ -7,7 +7,6 @@
 	const router = useRouter();
 
 	let job_dets=ref([]);
-	let jobid=ref(0);
 	let categorylist=ref([]);
 	let industrylist=ref([]);
 	let countrylist=ref([]);
@@ -51,9 +50,6 @@
 
 	onMounted(async () => {
 		JobDetails()
-		if(props.id != 0 || jobid.value != 0){
-			JobDraft()
-		}
 		getcategory()
 		getindustry()
 		getcity()
@@ -65,22 +61,10 @@
 	})
 
 	const JobDetails = async () => {
-			let response = await axios.get("/api/create_job");
-			job_dets.value = response.data;
-	}
-
-	const JobDraft = async (jobid) => {
-		if(props.id!=0){
 			let response = await axios.get("/api/job_details_draft/"+props.id);
 			job_dets.value = response.data.job_dets;
 			responsibility_list.value = response.data.job_responsibilities;
 			skill_list.value = response.data.job_skills;
-		}else if(jobid !=0){
-			let response = await axios.get("/api/job_details_draft/"+jobid);
-			job_dets.value = response.data.job_dets;
-			responsibility_list.value = response.data.job_responsibilities;
-			skill_list.value = response.data.job_skills;
-		}
 	}
 
 	const getcategory = async () => {
@@ -225,12 +209,7 @@
 
 	const ProceedJob = (status) => {
 		const formData= new FormData()
-		if(props.id != 0){
-			var job_id = props.id
-		}else{
-			var job_id = jobid.value
-		}
-		formData.append('jobid', job_id)
+		formData.append('jobid', props.id)
 		formData.append('job_title', job_dets.value.job_title)
 		formData.append('industry', job_dets.value.industry)
 		formData.append('employment_category', job_dets.value.employment_category)
@@ -242,7 +221,7 @@
 		formData.append('pay_type', job_dets.value.pay_type)
 		formData.append('currency', job_dets.value.currency)
 		formData.append('job_description', jobDescEditor.getHTML())
-		formData.append('job_summary', jobDescEditor.getHTML())
+		formData.append('job_summary', jobSummaryEditor.getHTML())
 		formData.append('salary_from', job_dets.value.salary_from)
 		formData.append('salary_to', job_dets.value.salary_to)
 		formData.append('confidential', job_dets.value.confidential ? '1' : '0') // Add confidential checkbox state
@@ -251,7 +230,7 @@
 		formData.append('responsibilities', JSON.stringify(responsibility_list.value))
 		formData.append('skills', JSON.stringify(skill_list.value))
 		formData.append('status', status)
-			if(job_dets.value.job_title==''){
+		if(job_dets.value.job_title==''){
 				jobtitle_message.value = 'Job Title is required!'
 			}else if(job_dets.value.industry==''){
 				industry_message.value = 'Industry is required!'
@@ -288,8 +267,7 @@
 			}else{
 			axios.post("/api/add_new_job", formData).then(function (response) {
 				if(status==='Draft'){
-					jobid.value = response.data;
-					JobDraft(response.data)
+					JobDetails(response.data)
 				}else{
 					router.push('/employer/postjob_qa/'+response.data)
 				}
