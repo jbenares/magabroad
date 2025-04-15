@@ -29,8 +29,20 @@
 		get_alljob.value = response.data.alljobs;
 	}
 
-	const showJobDetails = (id) => {
+	const OpenJobDetails = (id) => {
 		router.push('/employer/job_view/'+id)
+	}
+
+	const OpenJobDraft = (id) => {
+		router.push('/employer/postjob/'+id)
+	}
+
+	const OpenJobPending = (id) => {
+		router.push('/employer/postjob_qa/'+id)
+	}
+
+	const OpenJobUpdate = (id) => {
+		router.push('/employer/update_job/'+id)
 	}
 </script>
 <template>
@@ -65,8 +77,10 @@
 								<td>{{ aj.workplace }}</td>
 								<td class="text-center"></td>
 								<td class="flex justify-center space-x-1">
-								<a  @click="showJobDetails(aj.job_id)" class="btn btn-sm btn-primary">View</a>
-								<a href="" class="btn btn-sm btn-secondary">Edit</a>
+								<a  @click="OpenJobDraft(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Draft'">View</a>
+								<a  @click="OpenJobPending(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Pending'">View</a>
+								<a  @click="OpenJobDetails(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Saved'">View</a>
+								<a  @click="OpenJobUpdate(aj.job_id)" class="btn btn-sm btn-secondary">Edit</a>
 								</td>
 							</tr>
                         </tbody>

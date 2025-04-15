@@ -114,10 +114,16 @@ class EmployerController extends Controller
         foreach($skills AS $sk){
             $skill_list[] = [
                 'id'=>$sk->id,
-                'name'=>$sk->name,
+                'skill'=>$sk->name,
             ];
         }
-        $skillSuggestions = Skills::orderBy('name', 'ASC') ->get()->unique('name')->take(10);
+        $skillSugg = Skills::orderBy('name', 'ASC') ->get()->unique('name')->take(10);
+        foreach($skillSugg AS $ss){
+            $skillSuggestions[] = [
+                'id'=>$ss->id,
+                'skill'=>$ss->name,
+            ];
+        }
         return response()->json([
             'skill_list'=>$skill_list,
             'skillSuggestions'=>$skillSuggestions,
@@ -203,6 +209,62 @@ class EmployerController extends Controller
             $employer->update($validated);
     }
 
+    public function create_job(Request $request){
+        $job_dets=[
+            'job_id'=>0,
+            'job_title'=>'',
+            'job_description'=>'',
+            'job_summary'=>'',
+            'industry'=>'',
+            'employment_category'=>'',
+            'workplace'=>'',
+            'country'=>'',
+            'city'=>'',
+            'region'=>'',
+            'job_type'=>'',
+            'pay_type'=>'',
+            'confidential'=>false,
+            'currency'=>'',
+            'salary_from'=>'',
+            'salary_to'=>'',
+            'start_date'=>'',
+            'end_date'=>'',
+        ];
+        return response()->json($job_dets);
+    }
+
+    public function job_details_draft($job_id){
+        $jd = Job::where('id', $job_id)->first();
+        $job_responsibilities = JobResponsibilities::where('job_id', $job_id)->get();
+        $job_skills = JobSkills::where('job_id', $job_id)->get();
+
+        $job_dets = [
+            'job_id' => $jd->id,
+            'job_description' => $jd->job_description,
+            'job_summary' => $jd->job_summary,
+            'job_title' => $jd->job_title,
+            'city' => $jd->city,
+            'region' => $jd->region,
+            'country' => $jd->country,
+            'industry' => $jd->industry,
+            'employment_category' => $jd->employment_category,
+            'workplace' => $jd->workplace,
+            'job_type' => $jd->job_type,
+            'pay_type' => $jd->pay_type,
+            'currency' => $jd->currency,
+            'salary_from' => $jd->salary_from,
+            'salary_to' => $jd->salary_to,
+            'confidential' => $jd->confidential,
+            'start_date'=>$jd->start_date,
+            'end_date'=>$jd->end_date,
+        ];
+        return response()->json([
+            'job_dets' => $job_dets,
+            'job_responsibilities' => $job_responsibilities,
+            'job_skills' => $job_skills,
+        ], 200);
+    }
+
     public function add_new_job(Request $request){
         $employerid = Auth::id();
         $job['job_title']=$request->input('job_title');
@@ -223,30 +285,53 @@ class EmployerController extends Controller
         $job['start_date']=$request->input('start_date');
         $job['end_date']=$request->input('end_date');
         $job['employer_id']=$employerid;
-        $job['status']='Active';
+        $job['status']=$request->input('status');
         $job['created_at']=date('Y-m-d H:i:s');
-        $job_id=Job::insertGetId($job);
+
+        if($request->jobid==0){
+            // $job_id=Job::insertGetId($job);
+            $jobinfo=Job::create($job);
+        }else{
+            $jobinfo=Job::where('id',$request->jobid)->first();
+            $jobinfo->update($job);
+        }
 
 
         $responsibilities_list = $request->input('responsibilities');
         foreach(json_decode($responsibilities_list) as $rl){
-                $res['job_id']=$job_id;
-                $res['responsibility']=$rl->responsibility;
-                $res['employer_id']=$employerid;
-                $res['created_at']=date('Y-m-d H:i:s');
+            $res['job_id']=$jobinfo->id;
+            $res['responsibility']=$rl->responsibility;
+            $res['employer_id']=$employerid;
+            $res['created_at']=date('Y-m-d H:i:s');
+            if(!JobResponsibilities::where('job_id',$jobinfo->id)->where('responsibility',$rl->responsibility)->exists()){
                 JobResponsibilities::create($res);
+            }
         }
 
-        // $skill_list = $request->input('skills');
-        // foreach(json_decode($skill_list) as $sl){
-        //         $skill['job_id']=$job_id;
-        //         $skill['skill']=$sl->skill;
-        //         $skill['employer_id']=$employerid;
-        //         $skill['created_at']=date('Y-m-d H:i:s');
-        //         JobSkills::create($skill);
-        // }
+        $skill_list = $request->input('skills');
+        foreach(json_decode($skill_list) as $sl){
+                $skill['job_id']=$jobinfo->id;
+                $skill['skill']=$sl->skill;
+                $skill['employer_id']=$employerid;
+                $skill['created_at']=date('Y-m-d H:i:s');
+                JobSkills::create($skill);
+                if(!JobSkills::where('job_id',$jobinfo->id)->where('skill',$sl->skill)->exists()){
+                    JobSkills::create($skill);
+                }
+        }
 
-        return $job_id;
+        // return $job_id;
+        echo $jobinfo->id;
+    }
+
+    public function delete_skill($id){
+        $skilldelete = JobSkills::find($id);
+        $skilldelete->delete();
+    }
+
+    public function delete_responsibility($id){
+        $resdelete = JobResponsibilities::find($id);
+        $resdelete->delete();
     }
 
     public function job_details($job_id){

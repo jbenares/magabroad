@@ -122,7 +122,7 @@
                                 <a class="dropdown-item" href="#" @click="logout">Logout</a>
                             </div>
                         </li>
-                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob" class="nav-link" v-if="credentials.approved == 1">Post a Job</a></li>
+                        <li class="nav-item cta mr-md-1"><a href="/employer/postjob/0" class="nav-link" v-if="credentials.approved == 1">Post a Job</a></li>
                     </ul>
                 </div>
             </div>
