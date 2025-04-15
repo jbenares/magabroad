@@ -242,7 +242,7 @@
 		formData.append('pay_type', job_dets.value.pay_type)
 		formData.append('currency', job_dets.value.currency)
 		formData.append('job_description', jobDescEditor.getHTML())
-		formData.append('job_summary', jobSummaryEditor.getHTML())
+		formData.append('job_summary', jobDescEditor.getHTML())
 		formData.append('salary_from', job_dets.value.salary_from)
 		formData.append('salary_to', job_dets.value.salary_to)
 		formData.append('confidential', job_dets.value.confidential ? '1' : '0') // Add confidential checkbox state
@@ -263,13 +263,13 @@
 				region_message.value = 'Region is required!'
 			}else if(job_dets.value.city==''){
 				city_message.value = 'City is required!'
-			}else if(workplace==''){
+			}else if(job_dets.value.workplace==''){
 				workplace_message.value = 'Wokr Place is required!'
-			}else if(job_dets.value.jobtype==''){
+			}else if(job_dets.value.job_type==''){
 				jobtype_message.value = 'Job Type is required!'
-			}else if(job_dets.value.paytype==''){
+			}else if(job_dets.value.pay_type==''){
 				paytype_message.value = 'Pay Type is required!'
-			}else if(job_dets.value.confidential==false){
+			}else if(job_dets.value.confidential==true){
 				if(job_dets.value.currency==''){
 					currency_message.value = 'Currency is required!'
 				}else if(job_dets.value.salary_from==''){
@@ -277,9 +277,9 @@
 				}else if(job_dets.value.salary_to==''){
 					salary_to_message.value = 'Salary To is required!'
 				}
-			}else if(job_dets.value.job_description==''){
+			}else if(jobDescEditor.getHTML()==''){
 				job_desc_message.value = 'Job Description is required!'	
-			}else if(job_dets.value.job_summary==''){
+			}else if( jobDescEditor.getHTML()==''){
 				job_sum_message.value = 'Job Summary is required!'	
 			}else if(job_dets.value.start_date==''){
 				start_date_message.value = 'Start Date is required!'	
@@ -355,7 +355,7 @@
 	import BulletList from '@tiptap/extension-bullet-list'
 	import OrderedList from '@tiptap/extension-ordered-list'
 	import ListItem from '@tiptap/extension-list-item'
-import { VariableIcon } from '@heroicons/vue/16/solid';
+	import { VariableIcon } from '@heroicons/vue/16/solid';
 	
 	const jobDescEditor = new Editor({
 		extensions: [

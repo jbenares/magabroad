@@ -230,7 +230,7 @@
 		formData.append('responsibilities', JSON.stringify(responsibility_list.value))
 		formData.append('skills', JSON.stringify(skill_list.value))
 		formData.append('status', status)
-			if(job_dets.value.job_title==''){
+		if(job_dets.value.job_title==''){
 				jobtitle_message.value = 'Job Title is required!'
 			}else if(job_dets.value.industry==''){
 				industry_message.value = 'Industry is required!'
@@ -242,13 +242,13 @@
 				region_message.value = 'Region is required!'
 			}else if(job_dets.value.city==''){
 				city_message.value = 'City is required!'
-			}else if(workplace==''){
+			}else if(job_dets.value.workplace==''){
 				workplace_message.value = 'Wokr Place is required!'
-			}else if(job_dets.value.jobtype==''){
+			}else if(job_dets.value.job_type==''){
 				jobtype_message.value = 'Job Type is required!'
-			}else if(job_dets.value.paytype==''){
+			}else if(job_dets.value.pay_type==''){
 				paytype_message.value = 'Pay Type is required!'
-			}else if(job_dets.value.confidential==false){
+			}else if(job_dets.value.confidential==true){
 				if(job_dets.value.currency==''){
 					currency_message.value = 'Currency is required!'
 				}else if(job_dets.value.salary_from==''){
@@ -256,9 +256,9 @@
 				}else if(job_dets.value.salary_to==''){
 					salary_to_message.value = 'Salary To is required!'
 				}
-			}else if(job_dets.value.job_description==''){
+			}else if(jobDescEditor.getHTML()==''){
 				job_desc_message.value = 'Job Description is required!'	
-			}else if(job_dets.value.job_summary==''){
+			}else if( jobDescEditor.getHTML()==''){
 				job_sum_message.value = 'Job Summary is required!'	
 			}else if(job_dets.value.start_date==''){
 				start_date_message.value = 'Start Date is required!'	
@@ -333,7 +333,7 @@
 	import BulletList from '@tiptap/extension-bullet-list'
 	import OrderedList from '@tiptap/extension-ordered-list'
 	import ListItem from '@tiptap/extension-list-item'
-import { VariableIcon } from '@heroicons/vue/16/solid';
+	import { VariableIcon } from '@heroicons/vue/16/solid';
 	
 	const jobDescEditor = new Editor({
 		extensions: [
