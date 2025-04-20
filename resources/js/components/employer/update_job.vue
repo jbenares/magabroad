@@ -65,6 +65,8 @@
 			job_dets.value = response.data.job_dets;
 			responsibility_list.value = response.data.job_responsibilities;
 			skill_list.value = response.data.job_skills;
+			jobDescEditor.commands.setContent(job_dets.value.job_description)
+			jobSummaryEditor.commands.setContent(job_dets.value.job_summary)
 	}
 
 	const getcategory = async () => {
@@ -344,6 +346,9 @@
 			ListItem,
 		],
 		content: '<p>Type job description here...</p>',
+		onUpdate: ({ editor }) => {
+			this.job_dets.job_description = editor.getHTML()
+		}
 	});
 
 	const jobSummaryEditor = new Editor({
@@ -355,6 +360,9 @@
 			ListItem,
 		],
 		content: '<p>Type job description here...</p>',
+		onUpdate: ({ editor }) => {
+			this.job_dets.job_summary = editor.getHTML()
+		}
 	}); 
 </script>
 <template>
