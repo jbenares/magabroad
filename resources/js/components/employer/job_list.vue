@@ -69,7 +69,7 @@
                         <tbody>
                             <tr v-for="aj in get_alljob" :key="aj.job_id">
 								<td>
-								<span class="badge badge-success" v-if="aj.status == 'Active'">{{ aj.status }}</span>
+								<span class="badge badge-success" v-if="aj.status == 'Saved'">{{ aj.status }}</span>
 								<span class="badge badge-warning" v-if="aj.status == 'Draft' || aj.status == 'Pending'">{{ aj.status }}</span>
 								<span class="badge badge-danger" v-if="aj.status == 'Deactivated'">{{ aj.status }}</span>
 								</td>
