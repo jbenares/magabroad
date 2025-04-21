@@ -91,7 +91,7 @@
                             </p> -->
                             <p class="mb-0 flex space-x-3">
                                 <span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
-                                <div class="flex justify-start space-x-1">
+                                <span class="flex justify-start space-x-1">
 									<div class="flex justify-start space-x-1">
 										<span class="font-semibold">{{ jobdets.currency }}</span>
 										<span>{{ jobdets.salary_from }}</span>
@@ -102,13 +102,13 @@
 										<span>{{ jobdets.salary_to }}</span>
 									</div>
 									<span>{{ jobdets.pay_type }}</span>
-								</div>
+								</span>
                             </p>
                             <br>
                             <h5 class="text-lg mb-0 leading-none">Job Description</h5>
-                            <p class="text-gray-500 leading-normal"><div v-html="jobdets.job_description"></div></p>
+                            <p class="text-gray-500 leading-normal"><span v-html="jobdets.job_description"></span></p>
                             <h5 class="text-lg mb-0 leading-none">Job Summary</h5>
-                            <p class="text-gray-500 leading-normal"><div v-html="jobdets.job_summary"></div></p>
+                            <p class="text-gray-500 leading-normal"><span v-html="jobdets.job_summary"></span></p>
                             <h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
                             <ul class="text-gray-500 leading-normal">
 								<template v-for="jr in jobres">
@@ -141,26 +141,26 @@
         </section>
 
 		<section class="ftco-section-parallax">
-		  <div class="parallax-img d-flex align-items-center">
+			<div class="parallax-img d-flex align-items-center">
 				<div class="container">
-				  <div class="row d-flex justify-content-center">
-					  <div class="col-md-7 text-center heading-section heading-section-white">
-						  <h2>Subcribe to our Newsletter</h2>
-						  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-						  <div class="row d-flex justify-content-center mt-4 mb-4">
-							  <div class="col-md-12">
-								  <form action="#" class="subscribe-form">
-									  <div class="form-group d-flex">
-										  <input type="text" class="form-control" placeholder="Enter email address">
-										  <input type="submit" value="Subscribe" class="submit px-3">
-									  </div>
-								  </form>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
+					<div class="row d-flex justify-content-center">
+						<div class="col-md-7 text-center heading-section heading-section-white">
+							<h2>Subcribe to our Newsletter</h2>
+							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+							<div class="row d-flex justify-content-center mt-4 mb-4">
+								<div class="col-md-12">
+									<form action="#" class="subscribe-form">
+										<div class="form-group d-flex">
+											<input type="text" class="form-control" placeholder="Enter email address">
+											<input type="submit" value="Subscribe" class="submit px-3">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-		  </div>
+			</div>
 		</section>
   
 		<footer class="ftco-footer ftco-bg-dark ftco-section">

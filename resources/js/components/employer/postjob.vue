@@ -1,7 +1,8 @@
 <script setup>
 	import navigation from '@/layouts/navigation_employer.vue';
-	import { PlusCircleIcon, XCircleIcon, ListBulletIcon, NumberedListIcon, ItalicIcon, BoldIcon, QuestionMarkCircleIcon, IdentificationIcon} from '@heroicons/vue/24/solid'
+	import { PlusCircleIcon, XCircleIcon, ListBulletIcon, NumberedListIcon, ItalicIcon, BoldIcon, QuestionMarkCircleIcon, IdentificationIcon, DocumentDuplicateIcon, TrashIcon, PencilSquareIcon, EllipsisVerticalIcon,} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
+	import { MapPinIcon, GlobeAsiaAustraliaIcon, ClockIcon, BanknotesIcon ,BuildingOfficeIcon, BuildingOffice2Icon} from '@heroicons/vue/24/outline'
 	import { onMounted, ref , onBeforeUnmount, watch } from "vue"
 	import { useRouter } from "vue-router";
 	const router = useRouter();
@@ -378,6 +379,13 @@
 		],
 		content: '<p>Type job description here...</p>',
 	}); 
+
+	const showPreview = ref(false);
+
+	function previewJob() {
+	// You can fetch job data here if needed
+	showPreview.value = true;
+	}
 </script>
 <template>
 	<navigation>
@@ -535,7 +543,7 @@
 								</div>
 							</div>
 							<div class="mb-4">
-								<label class="font-bold text-gray-500 mb-2 block">Responsibilities</label>
+								<label class="font-bold text-gray-500 mb-0 block">Responsibilities</label>
 								<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
 									<input v-model="responsibility" type="text" class="flex-grow outline-none text-gray-500" placeholder="Enter a responsibility" id="check_responsibility">
 									<button @click.prevent="addResponsibility()" class="text-blue-500">
@@ -555,7 +563,7 @@
 								</div>
 							</div>
 							<div class="mb-4">
-								<label class="font-bold text-gray-500 mb-2 block">Skills</label>
+								<label class="font-bold text-gray-500 mb-0 block">Skills</label>
 								<div class="relative">
 									<div class="flex items-center border border-gray-400 rounded-md px-3 py-2">
 										<input  v-model="newSkill"  @input="filterSuggestions" @keyup.enter="addSkill" type="text" class="flex-grow outline-none text-gray-500" placeholder="Enter a skill" />
@@ -619,12 +627,11 @@
 									<span v-if="end_date_message" class="text-red-500 text-sm m-0">{{ end_date_message }}</span>
 								</div>
 							</div>
-							<br>
 							<hr>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<div class="flex justify-between">
-										<button class="btn btn-outline-primary py-2 px-5">Preview</button>
+										<button type="button" class="btn btn-outline-primary py-2 px-5" @click="previewJob">Preview</button>
 										<div class="flex justify-end space-x-1">
 											<button type="button" class="btn !bg-orange-400 text-white py-2 px-5" @click="ProceedJob('Draft')">Save Draft</button>
 											<!-- <input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5"> -->
@@ -639,23 +646,23 @@
 					</div>
 
 					<div class="col-lg-4">
-					<div class="p-4 mb-3 bg-white">
-						<h3 class="h5 text-black mb-3">Contact Info</h3>
-						<p class="mb-0 font-weight-bold">Address</p>
-						<p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+						<div class="p-4 mb-3 bg-white">
+							<h3 class="h5 text-black mb-3">Contact Info</h3>
+							<p class="mb-0 font-weight-bold">Address</p>
+							<p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
 
-						<p class="mb-0 font-weight-bold">Phone</p>
-						<p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+							<p class="mb-0 font-weight-bold">Phone</p>
+							<p class="mb-4"><a href="#">+1 232 3235 324</a></p>
 
-						<p class="mb-0 font-weight-bold">Email Address</p>
-						<p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
-					</div>
-					
-					<div class="p-4 mb-3 bg-white">
-						<h3 class="h5 text-black mb-3">More Info</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
-						<p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
-					</div>
+							<p class="mb-0 font-weight-bold">Email Address</p>
+							<p class="mb-0"><a href="#"><span class="" data-cfemail="">[email&#160;protected]</span></a></p>
+						</div>
+						
+						<div class="p-4 mb-3 bg-white">
+							<h3 class="h5 text-black mb-3">More Info</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>
+							<p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -755,4 +762,77 @@
 			</div>
 		</footer>
 	</navigation>
+	<Transition name="fade">
+		<div v-if="showPreview" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+			<div class="bg-white rounded-md shadow-lg w-full max-w-3xl p-6 relative">
+				<!-- <button class="absolute top-4 right-6 text-gray-500 hover:text-black" @click="showPreview = false">
+					✕
+				</button> -->
+				<pre class="bg-gray-100 p-4 rounded overflow-x-auto">
+					<div>
+						<h3 class="mb-0 leading-tight font-semibold">jobdets.job_title</h3>
+						<p class="mb-2 leading-tight !text-gray-500">jobdets.company_name</p>
+						<div class="flex justify-start space-x-1 mb-2">
+							<!-- <span class="bg-purple-400 rounded-lg px-2 text-sm text-white">asd</span> -->
+							<span class="bg-emerald-400 rounded-lg px-2 text-sm text-white">jobdets.job_type</span>
+							<span class="bg-orange-400 rounded-lg px-2 text-sm text-white">jobdets.workplace</span>
+						</div>
+						<p class="mb-0 flex space-x-3">
+							<span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
+							<span>jobdets.city, jobdets.region, jobdets.country</span>
+						</p>
+						<p class="mb-0 flex space-x-3">
+							<span class="pt-1"><BuildingOfficeIcon class="size-5 text-gray-400" /></span>
+							<span>jobdets.industry</span>
+						</p>
+						<p class="mb-0 flex space-x-3">
+							<span class="pt-1"><BuildingOffice2Icon class="size-5 text-gray-400" /></span>
+							<span>jobdets.employment_category</span>
+						</p>
+						<!-- <p class="mb-0 flex space-x-3">
+							<span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+							<span>jobdets.job_type</span>
+						</p>
+						<p class="mb-0 flex space-x-3">
+							<span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
+							<span>jobdets.workplace</span>
+						</p> -->
+						<p class="mb-0 flex space-x-3">
+							<span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
+							<span class="flex justify-start space-x-1">
+								<div class="flex justify-start space-x-1">
+									<span class="font-semibold">jobdets.currency</span>
+									<span>jobdets.salary_from</span>
+								</div> 
+								<span>-</span>
+								<div class="flex justify-start space-x-1">
+									<span class="font-semibold">jobdets.currency</span>
+									<span>jobdets.salary_to</span>
+								</div>
+								<span>jobdets.pay_type</span>
+							</span>
+						</p>
+						<br>
+						<h5 class="text-lg mb-0 leading-none">Job Description</h5>
+						<p class="text-gray-500 leading-normal"><span></span></p>
+						<h5 class="text-lg mb-0 leading-none">Job Summary</h5>
+						<p class="text-gray-500 leading-normal"><span></span></p>
+						<h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
+						<ul class="text-gray-500 leading-normal">
+							<template v-for="jr in jobres">
+								<li>jr.responsibility</li>
+							</template>
+						</ul>
+						<h5 class="text-lg mb-0 leading-none">Requirements</h5>
+						<ul class="text-gray-500 leading-normal">
+							<template v-for="js in jobskills">
+								<li>js.skill</li>
+							</template>
+						</ul>
+						
+					</div>
+				</pre>
+			</div>
+		</div>
+	</Transition>
 </template>
