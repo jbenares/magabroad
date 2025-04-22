@@ -242,7 +242,7 @@
 		formData.append('pay_type', job_dets.value.pay_type)
 		formData.append('currency', job_dets.value.currency)
 		formData.append('job_description', jobDescEditor.getHTML())
-		formData.append('job_summary', jobDescEditor.getHTML())
+		formData.append('job_summary', jobSummaryEditor.getHTML())
 		formData.append('salary_from', job_dets.value.salary_from)
 		formData.append('salary_to', job_dets.value.salary_to)
 		formData.append('confidential', job_dets.value.confidential ? '1' : '0') // Add confidential checkbox state
