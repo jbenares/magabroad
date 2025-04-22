@@ -383,9 +383,22 @@
 	const showPreview = ref(false);
 
 	function previewJob() {
-	// You can fetch job data here if needed
-	showPreview.value = true;
+		// You can fetch job data here if needed
+		showPreview.value = true;
 	}
+
+	const successAlert = ref(false)
+
+	const showAlertSuccess = () => {
+	successAlert.value = true
+	}
+
+	const closeAlert = () => {
+	successAlert.value = false
+	}
+
+	// Example message for success
+	const success = 'Your draft has been saved!'
 </script>
 <template>
 	<navigation>
@@ -605,13 +618,13 @@
 							</div> -->
 							<div class="row form-group">
 								<div class="col-md-6 mb-3 mb-md-0">
-									<label class="font-weight-bold text-gray-500" for="start_date">Start Date</label>
+									<label class="font-bold text-gray-500 mb-0 block" for="start_date">Start Date</label>
 									<input  type="text" class="form-control" placeholder="Start Date" v-model="job_dets.start_date" @focus="($event.target.type='date')" @click="resetmessage('start_date')">
 									<span v-if="start_date_message" class="text-red-500 text-sm m-0">{{ start_date_message }}</span>
 								</div>
 								<div class="col-md-6 mb-3 mb-md-0">
 									<div class="flex justify-between items-center relative">
-										<label for="end_date" class="font-semibold text-gray-500">End Date</label>
+										<label for="end_date" class="font-bold text-gray-500 mb-0 block">End Date</label>
 										<div class="relative group cursor-pointer text-gray-500">
 											<QuestionMarkCircleIcon class="w-5 h-5" />
 											<div class="absolute w-60 right-full mr-2 top-1/2 -translate-y-1/2 hidden group-hover:block bg-white text-gray-700 text-sm px-3 py-1 rounded shadow-md z-10">
@@ -627,13 +640,15 @@
 									<span v-if="end_date_message" class="text-red-500 text-sm m-0">{{ end_date_message }}</span>
 								</div>
 							</div>
-							<hr>
+							<br>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<div class="flex justify-between">
 										<button type="button" class="btn btn-outline-primary py-2 px-5" @click="previewJob">Preview</button>
 										<div class="flex justify-end space-x-1">
-											<button type="button" class="btn !bg-orange-400 text-white py-2 px-5" @click="ProceedJob('Draft')">Save Draft</button>
+											<!-- <button type="button" class="btn !bg-orange-400 text-white py-2 px-5"  @click="ProceedJob('Draft')">Save Draft</button> -->
+											<button type="button" class="btn !bg-orange-400 text-white py-2 px-5" @click="showAlertSuccess">Save Draft</button>
+											<!-- <button type="button" class="btn !bg-orange-400 text-white py-2 px-5"  @click="showAlertSuccess">Save Draft</button> -->
 											<!-- <input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5"> -->
 											<!-- <button @click="ProceedJob()" type="button" class="btn btn-primary  py-2 px-5" id="save">Post Job</button> -->
 											<button @click="ProceedJob('Pending')" type="button" class="btn btn-primary  py-2 px-5" id="save">Proceed</button>
@@ -764,75 +779,99 @@
 	</navigation>
 	<Transition name="fade">
 		<div v-if="showPreview" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-			<div class="bg-white rounded-md shadow-lg w-full max-w-3xl p-6 relative">
-				<!-- <button class="absolute top-4 right-6 text-gray-500 hover:text-black" @click="showPreview = false">
+			<div class="bg-white rounded-xl shadow-lg w-full max-w-3xl max-h-[80vh] p-6 relative overflow-y-auto">
+				<button class="absolute top-4 right-6 text-gray-500 hover:text-black" @click="showPreview = false">
 					✕
-				</button> -->
-				<pre class="bg-gray-100 p-4 rounded overflow-x-auto">
-					<div>
-						<h3 class="mb-0 leading-tight font-semibold">jobdets.job_title</h3>
-						<p class="mb-2 leading-tight !text-gray-500">jobdets.company_name</p>
-						<div class="flex justify-start space-x-1 mb-2">
-							<!-- <span class="bg-purple-400 rounded-lg px-2 text-sm text-white">asd</span> -->
-							<span class="bg-emerald-400 rounded-lg px-2 text-sm text-white">jobdets.job_type</span>
-							<span class="bg-orange-400 rounded-lg px-2 text-sm text-white">jobdets.workplace</span>
-						</div>
-						<p class="mb-0 flex space-x-3">
-							<span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
-							<span>jobdets.city, jobdets.region, jobdets.country</span>
-						</p>
-						<p class="mb-0 flex space-x-3">
-							<span class="pt-1"><BuildingOfficeIcon class="size-5 text-gray-400" /></span>
-							<span>jobdets.industry</span>
-						</p>
-						<p class="mb-0 flex space-x-3">
-							<span class="pt-1"><BuildingOffice2Icon class="size-5 text-gray-400" /></span>
-							<span>jobdets.employment_category</span>
-						</p>
-						<!-- <p class="mb-0 flex space-x-3">
-							<span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
-							<span>jobdets.job_type</span>
-						</p>
-						<p class="mb-0 flex space-x-3">
-							<span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
-							<span>jobdets.workplace</span>
-						</p> -->
-						<p class="mb-0 flex space-x-3">
-							<span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
-							<span class="flex justify-start space-x-1">
-								<div class="flex justify-start space-x-1">
-									<span class="font-semibold">jobdets.currency</span>
-									<span>jobdets.salary_from</span>
-								</div> 
-								<span>-</span>
-								<div class="flex justify-start space-x-1">
-									<span class="font-semibold">jobdets.currency</span>
-									<span>jobdets.salary_to</span>
-								</div>
-								<span>jobdets.pay_type</span>
-							</span>
-						</p>
-						<br>
-						<h5 class="text-lg mb-0 leading-none">Job Description</h5>
-						<p class="text-gray-500 leading-normal"><span></span></p>
-						<h5 class="text-lg mb-0 leading-none">Job Summary</h5>
-						<p class="text-gray-500 leading-normal"><span></span></p>
-						<h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
-						<ul class="text-gray-500 leading-normal">
-							<template v-for="jr in jobres">
-								<li>jr.responsibility</li>
-							</template>
-						</ul>
-						<h5 class="text-lg mb-0 leading-none">Requirements</h5>
-						<ul class="text-gray-500 leading-normal">
-							<template v-for="js in jobskills">
-								<li>js.skill</li>
-							</template>
-						</ul>
-						
+				</button>
+				<div class="overflow-x-auto ">
+					<h3 class="mb-0 leading-tight font-semibold">jobdets.job_title</h3>
+					<p class="mb-2 leading-tight !text-gray-500">jobdets.company_name</p>
+					<div class="flex justify-start space-x-1 mb-2">
+						<!-- <span class="bg-purple-400 rounded-lg px-2 text-sm text-white">asd</span> -->
+						<span class="bg-emerald-400 rounded-lg px-2 text-sm text-white">jobdets.job_type</span>
+						<span class="bg-orange-400 rounded-lg px-2 text-sm text-white">jobdets.workplace</span>
 					</div>
-				</pre>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
+						<span>jobdets.city, jobdets.region, jobdets.country</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><BuildingOfficeIcon class="size-5 text-gray-400" /></span>
+						<span>jobdets.industry</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><BuildingOffice2Icon class="size-5 text-gray-400" /></span>
+						<span>jobdets.employment_category</span>
+					</p>
+					<!-- <p class="mb-0 flex space-x-3">
+						<span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+						<span>jobdets.job_type</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
+						<span>jobdets.workplace</span>
+					</p> -->
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
+						<span class="flex justify-start space-x-1">
+							<div class="flex justify-start space-x-1">
+								<span class="font-semibold">P</span>
+								<span>20,000</span>
+							</div> 
+							<span>-</span>
+							<div class="flex justify-start space-x-1">
+								<span class="font-semibold">P</span>
+								<span>20,000</span>
+							</div>
+							<span>Monthly</span>
+						</span>
+					</p>
+					<br>
+					<h5 class="text-lg mb-0 leading-none">Job Description</h5>
+					<p class="text-gray-500 leading-normal"><span></span></p>
+					<h5 class="text-lg mb-0 leading-none">Job Summary</h5>
+					<p class="text-gray-500 leading-normal"><span></span></p>
+					<h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
+					<ul class="text-gray-500 leading-normal">
+						<template v-for="jr in jobres">
+							<li>jr.responsibility</li>
+						</template>
+					</ul>
+					<h5 class="text-lg mb-0 leading-none">Requirements</h5>
+					<ul class="text-gray-500 leading-normal">
+						<template v-for="js in jobskills">
+							<li>js.skill</li>
+						</template>
+					</ul>
+					
+				</div>
 			</div>
 		</div>
 	</Transition>
+	<transition name="modal-fade">
+		<div v-show="successAlert" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" >
+		<!-- Modal content -->
+			<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-3/6 shadow-lg relative" >
+				<!-- Close button -->
+				<!-- <button @click="closeAlert" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800 text-xl" > ✖ </button> -->
+
+				<div class="flex justify-start space-x-4 px-4 pb-2">
+				<div class="flex justify-center items-start pt-2 text-orange-400">
+					<svg class="checkmark_orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle_orange" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check_orange" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+				</div>
+
+				<div class="text-left mb-4">
+					<h2 class="font-bold text-[#FB923C] mt-2 mb-0">Draft Saved!</h2>
+					<hr class="my-1" />
+					<p class="text-gray-600 font-bold m-0">
+						Your draft has been successfully saved.
+					</p>
+					<p class="text-gray-500 m-0 leading-snug">
+						You can continue editing at any time. Don’t forget to submit when you’re ready.
+					</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</transition>
 </template>

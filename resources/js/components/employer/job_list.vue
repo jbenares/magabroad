@@ -54,9 +54,9 @@
 
 		<section class="ftco-section bg-light">
             <div class="container">
-                <h2 class="mb-2 text-left">Job Listings</h2>
-                <div class="table-responsive border rounded-xl">
-                    <table id="jobTable" class="table text-base">
+				<h2 class="text-lg text-gray-700 font-semibold mb-4">Job Post List</h2>
+				<div class="table-responsive tl-card">
+                    <table id="jobTable" class="table text-sm">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th width="5">Status</th>
@@ -69,18 +69,18 @@
                         <tbody>
                             <tr v-for="aj in get_alljob" :key="aj.job_id">
 								<td>
-								<span class="badge badge-success" v-if="aj.status == 'Saved'">{{ aj.status }}</span>
-								<span class="badge badge-warning" v-if="aj.status == 'Draft' || aj.status == 'Pending'">{{ aj.status }}</span>
-								<span class="badge badge-danger" v-if="aj.status == 'Deactivated'">{{ aj.status }}</span>
+									<span class="badge badge-success" v-if="aj.status == 'Saved'">{{ aj.status }}</span>
+									<span class="badge badge-warning" v-if="aj.status == 'Draft' || aj.status == 'Pending'">{{ aj.status }}</span>
+									<span class="badge badge-danger" v-if="aj.status == 'Deactivated'">{{ aj.status }}</span>
 								</td>
 								<td>{{ aj.job_title }}</td>
 								<td>{{ aj.workplace }}</td>
 								<td class="text-center"></td>
 								<td class="flex justify-center space-x-1">
-								<a  @click="OpenJobDraft(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Draft'">View</a>
-								<a  @click="OpenJobPending(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Pending'">View</a>
-								<a  @click="OpenJobDetails(aj.job_id)" class="btn btn-sm btn-primary" v-if="aj.status == 'Saved'">View</a>
-								<a  @click="OpenJobUpdate(aj.job_id)" class="btn btn-sm btn-secondary">Edit</a>
+									<a  @click="OpenJobDraft(aj.job_id)" class="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" v-if="aj.status == 'Draft'">View</a>
+									<a  @click="OpenJobPending(aj.job_id)" class="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" v-if="aj.status == 'Pending'">View</a>
+									<a  @click="OpenJobDetails(aj.job_id)" class="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer" v-if="aj.status == 'Saved'">View</a>
+									<a  @click="OpenJobUpdate(aj.job_id)" class="bg-orange-500 text-white px-2 py-1 rounded cursor-pointer">Edit</a>
 								</td>
 							</tr>
                         </tbody>

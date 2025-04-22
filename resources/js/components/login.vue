@@ -86,7 +86,6 @@
     }
 };
 </script>
-
 <template>
 	<navigation>
 		<div class="hero-wrap hero-wrap-3" id="_page">
