@@ -46,26 +46,82 @@ const getEmployerData = async () => {
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="flex flex-col sm:flex-row items-center justify-between w-full bg-white px-14 py-4 rounded-b-2xl shadow-sm">
-							<div class="flex items-center gap-4">
-								<div class="flex-shrink-0">
-									<img src="../../../images/company-1.jpg" alt="Company Logo" class="w-20 h-20 rounded-full object-cover border-2 border-blue-100 shadow-sm"/>
-								</div>
-								<div class="flex flex-col">
-									<div class="flex items-center text-xl font-semibold text-gray-900">
-										Sample Company
-										<CheckBadgeIcon class="w-5 h-5 text-blue-500 ml-1" />
+						<div class=" bg-white px-14 py-4 rounded-b-2xl shadow-sm">
+							<div class="flex flex-col sm:flex-row items-center justify-between w-full">
+								<div class="flex items-center gap-4">
+									<div class="flex-shrink-0">
+										<img src="../../../images/company-1.jpg" alt="Company Logo" class="w-20 h-20 rounded-full object-cover border-2 border-blue-100 shadow-sm"/>
 									</div>
-									<div class="text-sm text-gray-500">Tech Industry</div>
+									<div class="flex flex-col">
+										<div class="flex items-center text-xl font-semibold text-gray-900">
+											Sample Company
+											<CheckBadgeIcon class="w-5 h-5 text-blue-500 ml-1" />
+										</div>
+										<div class="text-sm text-gray-500">Tech Industry</div>
+									</div>
+								</div>
+								<div class="mt-2 sm:mt-0 flex gap-2">
+									<a href="/employer/job_list" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+										Manage Job Posts
+									</a>
+									<a href="/employer/question_list" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+										Manage Questions
+									</a>
 								</div>
 							</div>
-							<div class="mt-2 sm:mt-0 flex gap-2">
-								<a href="/employer/job_list" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-									Manage Job Posts
-								</a>
-								<a href="/employer/question_list" class="bg-blue-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-									Manage Questions
-								</a>
+							<!-- <div class="w-full mt-2">
+								<div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+									<span>Profile Completion</span>
+									<span>75%</span>
+								</div>
+								
+								<div class="relative h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+								<div
+									class="h-3 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full animate-pulse"
+									style="width: 75%;"
+								></div>
+								</div>
+
+								<div class="mt-2 text-xs text-gray-500">
+								3 of 4 steps completed
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+				<div class="row"  v-if="form.approved == 1">
+					<div class="col-lg-12">
+						<div class="p-3 px-4 mt-4 tl-card !bg-yellow-400">
+							<div class="flex justify-start space-x-3">
+								<div class="text-white">
+									<ExclamationTriangleIcon class="size-14"/>
+								</div>
+								<div >
+									<h4 class="text-white font-bold mb-0 leading-tight">Warning!</h4>
+									<p class="leading-snug m-0 text-white">Your application is currently under review. Please keep an eye on your email for updates on the status of your registration.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="bg-white rounded-2xl mt-4 p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+							<div class="w-full mt-2">
+								<div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+									<span>Profile Completion</span>
+									<span>75%</span>
+								</div>
+								
+								<div class="relative h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+								<div
+									class="h-3 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full animate-pulse"
+									style="width: 75%;"
+								></div>
+								</div>
+								<div class="mt-2 text-xs text-gray-500">
+								3 of 4 steps completed
+								</div>
 							</div>
 						</div>
 					</div>
@@ -110,17 +166,136 @@ const getEmployerData = async () => {
 								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">View Analytics</a>
 							</div>
 						</div>
-						<div class="mt-8">
-						<h2 class="text-lg text-gray-700 font-semibold mb-4">Recent Activities</h2>
-						<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-							<div class="flex items-center gap-4">
-							<img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe" class="w-10 h-10 rounded-full" />
-							<p class="text-gray-500 text-base">John Doe applied for Frontend Developer</p>
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+							<div class="col-span-1 sm:col-span-2 lg:col-span-2 row-span-2 bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+									<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									Profile Overview
+									</div>
+									<div class="text-lg font-semibold text-gray-900 mb-3">Complete your profile to boost visibility</div>
+									
+									<div class="w-full">
+									<div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+										<span>Profile Completion</span>
+										<span>75%</span>
+									</div>
+									
+									<div class="relative h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+										<div
+										class="h-3 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full animate-pulse"
+										style="width: 75%;">
+										</div>
+									</div>
+
+									<div class="mt-2 text-xs text-gray-500">
+										3 of 4 steps completed
+									</div>
+									</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline mt-4">Complete Profile</a>
+								</div>
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+								<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									Active Job Postings
+								</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">12 jobs currently posted</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">Manage Postings</a>
 							</div>
-							<button class="bg-blue-600 text-white text-sm font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
-							View
-							</button>
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+								<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									New Applications
+								</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">45 new applications</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">View Applications</a>
+							</div>
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+								<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									Team Members
+								</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">5 team members added</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">Manage Team</a>
+							</div>
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+								<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									Performance Analytics
+								</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">120 job views this week</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">View Analytics</a>
+							</div>
 						</div>
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+							<!-- Existing Cards (3 of them here as examples) -->
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+								<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+									Active Job Postings
+								</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">12 jobs currently posted</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">Manage Postings</a>
+							</div>
+
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+									<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+										New Applications
+									</div>
+									<div class="text-lg font-semibold text-gray-900 mb-3">45 new applications</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline">View Applications</a>
+							</div>
+
+							<!-- Wide Card (spans 2 columns on large screens) -->
+							<div class="col-span-1 sm:col-span-2 lg:col-span-2 bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:scale-[1.02] transition cursor-default flex flex-col justify-between">
+								<div>
+									<div class="text-xs text-gray-400 mb-1 leading-none flex items-center gap-2">
+										Profile Overview
+									</div>
+								<div class="text-lg font-semibold text-gray-900 mb-3">Complete your profile to boost visibility</div>
+								
+									<!-- Profile Completion Block -->
+									<div class="w-full">
+										<div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+										<span>Profile Completion</span>
+										<span>75%</span>
+										</div>
+										
+										<div class="relative h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+										<div
+											class="h-3 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full animate-pulse"
+											style="width: 75%;">
+										</div>
+										</div>
+
+										<div class="mt-2 text-xs text-gray-500">
+										3 of 4 steps completed
+										</div>
+									</div>
+								</div>
+								<a href="#" class="text-blue-600 text-sm font-semibold hover:underline mt-4">Complete Profile</a>
+							</div>
+
+							<!-- You can add the 4th small card here if needed -->
+						</div>
+						<div class="mt-8">
+							<h2 class="text-lg text-gray-700 font-semibold mb-4">Recent Activities</h2>
+							<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+								<div class="flex items-center gap-4">
+									<img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe" class="w-10 h-10 rounded-full" />
+									<p class="text-gray-500 text-base">John Doe applied for Frontend Developer</p>
+								</div>
+								<button class="bg-blue-600 text-white text-sm font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
+									View
+								</button>
+							</div>
 						</div>
 					</div>
 					

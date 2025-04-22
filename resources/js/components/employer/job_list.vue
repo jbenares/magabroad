@@ -54,7 +54,7 @@
 
 		<section class="ftco-section bg-light">
             <div class="container">
-				<h2 class="text-lg text-gray-700 font-semibold mb-4">Job Post List</h2>
+				<h2 class="text-lg text-gray-700 font-semibold mb-2">Job Post List</h2>
 				<div class="table-responsive tl-card">
                     <table id="jobTable" class="table text-sm">
                         <thead class="bg-gray-100">

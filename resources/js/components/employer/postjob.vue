@@ -387,14 +387,14 @@
 		showPreview.value = true;
 	}
 
-	const successAlert = ref(false)
+	const successDraft = ref(false)
 
 	const showAlertSuccess = () => {
-	successAlert.value = true
+	successDraft.value = true
 	}
 
 	const closeAlert = () => {
-	successAlert.value = false
+	successDraft.value = false
 	}
 
 	// Example message for success
@@ -849,7 +849,7 @@
 		</div>
 	</Transition>
 	<transition name="modal-fade">
-		<div v-show="successAlert" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" >
+		<div v-show="successDraft" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" >
 		<!-- Modal content -->
 			<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-3/6 shadow-lg relative" >
 				<!-- Close button -->
