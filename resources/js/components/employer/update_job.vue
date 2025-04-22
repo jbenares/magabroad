@@ -156,7 +156,7 @@
 			responsibility_list.value.splice(index,1)
 		}else{
 			axios.get(`/api/delete_responsibility/`+id).then(function () {
-				JobDraft()
+				JobDetails()
 			});
 		}
 	}
@@ -187,7 +187,7 @@
 			skill_list.value.splice(index, 1);
 		}else{
 			axios.get(`/api/delete_skill/`+id).then(function () {
-				JobDraft()
+				JobDetails()
 			});
 		}
 	}
