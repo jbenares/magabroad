@@ -156,7 +156,7 @@
 			responsibility_list.value.splice(index,1)
 		}else{
 			axios.get(`/api/delete_responsibility/`+id).then(function () {
-				JobDraft()
+				JobDetails()
 			});
 		}
 	}
@@ -187,7 +187,7 @@
 			skill_list.value.splice(index, 1);
 		}else{
 			axios.get(`/api/delete_skill/`+id).then(function () {
-				JobDraft()
+				JobDetails()
 			});
 		}
 	}
@@ -533,7 +533,7 @@
 										<li v-for="(res, index) in responsibility_list" :key="index" class="responsibility-item flex justify-between items-center px-3 py-1">
 											<span class="w-5 font-bold text-gray-500">{{ index + 1 }}.</span>
 											<div class="flex justify-between items-center border-b w-full">
-												<span class="text-gray-500 font-medium ">{{ res.responsibility }}{{ res.id }}</span>
+												<span class="text-gray-500 font-medium ">{{ res.responsibility }}</span>
 												<XCircleIcon @click="removeResponsibility(index, res.id)" class="w-5 h-5 text-red-500 cursor-pointer hover:text-red-700"/>
 											</div>
 										</li>
