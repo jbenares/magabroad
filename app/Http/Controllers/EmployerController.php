@@ -210,6 +210,7 @@ class EmployerController extends Controller
     }
 
     public function create_job(Request $request){
+        $employerid = Auth::id();
         $job_dets=[
             'job_id'=>0,
             'job_title'=>'',
@@ -229,11 +230,13 @@ class EmployerController extends Controller
             'salary_to'=>'',
             'start_date'=>'',
             'end_date'=>'',
+            'company_name'=>User::where('id',$employerid)->value('business_name'),
         ];
         return response()->json($job_dets);
     }
 
     public function job_details_draft($job_id){
+        $employerid = Auth::id();
         $jd = Job::where('id', $job_id)->first();
         $job_responsibilities = JobResponsibilities::where('job_id', $job_id)->get();
         $job_skills = JobSkills::where('job_id', $job_id)->get();
@@ -257,6 +260,7 @@ class EmployerController extends Controller
             'confidential' => $jd->confidential,
             'start_date'=>$jd->start_date,
             'end_date'=>$jd->end_date,
+            'company_name'=>User::where('id',$employerid)->value('business_name'),
         ];
         return response()->json([
             'job_dets' => $job_dets,

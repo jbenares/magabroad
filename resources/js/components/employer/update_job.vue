@@ -2,7 +2,7 @@
 	import navigation from '@/layouts/navigation_employer.vue';
 	import { PlusCircleIcon, XCircleIcon, ListBulletIcon, NumberedListIcon, ItalicIcon, BoldIcon, QuestionMarkCircleIcon, IdentificationIcon} from '@heroicons/vue/24/solid'
 	import axios from 'axios';
-	import { onMounted, ref , onBeforeUnmount, watch } from "vue"
+	import { onMounted, ref , onBeforeUnmount, watch, computed } from "vue"
 	import { useRouter } from "vue-router";
 	const router = useRouter();
 
@@ -232,7 +232,16 @@
 		formData.append('responsibilities', JSON.stringify(responsibility_list.value))
 		formData.append('skills', JSON.stringify(skill_list.value))
 		formData.append('status', status)
-		if(job_dets.value.job_title==''){
+		if(status==='Draft'){
+			axios.post("/api/update_job", formData).then(function (response) {
+				successDraft.value = true
+				setTimeout(() => {
+					successDraft.value = false
+				}, 5000);
+				JobDetails()
+				});
+		}else{
+			if(job_dets.value.job_title==''){
 				jobtitle_message.value = 'Job Title is required!'
 			}else if(job_dets.value.industry==''){
 				industry_message.value = 'Industry is required!'
@@ -267,13 +276,10 @@
 			}else if(job_dets.value.start_to==''){
 				end_date_message.value = 'End Date is required!'	
 			}else{
-			axios.post("/api/update_job", formData).then(function (response) {
-				if(status==='Draft'){
-					JobDetails()
-				}else{
-					router.push('/employer/postjob_qa/'+props.id)
-				}
-			});
+				axios.post("/api/update_job", formData).then(function (response) {
+				router.push('/employer/postjob_qa/'+props.id)
+				});
+			}
 		}
 	}
 
@@ -364,6 +370,32 @@
 			this.job_dets.job_summary = editor.getHTML()
 		}
 	}); 
+
+	const jobDescriptionHtml = computed(() => {
+		console.log('Editor value:',job_dets.value.job_description)
+		return jobDescEditor.value ? jobDescEditor.value.getHTML() : '';
+	})
+
+	const jobSummaryHtml = computed(() => {
+		return jobSummaryEditor.value ? jobSummaryEditor.value.getHTML() : '';
+	})
+
+	const showPreview = ref(false);
+
+	function previewJob() {
+		// You can fetch job data here if needed
+		showPreview.value = true;
+	}
+
+	const successDraft = ref(false)
+
+	const showDraftAlert = () => {
+	successDraft.value = true
+	}
+
+	const closeAlert = () => {
+	successDraft.value = false
+	}
 </script>
 <template>
 	<navigation>
@@ -610,7 +642,7 @@
 							<div class="row form-group">
 								<div class="col-md-12">
 									<div class="flex justify-between">
-										<button class="btn btn-outline-primary py-2 px-5">Preview</button>
+										<button type="button" class="btn btn-outline-primary py-2 px-5" @click="previewJob">Preview</button>
 										<div class="flex justify-end space-x-1">
 											<button type="button" class="btn !bg-orange-400 text-white py-2 px-5" @click="ProceedJob('Draft')">Save Draft</button>
 											<!-- <input type="submit" value="Post Job" class="btn btn-primary  py-2 px-5"> -->
@@ -741,4 +773,105 @@
 			</div>
 		</footer>
 	</navigation>
+	<Transition name="fade">
+		<div v-if="showPreview" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+			<div class="bg-white rounded-xl shadow-lg w-full max-w-3xl max-h-[80vh] p-6 relative overflow-y-auto">
+				<button class="absolute top-4 right-6 text-gray-500 hover:text-black" @click="showPreview = false">
+					✕
+				</button>
+				<div class="overflow-x-auto ">
+					<h3 class="mb-0 leading-tight font-semibold">{{ job_dets.job_title }}</h3>
+					<p class="mb-2 leading-tight !text-gray-500">{{ job_dets.company_name }}</p>
+					<div class="flex justify-start space-x-1 mb-2">
+						<!-- <span class="bg-purple-400 rounded-lg px-2 text-sm text-white">asd</span> -->
+						<span class="bg-emerald-400 rounded-lg px-2 text-sm text-white">{{ job_dets.job_type }}</span>
+						<span class="bg-orange-400 rounded-lg px-2 text-sm text-white">{{ job_dets.workplace }}</span>
+					</div>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><MapPinIcon class="size-5 text-gray-400" /></span>
+						<span>{{ job_dets.city }}, {{ job_dets.region }}, {{ job_dets.country }}</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><BuildingOfficeIcon class="size-5 text-gray-400" /></span>
+						<span>{{ job_dets.industry }}</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><BuildingOffice2Icon class="size-5 text-gray-400" /></span>
+						<span>{{ job_dets.employment_category }}</span>
+					</p>
+					<!-- <p class="mb-0 flex space-x-3">
+						<span class="pt-1"><ClockIcon class="size-5 text-gray-400" /></span>
+						<span>job_dets.job_type</span>
+					</p>
+					<p class="mb-0 flex space-x-3">
+						<span class="pt-1"><GlobeAsiaAustraliaIcon class="size-5 text-gray-400" /></span>
+						<span>job_dets.workplace</span>
+					</p> -->
+					<p class="mb-0 flex space-x-3"  v-if="!job_dets.confidential">
+						<span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
+						<span class="flex justify-start space-x-1">
+							<div class="flex justify-start space-x-1">
+								<span class="font-semibold">{{ job_dets.currency }}</span>
+								<span>{{ job_dets.salary_from }}</span>
+							</div> 
+							<span>-</span>
+							<div class="flex justify-start space-x-1">
+								<span class="font-semibold">{{ job_dets.currency }}</span>
+								<span>{{ job_dets.salary_to }}</span>
+							</div>
+							<span>{{ job_dets.pay_type }}</span>
+						</span>
+					</p>
+					<p class="mb-0 flex space-x-3"  v-else>
+						<span class="pt-1"><BanknotesIcon class="size-5 text-gray-400" /></span>
+						<span>Confidential</span>
+					</p>
+					<br>
+					<h5 class="text-lg mb-0 leading-none">Job Description</h5>
+					<p class="text-gray-500 leading-normal"><editor-content :editor="jobDescEditor" class="prose max-w-none focus:outline-none focus:ring-0" v-model="job_dets.job_description"/></p>
+					<h5 class="text-lg mb-0 leading-none">Job Summary</h5>
+					<p class="text-gray-500 leading-normal"><editor-content :editor="jobSummaryEditor" class="prose max-w-none focus:outline-none focus:ring-0" v-model="job_dets.job_summary"/></p>
+					<h5 class="text-lg mb-0 leading-none">Responsibilities</h5>
+					<ul class="text-gray-500 leading-normal">
+						<template v-for="rl in responsibility_list">
+							<li>{{ rl.responsibility }}</li>
+						</template>
+					</ul>
+					<h5 class="text-lg mb-0 leading-none">Requirements</h5>
+					<ul class="text-gray-500 leading-normal">
+						<template v-for="sl in skill_list">
+							<li>{{ sl.skill }}</li>
+						</template>
+					</ul>
+					
+				</div>
+			</div>
+		</div>
+	</Transition>
+	<transition name="modal-fade">
+		<div v-show="successDraft" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50" >
+		<!-- Modal content -->
+			<div ref="modalContent" class="bg-white rounded-lg py-4 px-4 w-3/6 shadow-lg relative" >
+				<!-- Close button -->
+				<!-- <button @click="closeAlert" class="absolute top-5 right-7 text-gray-500 hover:text-gray-800 text-xl" > ✖ </button> -->
+
+				<div class="flex justify-start space-x-4 px-4 pb-2">
+				<div class="flex justify-center items-start pt-2 text-orange-400">
+					<svg class="checkmark_orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle_orange" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check_orange" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+				</div>
+
+				<div class="text-left mb-4">
+					<h2 class="font-bold text-[#FB923C] mt-2 mb-0">Draft Saved!</h2>
+					<hr class="my-1" />
+					<p class="text-gray-600 font-bold m-0">
+						Your draft has been successfully saved.
+					</p>
+					<p class="text-gray-500 m-0 leading-snug">
+						You can continue editing at any time. Don’t forget to proceed when you’re ready.
+					</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</transition>
 </template>
