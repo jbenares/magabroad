@@ -52,6 +52,7 @@ Route::get('/employer_data',[EmployerController::class,'employer_data']);
 Route::post('/update_employeer/{id}',[EmployerController::class,'update_employeer']);
 Route::get('/create_job',[EmployerController::class,'create_job']);
 Route::post('/add_new_job',[EmployerController::class,'add_new_job']);
+Route::post('/update_job',[EmployerController::class,'update_job']);
 Route::get('/job_details/{job_id}', [EmployerController::class,'job_details']);
 Route::get('/job_details_draft/{job_id}', [EmployerController::class,'job_details_draft']);
 Route::get('/get_all_job',[EmployerController::class,'get_alljob']);

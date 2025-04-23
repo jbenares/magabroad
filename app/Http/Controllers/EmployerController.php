@@ -309,19 +309,82 @@ class EmployerController extends Controller
         }
 
         $skill_list = $request->input('skills');
-        foreach(json_decode($skill_list) as $sl){
-                $skill['job_id']=$jobinfo->id;
-                $skill['skill']=$sl->skill;
-                $skill['employer_id']=$employerid;
-                $skill['created_at']=date('Y-m-d H:i:s');
+        foreach (json_decode($skill_list) as $sl) {
+            // Check if this exact skill for the job already exists
+            $exists = JobSkills::where('skill', $sl->skill)
+                            ->where('job_id', $jobinfo->id)
+                            ->exists();
+
+            if (!$exists) {
+                $skill = [
+                    'job_id' => $jobid,
+                    'skill' => $sl->skill,
+                    'employer_id' => $employerid,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
                 JobSkills::create($skill);
-                if(!JobSkills::where('job_id',$jobinfo->id)->where('skill',$sl->skill)->exists()){
-                    JobSkills::create($skill);
-                }
+            }
         }
 
         // return $job_id;
         echo $jobinfo->id;
+    }
+
+    public function update_job(Request $request){
+        $employerid = Auth::id();
+        $jobid = $request->input('jobid');
+        $job['job_title']=$request->input('job_title');
+        $job['industry']=$request->input('industry');
+        $job['employment_category']=$request->input('employment_category');
+        $job['city']=$request->input('city');
+        $job['region']=$request->input('region');
+        $job['country']=$request->input('country');
+        $job['workplace']=$request->input('workplace');
+        $job['job_type']=$request->input('job_type');
+        $job['pay_type']=$request->input('pay_type');
+        $job['currency']=$request->input('currency');
+        $job['job_description']=$request->input('job_description');
+        $job['job_summary']=$request->input('job_summary');
+        $job['salary_from']=$request->input('salary_from') ?? 0;
+        $job['salary_to']=$request->input('salary_to') ?? 0;
+        $job['confidential']=$request->input('confidential') ?? 0;
+        $job['start_date']=$request->input('start_date');
+        $job['end_date']=$request->input('end_date');
+        $job['employer_id']=$employerid;
+        $job['status']=$request->input('status');
+        $job['created_at']=date('Y-m-d H:i:s');
+        $jobinfo=Job::where('id',$request->jobid)->first();
+        $jobinfo->update($job);
+
+
+        $responsibilities_list = $request->input('responsibilities');
+        foreach(json_decode($responsibilities_list) as $rl){
+            $res['job_id']=$jobid;
+            $res['responsibility']=$rl->responsibility;
+            $res['employer_id']=$employerid;
+            $res['created_at']=date('Y-m-d H:i:s');
+            if(!JobResponsibilities::where('job_id',$jobid)->where('responsibility',$rl->responsibility)->exists()){
+                JobResponsibilities::create($res);
+            }
+        }
+
+        $skill_list = $request->input('skills');
+            foreach (json_decode($skill_list) as $sl) {
+                // Check if this exact skill for the job already exists
+                $exists = JobSkills::where('skill', $sl->skill)
+                                ->where('job_id', $jobid)
+                                ->exists();
+
+                if (!$exists) {
+                    $skill = [
+                        'job_id' => $jobid,
+                        'skill' => $sl->skill,
+                        'employer_id' => $employerid,
+                        'created_at' => date('Y-m-d H:i:s'),
+                    ];
+                    JobSkills::create($skill);
+                }
+            }
     }
 
     public function delete_skill($id){

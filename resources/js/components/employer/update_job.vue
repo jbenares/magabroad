@@ -267,11 +267,11 @@
 			}else if(job_dets.value.start_to==''){
 				end_date_message.value = 'End Date is required!'	
 			}else{
-			axios.post("/api/add_new_job", formData).then(function (response) {
+			axios.post("/api/update_job", formData).then(function (response) {
 				if(status==='Draft'){
-					JobDetails(response.data)
+					JobDetails()
 				}else{
-					router.push('/employer/postjob_qa/'+response.data)
+					router.push('/employer/postjob_qa/'+props.id)
 				}
 			});
 		}
