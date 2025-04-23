@@ -27,10 +27,10 @@
 </script>
 <template>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light !top-0 shadow-md" id="ftco-navbar">
             <div class="container-fluid px-md-4">
                 <!-- Logo section -->
-                <a class="navbar-brand !flex !space-x-2" href="/">
+                <a class="navbar-brand !flex !space-x-2 hover:!text-white" href="/">
                     <img src="../../images/magabroad_logo.png" alt="MagAbroad Logo" class="img-fluid" style="max-height: 50px;"> 
                     <span class="pt-2">MagAbroad</span>
                 </a>

@@ -4,6 +4,7 @@ AOS.init({
 });
 import "aos/dist/aos.css";
 import './bootstrap';
+import './assets/styles.css';
 
 import { createApp } from 'vue'
 import app from './components/app.vue'
