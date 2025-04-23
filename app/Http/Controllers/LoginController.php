@@ -60,8 +60,8 @@ class LoginController extends Controller
     public function jobseeker_login_process(Request $request)
 {
     $credentials = [
-        'email' => $request->email,
-        'password' => $request->password,
+        'email' => $request->jobseeker_email,
+        'password' => $request->jobseeker_password,
     ];
 
     if (Auth::attempt($credentials)) {
@@ -98,8 +98,8 @@ class LoginController extends Controller
 
     public function EmployerLogin(Request $request) {
         $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
+            'email' => $request->employer_email,
+            'password' => $request->employer_password,
         ];
     
         if (Auth::attempt($credentials)) {
