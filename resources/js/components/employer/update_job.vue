@@ -377,7 +377,7 @@
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mb-5">
 						<form action="#" class="p-4 bg-white">
-							<h3 class="mb-0 leading-tight">Create a Job Post</h3>
+							<h3 class="mb-0 leading-tight">Update a Job Post</h3>
 							<p class="mb-3 leading-tight !text-gray-500">Classify the role</p>
 							<!-- <br> -->
 							<div class="row form-group">
